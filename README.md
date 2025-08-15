@@ -1,8 +1,8 @@
-# 🧪 Laboratório de Desenvolvimento de Software — Portfólio de Projetos
+# 🧪 Laboratório de Projeto de Software — Portfólio de Projetos
 
 ![Banner](img/banner-repositorio.png)
 
-Este repositório reúne **todas as entregas práticas** realizadas durante a disciplina **Laboratório de Desenvolvimento de Software**, no 4º período do curso de Engenharia de Software na PUC Minas.  
+Este repositório reúne **todas as entregas práticas** realizadas durante a disciplina **Laboratório de Projeto de Software**, no 4º período do curso de Engenharia de Software na PUC Minas.  
 
 Cada projeto foi desenvolvido em equipe, seguindo o modelo incremental de entregas (Sprints) e aplicando boas práticas de versionamento, arquitetura e documentação.  
 
