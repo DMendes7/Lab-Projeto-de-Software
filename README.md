@@ -4,7 +4,7 @@
 
 Este repositório reúne **todas as entregas práticas** realizadas durante a disciplina **Laboratório de Desenvolvimento de Software**, no 4º período do curso de Engenharia de Software na PUC Minas.  
 
-Cada projeto foi desenvolvido em equipe ou individualmente, seguindo o modelo incremental de entregas (Sprints) e aplicando boas práticas de versionamento, arquitetura e documentação.  
+Cada projeto foi desenvolvido em equipe, seguindo o modelo incremental de entregas (Sprints) e aplicando boas práticas de versionamento, arquitetura e documentação.  
 
 ---
 
