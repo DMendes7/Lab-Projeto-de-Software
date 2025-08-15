@@ -35,15 +35,15 @@ O site foi desenvolvido com HTML, CSS e JavaScript puros, e está dividido em se
 
 ### Tela Inicial, Habilidades
 
-![Protótipo 1](prototipo_1.png)
+![Protótipo 1](img/prototipo_1.png)
 
 ### Sobre Mim e Projetos
 
-![Protótipo 2](prototipo_2.png)
+![Protótipo 2](img/prototipo_2.png)
 
 ### Experiência e Contato
 
-![Protótipo 3](prototipo_3.png)
+![Protótipo 3](img/prototipo_3.png)
 
 🔗 [Acessar protótipo no Figma](https://www.figma.com/design/vqXQkjnAAOXrcRvKzXbBmc/Sem-t%C3%ADtulo?node-id=0-1&t=hmTPWhLoyBoFXJkz-1)
 
