@@ -16,19 +16,19 @@ Os projetos da disciplina foram reorganizados e agora ficam dentro da pasta `Pro
 Cada projeto possui seu README próprio com instruções de execução e screenshots.
 
 - **Projeto 1 — Portfólio Profissional**  
-  Desenvolvimento de um website pessoal para apresentação de trajetória, habilidades, projetos e formas de contato, com design responsivo e hospedagem em nuvem:contentReference[oaicite:0]{index=0}.
+  Desenvolvimento de um website pessoal para apresentação de trajetória, habilidades, projetos e formas de contato, com design responsivo e hospedagem em nuvem.
 
 - **Projeto 2 — Sistema de Aluguel de Carros**  
-  Sistema web para gestão de pedidos e contratos de aluguel de automóveis, com funcionalidades de cadastro, consulta e modificação de pedidos, integrado a um modelo de dados completo:contentReference[oaicite:1]{index=1}.
+  Sistema web para gestão de pedidos e contratos de aluguel de automóveis, com funcionalidades de cadastro, consulta e modificação de pedidos, integrado a um modelo de dados completo.
 
 - **Projeto 3 — Sistema de Moeda Estudantil (Release 1)**  
-  Primeira versão de um sistema para reconhecimento de mérito estudantil por meio de uma moeda virtual distribuída por professores e trocada por vantagens:contentReference[oaicite:2]{index=2}.
+  Primeira versão de um sistema para reconhecimento de mérito estudantil por meio de uma moeda virtual distribuída por professores e trocada por vantagens.
 
 - **Projeto 4 — Sistema de Moeda Estudantil (Release 2)**  
-  Continuação do sistema, com implementação dos casos de uso de envio de moedas, consulta de extratos, cadastro e listagem de vantagens:contentReference[oaicite:3]{index=3}.
+  Continuação do sistema, com implementação dos casos de uso de envio de moedas, consulta de extratos, cadastro e listagem de vantagens:contentReference.
 
 - **Projeto 5 — Sistema de Moeda Estudantil (Release 3)**  
-  Versão final do sistema, com envio de cupons por e-mail, análise crítica de projetos da turma, refatorações e melhorias na arquitetura e usabilidade:contentReference[oaicite:4]{index=4}.
+  Versão final do sistema, com envio de cupons por e-mail, análise crítica de projetos da turma, refatorações e melhorias na arquitetura e usabilidade.
 
 ## 📑 Resenhas de Artigos
 
