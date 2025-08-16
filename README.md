@@ -10,6 +10,8 @@ Cada projeto foi desenvolvido em equipe, seguindo o modelo incremental de entreg
 
 ## 📂 Conteúdo do Repositório
 
+# Projetos
+
 - **Projeto 1 — Portfólio Profissional**  
   Desenvolvimento de um website pessoal para apresentação de trajetória, habilidades, projetos e formas de contato, com design responsivo e hospedagem em nuvem:contentReference[oaicite:0]{index=0}.
 
@@ -24,6 +26,14 @@ Cada projeto foi desenvolvido em equipe, seguindo o modelo incremental de entreg
 
 - **Projeto 5 — Sistema de Moeda Estudantil (Release 3)**  
   Versão final do sistema, com envio de cupons por e-mail, análise crítica de projetos da turma, refatorações e melhorias na arquitetura e usabilidade:contentReference[oaicite:4]{index=4}.
+
+## 📑 Resenhas de Artigos
+
+Conjunto de resenhas críticas dos artigos estudados ao longo da disciplina de Projeto de Software.  
+Cada resenha está organizada em sua respectiva pasta dentro de `Artigos/`.
+
+- **Artigo 1 — The Big Ball of Mud**  
+  Resenha sobre o artigo de Brian Foote e Joseph Yoder, discutindo sistemas mal estruturados (“Big Ball of Mud”), suas causas, consequências e relevância prática.
 
 ---
 

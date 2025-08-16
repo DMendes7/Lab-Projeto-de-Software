@@ -1,0 +1,48 @@
+Resenha do Artigo: Big Ball of Mud (Foote & Yoder, 1997)
+--------------------------------------------------------
+
+Introdução
+----------
+O artigo "Big Ball of Mud", escrito por Brian Foote e Joseph Yoder, fala sobre um tipo de 
+arquitetura de software que, mesmo ninguém gostando de admitir, é a mais comum de todas: 
+os sistemas bagunçados, cheios de remendos e improvisos. Esses sistemas acabam sendo 
+chamados de “Big Ball of Mud” (BBoM).
+
+Os autores não tratam isso só como algo ruim, mas tentam mostrar porque esse tipo de código 
+surge, porque continua funcionando e como ele consegue sobreviver mesmo sem seguir 
+nenhum padrão bonito de arquitetura.
+
+Principais pontos
+-----------------
+- Big Ball of Mud: código feio, desorganizado, mas que funciona e atende o que precisa.
+- Throwaway Code: aquele código feito pra ser descartável, mas que acaba virando parte do sistema.
+- Piecemeal Growth: crescimento aos pedaços, sem planejamento, só adicionando coisas.
+- Keep it Working: a lógica de “não importa se tá feio, o importante é que funcione”.
+- Sweeping it Under the Rug: esconder ou isolar partes ruins do sistema em vez de corrigir.
+- Reconstruction: quando não tem mais jeito e precisa reescrever tudo do zero.
+
+Reflexão
+--------
+O artigo mostra que o Big Ball of Mud não aparece por falta de esforço, mas por motivos 
+bem reais: prazo apertado, custo, mudanças constantes, complexidade natural do problema 
+ou até inexperiência da equipe. Ou seja, é quase inevitável em algum ponto.
+
+Eles fazem uma comparação com cidades: assim como bairros crescem sem muito controle, 
+os softwares também vão ganhando remendos e expansão meio improvisada. E, do mesmo 
+jeito que dá pra revitalizar um bairro, também dá pra refatorar um sistema caótico.
+
+Minha opinião
+-------------
+Achei interessante porque mostra o lado real do desenvolvimento. A gente sempre vê 
+arquiteturas perfeitas nos livros, mas quando pega sistemas de verdade eles já são 
+verdadeiras “favelas” de código. Mesmo assim, muita empresa roda anos em cima disso.
+
+Pra mim a lição principal é: não adianta só reclamar do código feio, ele existe porque 
+resolveu o problema na hora. O desafio é saber quando continuar remendando e quando parar 
+pra refazer do jeito certo.
+
+Conclusão
+---------
+O Big Ball of Mud acaba sendo um “padrão” também, não no sentido bom, mas porque é 
+recorrente e acontece em todo lugar. O importante é entender esse fenômeno e aprender 
+a lidar com ele sem deixar o sistema morrer na lama.
