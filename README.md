@@ -12,6 +12,9 @@ Cada projeto foi desenvolvido em equipe, seguindo o modelo incremental de entreg
 
 # Projetos
 
+Os projetos da disciplina foram reorganizados e agora ficam dentro da pasta `Projetos/`.  
+Cada projeto possui seu README próprio com instruções de execução e screenshots.
+
 - **Projeto 1 — Portfólio Profissional**  
   Desenvolvimento de um website pessoal para apresentação de trajetória, habilidades, projetos e formas de contato, com design responsivo e hospedagem em nuvem:contentReference[oaicite:0]{index=0}.
 
