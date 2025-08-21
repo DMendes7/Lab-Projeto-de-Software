@@ -1,0 +1,10 @@
+Resenha – Big Ball of Mud
+
+O artigo Big Ball of Mud (1997), de Brian Foote e Joseph Yoder, apresenta uma análise crítica de um fenômeno comum no desenvolvimento de software: sistemas construídos de forma desorganizada, sem uma arquitetura clara e muitas vezes sustentados por remendos e soluções improvisadas. Esses sistemas, chamados de “Bolas de Lama Gigantes”, são caracterizados por código confuso, difícil de manter e frequentemente sem documentação adequada.
+
+Apesar de parecer um anti-padrão, os autores defendem que o Big Ball of Mud é, na prática, o “padrão arquitetural mais comum” existente. 
+Isso acontece porque muitas vezes os fatores que impulsionam a criação de software – como tempo, custos, mudanças de requisitos, complexidade intrínseca do domínio e nível de habilidade da equipe – favorecem soluções rápidas e pragmáticas, em detrimento de arquiteturas elegantes e planejadas.
+
+O texto apresenta seis padrões relacionados a esse contexto: Big Ball of Mud, Throwaway Code, Piecemeal Growth, Keep it Working, Sweeping it Under the Rug e Reconstruction. Cada um descreve situações típicas que levam à degradação arquitetural, como a evolução de protótipos descartáveis que nunca são reescritos, o crescimento incremental sem planejamento e a manutenção emergencial que prioriza apenas manter o sistema funcionando.
+
+Contudo, os autores não condenam esse tipo de arquitetura. Pelo contrário, argumentam que em muitos casos ela é inevitável e até necessária em fases iniciais de desenvolvimento, quando ainda não se conhece bem o domínio do problema. O ponto central é reconhecer as forças que levam ao acúmulo de “lama” no sistema e buscar estratégias para lidar com isso – seja isolando o código problemático, refatorando continuamente ou, em casos extremos, reconstruindo o sistema do zero.
