@@ -55,6 +55,7 @@ O site foi desenvolvido com HTML, CSS e JavaScript puros, e está dividido em se
 ```bash
 📁 Lab01 - Portfólio Profissional/
 ├── index.html
+├── index-en.html #versão em ingles 
 ├── styles.css
 ├── scripts.js
 ├── img/
