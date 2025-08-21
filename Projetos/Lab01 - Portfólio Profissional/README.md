@@ -1,4 +1,3 @@
-
 # 💼 Portfólio Pessoal - Projeto de Site
 
 ## 📌 Descrição do Projeto
@@ -27,7 +26,9 @@ O site foi desenvolvido com HTML, CSS e JavaScript puros, e está dividido em se
 - **CSS3** – Estilização e responsividade  
 - **JavaScript** – Funcionalidades de interação, transições e animações básicas  
 - **Font Awesome** – Ícones utilizados nas seções e botões  
-- **Google Fonts (Montserrat)** – Tipografia padronizada
+- **Google Fonts (Montserrat)** – Tipografia padronizada  
+- **Vanta.js / Particles.js** – Efeitos visuais de background  
+- **Vercel** – Deploy e hospedagem do site  
 
 ---
 
@@ -63,3 +64,48 @@ O site foi desenvolvido com HTML, CSS e JavaScript puros, e está dividido em se
 └── pdf/
     └── Certificado.pdf
 ```
+
+---
+
+## 🚀 Funcionalidades Implementadas (Sprint 2)
+
+- Estrutura responsiva, adaptada para desktop e dispositivos móveis  
+- Animações e transições suaves ao navegar pelas seções  
+- Seção de **Projetos** com cards organizados em grid  
+- **Linha do tempo profissional** destacando experiências e conquistas  
+- **Seção de Certificações** com links para comprovação  
+- **Barra de progresso em Cursos** mostrando evolução acadêmica  
+- Integração de efeitos visuais (Vanta.js e Particles.js) para modernizar a interface  
+- Botão para **download do currículo** em PDF  
+
+---
+
+## 🌐 Deploy Online (Sprint 3)
+
+O site está publicado e disponível no link:
+
+🔗 [Acessar Portfólio Online](https://curriculo-davi-mendes.vercel.app)
+
+---
+
+## 🖼️ Galeria de Telas
+
+### Página Inicial
+![Home](img/screenshot_home.png)
+
+### Seção Projetos
+![Projetos](img/screenshot_projetos.png)
+
+### Seção Experiência Profissional
+![Experiência](img/screenshot_experiencia.png)
+
+### Seção Contato
+![Contato](img/screenshot_contato.png)
+
+---
+
+## 📌 Evolução das Entregas
+
+- **Sprint 1** → Protótipo no Figma, definição da estrutura inicial e planejamento do site.  
+- **Sprint 2** → Implementação funcional com HTML, CSS e JS, responsividade, interatividade e organização das seções.  
+- **Sprint 3** → Deploy online, README completo com prints, link do site e documentação final do projeto.
