@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Davi Mendes | Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="img/libreofficewriter.svg" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+</head>
+
+<body>
+  <div id="page-transition"></div>  
+  <!-- Hero with Vanta -->
+  <div id="vanta-bg" class="hero">
+    <div class="hero-content">
+      <img src="img/Profile.jpg" alt="Davi Mendes" class="profile-img">
+      <h2>Transforming ideas into technical solutions</h2>
+      <p>Backend developer specialized in Python automation and system integration</p>
+    </div>
+  </div>
+
+  <!-- Fixed Header -->
+  <header class="main-header">
+    <div class="header-content">
+      <h1>Davi Mendes</h1>
+      <p>Software Engineer | Automation Specialist</p>
+    </div>
+    <div class="header-buttons">
+      <a href="pdf/Davi-Mendes-EN.pdf" download class="btn-download">
+        <i class="fas fa-download"></i> Resume
+      </a>
+      <button class="language-toggle btn-language" data-target="index.html">
+        <i class="fas fa-language"></i> PT
+      </button>
+    </div>
+  </header>
+
+  <div id="particles-js"></div>
+
+  <!-- Skills Section -->
+  <section class="section light-section">
+  <div class="container">
+    <h2><i class="fas fa-tools"></i> Technical Skills</h2>
+    <div class="grid-habilidades">
+
+      <!-- Languages -->
+      <div class="habilidade">
+        <img src="img/python.svg" alt="Python">
+        <span>Python</span>
+      </div>
+      <div class="habilidade">
+        <img src="img/javascript.svg" alt="JavaScript">
+        <span>JavaScript</span>
+      </div>
+      <div class="habilidade">
+        <img src="img/html5.svg" alt="HTML5">
+        <span>HTML5</span>
+      </div>
+      <div class="habilidade">
+        <img src="img/css.svg" alt="CSS3">
+        <span>CSS</span>
+      </div>
+      <div class="habilidade">
+        <img src="img/java.svg" alt="Java">
+        <span>Java</span>
+      </div>
+      <div class="habilidade">
+        <img src="img/c.svg" alt="C">
+        <span>C</span>
+      </div>
+
+      <!-- Databases -->
+      <div class="habilidade">
+        <img src="img/postgresql.svg" alt="PostgreSQL">
+        <span>PostgreSQL</span>
+      </div>
+      <div class="habilidade">
+        <img src="img/mysql.svg" alt="MySQL">
+        <span>MySQL</span>
+      </div>
+
+      <!-- Version Control -->
+      <div class="habilidade">
+        <img src="img/git.svg" alt="Git">
+        <span>Git</span>
+      </div>
+      <div class="habilidade">
+        <img src="img/github.svg" alt="GitHub">
+        <span>GitHub</span>
+      </div>
+
+      <!-- Tools and Platforms -->
+      <div class="habilidade">
+        <img src="img/streamlit.svg" alt="Streamlit">
+        <span>Streamlit</span>
+      </div>
+      <div class="habilidade">
+        <img src="img/langchain.svg" alt="Langchain">
+        <span>Langchain</span>
+      </div>
+      <div class="habilidade">
+        <img src="img/grocy.svg" alt="Groq">
+        <span>Groq</span>
+      </div>
+      <div class="habilidade">
+        <img src="img/powerbi.svg" alt="Powerbi">
+        <span>Power BI</span>
+      </div>
+
+    </div>
+  </div>
+ </section>
+
+  <!-- Additional sections (About, Projects, Contact, Footer) -->
+  <section class="section dark-section">
+    <div class="container">
+      <h2><i class="fas fa-user"></i> About Me</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>Backend developer passionate about solving complex problems with technology. My journey through different areas has given me a broad view of business challenges, which I now apply to developing efficient technical solutions.</p>
+          <div class="hobbies">
+            <span><i class="fas fa-dumbbell"></i> Physical Training</span>
+            <span><i class="fas fa-car"></i> Automotive Mechanics</span>
+            <span><i class="fas fa-robot"></i> Automations</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light-section">
+    <div class="container">
+      <h2><i class="fas fa-code"></i> Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3>Status Teams</h3>
+          <p>MS Teams availability monitoring with Python + Power BI.</p>
+          <div class="tech-used">
+            <span>Python</span>
+            <span>Power BI</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <h3>Invoice Monitor</h3>
+          <p>Automated invoice tracking system with API and email.</p>
+          <div class="tech-used">
+            <span>Python</span>
+            <span>APIs</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <h3>Corporate ChatBot</h3>
+          <p>WhatsApp customer service with intelligent flow integrated to departments.</p>
+          <div class="tech-used">
+            <span>Python</span>
+            <span>WhatsApp API</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <h3><a href="https://github.com/DMendes7/JurandirBot" target="_blank">JurandirBot</a></h3>
+          <p>Chatbot with memory and PDF reading. Streamlit interface.</p>
+          <div class="tech-used">
+            <span>Langchain</span>
+            <span>Groq</span>
+            <span>Streamlit</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <h3>AI-based NF Validator</h3>
+          <p>Automated extraction and validation of invoice PDFs (DANFEs) using AI and an internal chatbot interface.</p>
+          <div class="tech-used">
+            <span>Python</span>
+            <span>Groq API</span>
+            <span>Langchain</span>
+            <span>Streamlit</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark-section">
+  <div class="container">
+    <h2><i class="fas fa-graduation-cap"></i> Software Engineering Progress</h2>
+    <div class="barra-progresso">
+      <div class="linha-fundo">
+        <div class="marcador" style="left: 50%;"> <!--3 = 37.5% | 4 = 50% | 5 = 62.5% | 6 = 75% | 7 = 87.5% | 8 = 100% -->
+          <i class="fas fa-caret-down"></i><br>4º Semester
+        </div>
+      </div>
+      </div>
+      <div class="rotulos">
+        <span>Start<br>2024</span>
+        <span>Completion<br>2028</span>
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <section class="section light-section">
+  <div class="container">
+    <h2>
+      <i class="fas fa-briefcase"></i> Professional Journey
+      <img src="img/Gota-Celer.png" alt="Celer Logo" class="logo-celer">
+    </h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3>Production Assistant</h3>
+          <span>Jan/2019 – Feb/2021</span>
+          <p>Worked in production line focusing on laboratory processes and quality control.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3>Maintenance Assistant</h3>
+          <span>Mar/2021 – Aug/2021</span>
+          <p>Preventive and corrective maintenance of equipment and internal support to operational departments.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3>IT Assistant</h3>
+          <span>Aug/2021 – Jan/2024</span>
+          <p>Infrastructure, Python scripts and integration between ERP systems and internal APIs.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3>IT Leader</h3>
+          <span>Jan/2024 – May/2025</span>
+          <p>Technical responsible for all company IT, automations, BI and internal efficiency projects.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <section class="section dark-section">
+  <div class="container">
+    <h2><i class="fas fa-certificate"></i> Relevant Certifications</h2>
+    <ul class="cert-list">
+      <li>
+        Hacka Truck - Algorithms and Object-Oriented Programming Fundamentals with Swift
+        <a href="pdf/Certificate/Conceitos_e_Fundamentos_Algoritmos_e_Programação_Orientada_a_Objetos_com_Swift-Certificado_1861.pdf" target="_blank">
+          <i class="fas fa-file-pdf"></i>
+        </a>
+      </li>
+      <li>
+        DIO - Santander Cybersecurity Bootcamp
+        <a href="pdf/Certificate/DIO - Santander - Cibersegurança.pdf" target="_blank">
+          <i class="fas fa-file-pdf"></i>
+        </a>
+      </li>
+      <li>
+        Udemy - Complete Git
+        <a href="pdf/Certificate/Udemy - Git Completo.pdf" target="_blank">
+          <i class="fas fa-file-pdf"></i>
+        </a>
+      </li>
+      <li>
+        Udemy - SQL for Data Analysis (PostgreSQL)
+        <a href="pdf/Certificate/Udemy - SQL Para analise de dados.pdf" target="_blank">
+          <i class="fas fa-file-pdf"></i>
+        </a>
+      </li>
+      <li>
+        Udemy - SQL Database (MySQL)
+        <a href="pdf/Certificate/Udemy - Banco de Dados SQL.pdf" target="_blank">
+          <i class="fas fa-file-pdf"></i>
+        </a>
+      </li>
+      <li>
+        Red Hat - System Administration I (RH124)
+        <a href="pdf/Certificate/RedHatSystemAdministration.pdf" target="_blank">
+          <i class="fas fa-file-pdf"></i>
+        </a>
+      </li>
+      <li>
+        Microsoft - VS Code Live: Agent Mode
+        <a href="https://www.credly.com/badges/2fc4de6c-0c4d-47df-94d2-bd72706a9392/public_url" target="_blank">
+          <i class="fas fa-link"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  </section>
+
+  <section class="section light-section">
+  <div class="container">
+    <h2><i class="fas fa-laptop-code"></i> Ongoing Courses</h2>
+
+    <div class="curso-em-andamento">
+      <div class="curso-info">
+        <span><strong>Python 3: From Beginner to Advanced</strong></span>
+        <span>23% completed</span>
+      </div>
+      <div class="barra-progresso-curso">
+        <div class="progresso" style="width: 23%;"></div>
+      </div>
+    </div>
+
+    <div class="curso-em-andamento">
+      <div class="curso-info">
+        <span><strong>Java COMPLETE: From Beginner to Pro + Projects</strong></span>
+        <span>13% completed</span>
+      </div>
+      <div class="barra-progresso-curso">
+        <div class="progresso" style="width: 13%;"></div>
+      </div>
+    </div>
+
+    <div class="curso-em-andamento">
+      <div class="curso-info">
+        <span><strong>Web Frontend HTML, CSS & JS + Projects</strong></span>
+        <span>Starting soon</span>
+      </div>
+      <div class="barra-progresso-curso">
+        <div class="progresso" style="width: 0%;"></div>
+      </div>
+    </div>
+
+    <div class="curso-em-andamento">
+      <div class="curso-info">
+        <span><strong>Santander Bootcamp 2025</strong></span>
+        <span>52% completed</span>
+      </div>
+      <div class="barra-progresso-curso">
+        <div class="progresso" style="width: 52%;"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+  <section class="section dark-section">
+    <div class="container">
+      <h2><i class="fas fa-envelope"></i> Contact</h2>
+      <div class="contact-content">
+        <p><i class="fas fa-envelope"></i> <a href="mailto:d4mendes@gmail.com">d4mendes@gmail.com</a></p>
+        <p><i class="fas fa-phone"></i> +55 31 98344-5422</p>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/dmendes7" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a href="https://github.com/DMendes7" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://www.instagram.com/davi_prm" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 Davi Mendes. All rights reserved.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script src="scripts.js"></script>
+  <script>
+    document.getElementById('language-toggle').addEventListener('click', () => {
+      const currentLang = document.documentElement.lang;
+      window.location.href = currentLang === 'en' ? 'index.html' : 'index-en.html';
+    });
+  </script>
+</body>
+</html>
