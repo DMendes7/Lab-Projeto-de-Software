@@ -531,3 +531,126 @@ body {
   width: 0%;
   transition: width 0.6s ease-in-out;
 }
+
+/* Modal de Projeto */
+.project-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 1100;
+}
+
+.project-modal.is-open {
+  display: block;
+}
+
+.project-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(2px);
+}
+
+.project-modal__content {
+  position: relative;
+  width: calc(100% - 32px);
+  max-width: 1100px;            /* aumentei um pouco */
+  max-height: 92vh;
+  margin: 6vh auto;
+  background: #0b0b0b;
+  border: 1px solid var(--primary-dark);
+  border-left: 3px solid var(--primary);
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  overflow-y: auto;             /* só rola para baixo */
+  overflow-x: hidden;           /* remove rolagem lateral */
+}
+
+.project-modal__close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+.project-modal__media-wrap {
+  width: 100%;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;                /* respiro interno */
+  box-sizing: border-box;       /* padding conta dentro da largura */
+}
+
+#pm-media {
+  max-width: 100%;              /* nunca ultrapassa a largura */
+  max-height: 65vh;             /* respeita altura da tela */
+  height: auto;
+  width: auto;
+  object-fit: scale-down;       /* redimensiona sem cortar */
+}
+
+.project-modal__body {
+  padding: 20px 24px 28px;
+}
+
+.project-modal__body h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.6rem;
+}
+
+.project-modal__body p {
+  margin: 0 0 16px 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.project-modal__link {
+  display: inline-block;
+  background: var(--primary-dark);
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: transform .2s ease, background .2s ease;
+}
+
+.project-modal__link:hover {
+  background: var(--primary);
+  transform: translateY(-2px);
+}
+
+/* Melhorar foco para acessibilidade */
+.project-card,
+.project-modal__close,
+.project-modal__link {
+  outline: none;
+}
+
+.project-card:focus-visible,
+.project-modal__close:focus-visible,
+.project-modal__link:focus-visible {
+  box-shadow: 0 0 0 3px rgba(255,0,0,0.5);
+  border-radius: 8px;
+}
+
+/* Responsividade */
+@media (max-width: 640px) {
+  .project-modal__media-wrap {
+    max-height: 35vh;           /* reduz ainda mais no mobile */
+  }
+}
+
+.project-modal__link.disabled {
+  background: #444;
+  cursor: not-allowed;
+  pointer-events: none;
+}

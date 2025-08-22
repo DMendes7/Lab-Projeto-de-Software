@@ -132,63 +132,110 @@
     </div>
   </section>
 
-  <section class="section light-section">
-    <div class="container">
-      <h2><i class="fas fa-code"></i> Projetos</h2>
-      <div class="projects-grid">
-        <div class="project-card">
-          <h3>Status Teams</h3>
-          <p>Monitoramento de disponibilidade no MS Teams com Python + Power BI.</p>
-          <div class="tech-used">
-            <span>Python</span>
-            <span>Power BI</span>
-          </div>
+<section class="section light-section">
+  <div class="container">
+    <h2><i class="fas fa-code"></i> Projetos</h2>
+    <div class="projects-grid">
+      
+      <div class="project-card"
+           data-title="Status Teams"
+           data-media="img/projetos/status-teams.png"
+           data-description="Status Teams é uma solução desenvolvida para monitoramento em tempo real do status de usuários no Microsoft Teams. O sistema integra-se à API oficial da Microsoft para coletar a presença (disponível, ausente, ocupado, offline) de uma lista de colaboradores. Essas informações são processadas por um script em Python, que é executado a cada minuto, garantindo atualização contínua dos registros. Com isso, tornou-se possível gerar relatórios consistentes sobre a utilização do Teams em horários de expediente, fornecendo dados para análises de produtividade e acompanhamento de disponibilidade da equipe. Além do monitoramento em si, os dados coletados são consolidados em arquivos CSV e exibidos em dashboards no Power BI, permitindo visualizações claras e intuitivas, com históricos e métricas que apoiam a gestão."
+           data-link="unavailable">
+        <h3>Status Teams</h3>
+        <p>Monitoramento de disponibilidade no MS Teams com Python + Power BI.</p>
+        <div class="tech-used">
+          <span>Python</span>
+          <span>Power BI</span>
         </div>
-        <div class="project-card">
-          <h3>Monitor NF</h3>
-          <p>Sistema automatizado de rastreio de Notas Fiscais com API e e-mail.</p>
-          <div class="tech-used">
-            <span>Python</span>
-            <span>APIs</span>
-          </div>
+      </div>
+
+      <div class="project-card"
+           data-title="Monitor NF"
+           data-media="img/projetos/monitor-nf.png"
+           data-description="Monitor NF é uma solução criada para oferecer aos clientes um rastreamento completo de suas cargas, suprindo a ausência desse recurso por parte da transportadora. O sistema consome as APIs da transportadora para obter atualizações em tempo real sobre cada Nota Fiscal. A partir dessas informações, um pipeline em Python envia automaticamente ao cliente, por e-mail, os status mais relevantes relacionados à sua carga. Ao final do processo logístico, o cliente ainda recebe diretamente em seu e-mail o comprovante de entrega assinado, garantindo transparência, praticidade e confiabilidade em todo o acompanhamento."
+           data-link="unavailable">
+        <h3>Monitor NF</h3>
+        <p>Sistema automatizado de rastreio de Notas Fiscais com API e e-mail.</p>
+        <div class="tech-used">
+          <span>Python</span>
+          <span>APIs</span>
         </div>
-        <div class="project-card">
-          <h3>ChatBot Corporativo</h3>
-          <p>Atendimento via WhatsApp com fluxo inteligente integrado a setores.</p>
-          <div class="tech-used">
-            <span>Python</span>
-            <span>WhatsApp API</span>
-          </div>
+      </div>
+
+      <div class="project-card"
+           data-title="ChatBot Corporativo"
+           data-media="img/projetos/chatbot.png"
+           data-description="ChatBot Corporativo foi desenvolvido para otimizar o atendimento aos clientes por meio do WhatsApp, proporcionando uma comunicação mais ágil, acessível e organizada. A solução atua como ponto de entrada principal para clientes externos, realizando o roteamento automático para o setor responsável conforme a necessidade identificada. Além disso, disponibiliza opções interativas capazes de responder dúvidas frequentes e resolver solicitações simples de forma imediata, reduzindo tempo de espera e a carga de atendimentos manuais. O chatbot integrou-se diretamente ao número oficial da empresa, tornando-se um canal unificado e confiável de contato com os clientes."
+           data-link="unavailable">
+        <h3>ChatBot Corporativo</h3>
+        <p>Atendimento via WhatsApp com fluxo inteligente integrado a setores.</p>
+        <div class="tech-used">
+          <span>Python</span>
+          <span>WhatsApp API</span>
         </div>
-        <div class="project-card">
-          <h3><a href="https://github.com/DMendes7/JurandirBot" target="_blank">JurandirBot</a></h3>
-          <p>Chatbot com memória e leitura de PDFs. Interface via Streamlit.</p>
-          <div class="tech-used">
-            <span>Langchain</span>
-            <span>Groq</span>
-            <span>Streamlit</span>
-          </div>
+      </div>
+
+      <div class="project-card"
+           data-title="JurandirBot"
+           data-media="img/projetos/jurandirbot.gif"
+           data-description="JurandirBot nasceu como um projeto experimental para colocar em prática os conteúdos estudados no curso de Inteligência Artificial da Assimov Academy. A proposta foi criar um chatbot com personalidade bem-humorada e interação descontraída, capaz de manter conversas naturais e, ao mesmo tempo, realizar tarefas úteis. O foco principal foi desenvolver a habilidade de ler e interpretar arquivos (como PDFs e textos), possibilitando gerar resumos, interpretações e explicações de forma automática. Esse equilíbrio entre funcionalidade técnica e interatividade divertida tornou o JurandirBot um projeto diferenciado, unindo aprendizado prático em IA com usabilidade voltada para engajamento do usuário."
+           data-link="https://github.com/DMendes7/JurandirBot">
+        <h3>JurandirBot</h3>
+        <p>Chatbot com memória e leitura de PDFs. Interface via Streamlit.</p>
+        <div class="tech-used">
+          <span>Langchain</span>
+          <span>Groq</span>
+          <span>Streamlit</span>
         </div>
-        <div class="project-card">
-          <h3>Validador de NFs com IA</h3>
-          <p>Extração e validação automática de dados fiscais de DANFEs em PDF via IA e chatbot interno.</p>
-          <div class="tech-used">
-            <span>Python</span>
-            <span>Groq API</span>
-            <span>Langchain</span>
-            <span>Streamlit</span>
-          </div>
+      </div>
+
+      <div class="project-card"
+           data-title="Validador de NFs com IA"
+           data-media="img/projetos/validador-ia.png"
+           data-description="Validador de NFs com IA surgiu para atender a uma demanda interna de alto volume na conferência manual de Notas Fiscais. Inspirado na lógica aplicada no JurandirBot, o projeto foi estruturado para automatizar todo o processo de validação. O sistema realiza o download automático das NFs listadas para verificação, renomeando cada arquivo de acordo com o número da nota. Em seguida, utiliza IA para interpretar os documentos e validar se os dados extraídos (valores, itens e informações fiscais) estão em conformidade com os critérios estabelecidos. As informações processadas são armazenadas e disponibilizadas em dashboards analíticos, permitindo acompanhamento claro e rápido. Além disso, cada NF validada recebe um rótulo indicador, mostrando de forma prática quais notas foram aprovadas e quais apresentaram inconsistências. Essa solução reduziu significativamente o esforço manual, liberando a equipe interna para tarefas de maior valor estratégico."
+           data-link="unavailable">
+        <h3>Validador de NFs com IA</h3>
+        <p>Extração e validação automática de dados fiscais de DANFEs em PDF via IA e chatbot interno.</p>
+        <div class="tech-used">
+          <span>Python</span>
+          <span>Groq API</span>
+          <span>Langchain</span>
+          <span>Power BI</span>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<!----------------------------------------------------------->
+<!-- Modal de Projeto -->
+<div id="project-modal" class="project-modal" aria-hidden="true" role="dialog" aria-labelledby="pm-title">
+  <div class="project-modal__overlay" data-close-modal></div>
+  <div class="project-modal__content" role="document">
+    <button class="project-modal__close" aria-label="Fechar" title="Fechar" data-close-modal>&times;</button>
+
+    <div class="project-modal__media-wrap">
+      <img id="pm-media" alt="" loading="lazy">
+    </div>
+
+    <div class="project-modal__body">
+      <h3 id="pm-title"></h3>
+      <p id="pm-desc"></p>
+      <a id="pm-link" href="#" target="_blank" rel="noopener" class="project-modal__link" hidden>
+        Ver repositório
+      </a>
+    </div>
+  </div>
+</div>
+<!----------------------------------------------------------->
 
   <section class="section dark-section">
   <div class="container">
     <h2><i class="fas fa-graduation-cap"></i> Progresso na Engenharia de Software</h2>
     <div class="barra-progresso">
       <div class="linha-fundo">
-        <div class="marcador" style="left: 50%;"> <!--3 = 37.5% | 4 = 50% | 5 = 62.5% | 6 = 75% | 7 = 87.5% | 8 = 100% -->
+        <div class="marcador" style="left: 50%;"> <!-- 4 = 50% | 5 = 62.5% | 6 = 75% | 7 = 87.5% | 8 = 100% -->
           <i class="fas fa-caret-down"></i><br>4º Semestre
         </div>
       </div>

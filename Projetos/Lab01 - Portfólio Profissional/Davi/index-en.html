@@ -132,56 +132,103 @@
     </div>
   </section>
 
-  <section class="section light-section">
-    <div class="container">
-      <h2><i class="fas fa-code"></i> Projects</h2>
-      <div class="projects-grid">
-        <div class="project-card">
-          <h3>Status Teams</h3>
-          <p>MS Teams availability monitoring with Python + Power BI.</p>
-          <div class="tech-used">
-            <span>Python</span>
-            <span>Power BI</span>
-          </div>
+<section class="section light-section">
+  <div class="container">
+    <h2><i class="fas fa-code"></i> Projects</h2>
+    <div class="projects-grid">
+      
+      <div class="project-card"
+           data-title="Status Teams"
+           data-media="img/projetos/status-teams.png"
+           data-description="Status Teams is a solution developed to monitor in real time the presence status of users in Microsoft Teams. The system integrates with the official Microsoft API to collect the availability (available, away, busy, offline) of a list of users. These records are processed by a Python script that runs every minute, ensuring continuous updates. As a result, it became possible to generate consistent reports on Teams usage during working hours, providing data for productivity analysis and availability tracking. In addition to monitoring, the collected data is consolidated into CSV files and displayed in Power BI dashboards, enabling clear and intuitive visualizations with historical data and metrics to support management."
+           data-link="unavailable">
+        <h3>Status Teams</h3>
+        <p>Availability monitoring in MS Teams with Python + Power BI.</p>
+        <div class="tech-used">
+          <span>Python</span>
+          <span>Power BI</span>
         </div>
-        <div class="project-card">
-          <h3>Invoice Monitor</h3>
-          <p>Automated invoice tracking system with API and email.</p>
-          <div class="tech-used">
-            <span>Python</span>
-            <span>APIs</span>
-          </div>
+      </div>
+
+      <div class="project-card"
+           data-title="Invoice Monitor"
+           data-media="img/projetos/monitor-nf.png"
+           data-description="Invoice Monitor is a solution created to provide customers with complete tracking of their shipments, filling the gap left by carriers that did not offer this feature. The system consumes the carrier's APIs to obtain real-time updates for each invoice. Based on this information, a Python pipeline automatically sends customers the most relevant status updates by email. At the end of the logistics process, customers also receive the signed delivery receipt directly by email, ensuring transparency, practicality, and reliability throughout the tracking process."
+           data-link="unavailable">
+        <h3>Invoice Monitor</h3>
+        <p>Automated tracking of invoices with API integration and email updates.</p>
+        <div class="tech-used">
+          <span>Python</span>
+          <span>APIs</span>
         </div>
-        <div class="project-card">
-          <h3>Corporate ChatBot</h3>
-          <p>WhatsApp customer service with intelligent flow integrated to departments.</p>
-          <div class="tech-used">
-            <span>Python</span>
-            <span>WhatsApp API</span>
-          </div>
+      </div>
+
+      <div class="project-card"
+           data-title="Corporate ChatBot"
+           data-media="img/projetos/chatbot.png"
+           data-description="The Corporate ChatBot was developed to streamline customer service through WhatsApp, offering a faster, more accessible, and organized communication channel. The solution acts as the main entry point for external customers, automatically routing them to the responsible department as needed. It also provides interactive options to answer frequently asked questions and resolve simple requests immediately, reducing waiting time and the workload of manual support. The chatbot was directly integrated with the company's official WhatsApp number, becoming a unified and reliable communication channel."
+           data-link="unavailable">
+        <h3>Corporate ChatBot</h3>
+        <p>Customer service via WhatsApp with intelligent flow and sector routing.</p>
+        <div class="tech-used">
+          <span>Python</span>
+          <span>WhatsApp API</span>
         </div>
-        <div class="project-card">
-          <h3><a href="https://github.com/DMendes7/JurandirBot" target="_blank">JurandirBot</a></h3>
-          <p>Chatbot with memory and PDF reading. Streamlit interface.</p>
-          <div class="tech-used">
-            <span>Langchain</span>
-            <span>Groq</span>
-            <span>Streamlit</span>
-          </div>
+      </div>
+
+      <div class="project-card"
+           data-title="JurandirBot"
+           data-media="img/projetos/jurandirbot.gif"
+           data-description="JurandirBot was born as an experimental project to put into practice the knowledge acquired in the Artificial Intelligence course at Assimov Academy. The idea was to create a chatbot with a humorous and engaging personality, capable of maintaining natural conversations while performing useful tasks. The main focus was to develop the ability to read and interpret files (such as PDFs and text), allowing it to generate summaries, interpretations, and explanations automatically. This balance between technical functionality and fun interaction made JurandirBot a unique project, combining hands-on AI learning with user-friendly usability."
+           data-link="https://github.com/DMendes7/JurandirBot">
+        <h3>JurandirBot</h3>
+        <p>Chatbot with memory and PDF reading. Streamlit interface.</p>
+        <div class="tech-used">
+          <span>Langchain</span>
+          <span>Groq</span>
+          <span>Streamlit</span>
         </div>
-        <div class="project-card">
-          <h3>AI-based NF Validator</h3>
-          <p>Automated extraction and validation of invoice PDFs (DANFEs) using AI and an internal chatbot interface.</p>
-          <div class="tech-used">
-            <span>Python</span>
-            <span>Groq API</span>
-            <span>Langchain</span>
-            <span>Streamlit</span>
-          </div>
+      </div>
+
+      <div class="project-card"
+           data-title="Invoice Validator with AI"
+           data-media="img/projetos/validador-ia.png"
+           data-description="Invoice Validator with AI was created to handle an internal demand of high-volume manual verification of invoices. Inspired by the logic implemented in JurandirBot, this project was structured to automate the entire validation process. The system automatically downloads the invoices listed for verification, renaming each file according to its number. It then uses AI to interpret the documents and validate whether the extracted data (values, items, and fiscal information) complies with established criteria. The processed information is stored and made available in analytical dashboards, enabling clear and quick tracking. Each validated invoice also receives an indicator label showing which invoices were approved and which had inconsistencies. This solution significantly reduced manual effort, freeing the internal team to focus on higher-value tasks."
+           data-link="unavailable">
+        <h3>Invoice Validator with AI</h3>
+        <p>Automated extraction and validation of invoices using AI with analytical dashboards.</p>
+        <div class="tech-used">
+          <span>Python</span>
+          <span>Groq API</span>
+          <span>Langchain</span>
+          <span>Power BI</span>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<!----------------------------------------------------------->
+<!-- Modal de Projeto -->
+<div id="project-modal" class="project-modal" aria-hidden="true" role="dialog" aria-labelledby="pm-title">
+  <div class="project-modal__overlay" data-close-modal></div>
+  <div class="project-modal__content" role="document">
+    <button class="project-modal__close" aria-label="Fechar" title="Fechar" data-close-modal>&times;</button>
+
+    <div class="project-modal__media-wrap">
+      <img id="pm-media" alt="" loading="lazy">
+    </div>
+
+    <div class="project-modal__body">
+      <h3 id="pm-title"></h3>
+      <p id="pm-desc"></p>
+      <a id="pm-link" href="#" target="_blank" rel="noopener" class="project-modal__link" hidden>
+        View repository
+      </a>
+    </div>
+  </div>
+</div>
+<!----------------------------------------------------------->
 
   <section class="section dark-section">
   <div class="container">
