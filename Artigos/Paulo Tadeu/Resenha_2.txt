@@ -1,0 +1,15 @@
+Resenha – Microservices
+
+O artigo Microservices (2014), escrito por Martin Fowler e James Lewis, discute um estilo arquitetural que vem ganhando espaço no desenvolvimento de sistemas: a arquitetura de microsserviços. A proposta é construir aplicações como um conjunto de serviços pequenos, independentes e focados em capacidades de negócio, em contraste com o modelo monolítico tradicional.
+
+No modelo monolítico, toda a lógica da aplicação é implementada e implantada como um único bloco. 
+Embora seja uma abordagem natural e simples de desenvolver, ela tende a gerar dificuldades conforme o sistema cresce, como ciclos de mudanças lentos, dificuldade de escalar apenas partes específicas e risco de acoplamento excessivo. A arquitetura de microsserviços surge como alternativa para reduzir esses problemas, dividindo o sistema em unidades menores, cada uma com seu próprio ciclo de vida, linguagem, banco de dados e processos de deploy independentes
+
+Os autores destacam algumas características essenciais dessa abordagem: componentização por serviços, organização em torno de capacidades de negócio, equipes responsáveis por produtos e não apenas projetos, endpoints inteligentes e canais simples de comunicação, governança descentralizada, gestão de dados distribuída, automação de infraestrutura, design para falha e evolução contínua
+Além disso, eles reforçam que a filosofia dos microsserviços dialoga fortemente com princípios do Unix (fazer uma coisa bem e integrá-la com outras) e com práticas modernas como DevOps e Continuous Delivery.
+
+Entretanto, o artigo também ressalta que essa arquitetura não é uma solução mágica. Microsserviços trazem novos desafios, como a complexidade de comunicação entre serviços, a necessidade de monitoramento mais robusto, a dificuldade de manter consistência entre bases de dados e a exigência de equipes com maturidade técnica. 
+Fowler e Lewis reconhecem que pode ser mais prudente iniciar um sistema como monólito e migrar para microsserviços conforme a necessidade
+
+Para nós, estudantes de Engenharia de Software, o texto é valioso por mostrar que não existe uma arquitetura “perfeita”. Os microsserviços representam um caminho poderoso para sistemas modernos, escaláveis e resilientes, mas seu sucesso depende de contexto, disciplina da equipe e capacidade de lidar com novas responsabilidades. 
+Assim, a lição central é que boas decisões arquiteturais precisam equilibrar teoria e prática, avaliando custos e benefícios a longo prazo.
