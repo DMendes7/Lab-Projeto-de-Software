@@ -1,0 +1,51 @@
+Resenha do Artigo: No Silver Bullet (Frederick P. Brooks, 1987)
+---------------------------------------------------------------
+
+Introdução
+----------
+O artigo "No Silver Bullet" do Frederick Brooks fala sobre um tema que ainda hoje é muito atual: 
+a busca por uma "bala de prata" que resolva todos os problemas de engenharia de software. 
+Muita gente espera um avanço tecnologico ou metodologico que traga ganhos de produtividade 
+gigantescos, igual aconteceu no hardware. Mas Brooks já dizia la atras que não existe essa 
+bala magica. Construir software sempre vai ser dificil por natureza.
+
+Principais pontos
+-----------------
+- Essência x Acidentes: Brooks divide as dificuldades em duas categorias. As essenciais 
+  (que são parte da propria natureza do software) e as acidentais (que vêm de limitações 
+  das ferramentas ou processos da epoca).
+- Dificuldades essenciais: complexidade, conformidade (se adaptar a regras externas), 
+  mutabilidade (software muda o tempo todo) e invisibilidade (não conseguimos visualizar 
+  bem como se visualiza um prédio ou um chip).
+- Avanços que ajudaram: linguagens de alto nível, time-sharing e ambientes integrados. 
+  Mas tudo isso ataca problemas "acidentais", não resolve a essência.
+- OOP, IA, expert systems, programação automática, programação visual... Brooks analisa 
+  essas promessas e mostra que nenhuma delas vai dar um salto tão grande assim.
+- O mais importante é aceitar que não vai ter um "silver bullet", mas sim progressos 
+  pequenos e constantes.
+
+Reflexão
+--------
+A grande sacada do texto é que o problema do software não está em como a gente escreve o código, 
+mas sim em como entender, projetar e especificar o que precisa ser feito. Isso é conceitualmente 
+complicado e não dá pra simplificar com uma tecnologia nova. 
+
+Brooks tambem reforça que mesmo avanços como OO ajudam, mas não eliminam a dificuldade 
+de pensar em sistemas complexos. Ou seja, o trabalho duro é inevitavel.
+
+Minha opinião
+-------------
+Achei o artigo muito bom pq ele dá um banho de realidade. A gente sempre ve uma nova moda 
+na area de TI prometendo resolver tudo — microservices, low-code, IA — mas a verdade é 
+que os problemas essenciais continuam os mesmos: entender o que o cliente quer, lidar com 
+complexidade, manter o sistema vivo no tempo.  
+
+O que eu levo é que não adianta procurar solução milagrosa. Melhor é investir em boas praticas, 
+em formar bons designers de software, e aceitar que o processo é gradual e trabalhoso.  
+
+Conclusão
+---------
+No Silver Bullet mostra que não existe caminho magico na engenharia de software. 
+Não tem tecnologia que vá multiplicar a produtividade por 10 de uma vez. 
+O que existe são avanços incrementais, que juntos fazem diferença ao longo do tempo. 
+A lição é parar de caçar a "bala de prata" e focar em evoluir de forma consistente.
