@@ -38,6 +38,12 @@ Cada resenha está organizada em sua respectiva pasta dentro de `Artigos/`.
 - **Artigo 1 — The Big Ball of Mud**  
   Resenha sobre o artigo de Brian Foote e Joseph Yoder, discutindo sistemas mal estruturados (“Big Ball of Mud”), suas causas, consequências e relevância prática.
 
+- **Artigo 2 — Microservices**  
+  Resenha sobre os principais conceitos e práticas relacionados a microsserviços, abordando vantagens, desafios e impacto arquitetural.  
+
+- **Artigo 3 — No Silver Bullet**  
+  Resenha do texto clássico de Frederick Brooks, analisando a ideia de que não existe uma solução única e definitiva para os desafios do desenvolvimento de software.  
+
 ---
 
 ## 🛠️ Tecnologias Utilizadas
