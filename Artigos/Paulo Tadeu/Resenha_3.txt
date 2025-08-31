@@ -1,0 +1,20 @@
+Resenha – No Silver Bullet: Essence and Accidents of Software Engineering
+
+O artigo clássico No Silver Bullet (1987), de Frederick P. Brooks Jr., discute uma questão central da Engenharia de Software:
+existe alguma solução milagrosa capaz de aumentar drasticamente a produtividade e a confiabilidade no desenvolvimento de software? 
+Brooks responde de forma categórica: não há “bala de prata”. Ou seja, não existe uma tecnologia ou metodologia única capaz de resolver, por si só, os grandes problemas da área
+
+
+O autor diferencia dois tipos de dificuldades: as acidentais, ligadas às ferramentas e linguagens utilizadas, e as essenciais, inerentes à natureza do software. 
+Enquanto avanços como linguagens de alto nível, ambientes integrados e timesharing ajudaram a reduzir dificuldades acidentais, as dificuldades essenciais permanecem. 
+Brooks as identifica em quatro pontos: 
+complexidade (sistemas de software crescem em interações não lineares e difíceis de compreender), conformidade (softwares precisam se adaptar a múltiplos contextos e interfaces arbitrárias), mutabilidade (softwares estão sempre sujeitos a mudanças de requisitos e ambiente) e invisibilidade (falta de representação visual clara para comunicar sua estrutura)
+
+
+O autor também analisa promessas tecnológicas como programação orientada a objetos, inteligência artificial, expert systems, programação automática, verificação formal e programação visual.
+Embora tragam melhorias incrementais, nenhuma ataca de forma decisiva a essência da dificuldade do software.
+Para Brooks, a maior esperança está em estratégias que lidam com a essência do problema, como refinamento iterativo de requisitos, prototipação rápida, desenvolvimento incremental e, sobretudo, a valorização de grandes designers de software – profissionais criativos e talentosos que conseguem projetar sistemas melhores e mais simples.
+
+A principal lição para nós, estudantes de Engenharia de Software, é compreender que a construção de sistemas será sempre complexa e desafiadora, não existindo soluções mágicas.
+O progresso depende de avanços graduais, boas práticas de projeto e da formação de equipes capacitadas, ao mesmo tempo em que se reconhece a inevitabilidade das dificuldades essenciais.
+Em outras palavras, não há atalho milagroso: a evolução da Engenharia de Software é feita de disciplina, criatividade e trabalho consistente a longo prazo.
