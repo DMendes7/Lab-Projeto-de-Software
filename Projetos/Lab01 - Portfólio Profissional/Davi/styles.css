@@ -654,3 +654,19 @@ body {
   cursor: not-allowed;
   pointer-events: none;
 }
+
+.company-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;               /* espaço entre logo e nome */
+  font-size: 1.6rem;       /* ajusta o tamanho do texto */
+  margin: 30px 0 15px;     /* espaçamento em cima/baixo */
+  font-weight: 600;
+}
+
+.company-title .logo-company {
+  width: 32px;             /* define largura fixa */
+  height: auto;
+  display: inline-block;   /* força ficar na mesma linha */
+  vertical-align: middle;
+}
