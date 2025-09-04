@@ -85,8 +85,9 @@ O site foi desenvolvido com HTML, CSS e JavaScript puros, e está dividido em se
 
 O site está publicado e disponível no link:
 
-🔗 [Acessar Portfólio Online](https://davimendes.vercel.app/)
-🔗[Acessar Portfólio Online](https://paulotadeu-khaki.vercel.app/index.html)
+🔗 [Acessar Portfólio Online - Davi Mendes](https://davimendes.vercel.app/)
+
+🔗 [Acessar Portfólio Online - Paulo Tadeu](https://paulotadeu-khaki.vercel.app/index.html)
 
 ---
 
