@@ -120,5 +120,8 @@ langToggles.forEach((btn) => {
     setTimeout(() => {
       window.location.href = target;
     }, 600);
+
+
+    
   });
 });

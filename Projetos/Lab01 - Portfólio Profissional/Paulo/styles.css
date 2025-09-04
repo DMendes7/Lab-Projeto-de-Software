@@ -672,3 +672,23 @@ body {
   display: inline-block;   /* força ficar na mesma linha */
   vertical-align: middle;
 }
+
+.project-card .project-img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 15px 0;
+  object-fit: cover;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+
+.project-card .project-img {
+  width: 100%;
+  max-height: 120px;   /* controla a altura máxima */
+  object-fit: contain; /* mantém a proporção da logo */
+  border-radius: 8px;
+  margin: 10px 0;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
