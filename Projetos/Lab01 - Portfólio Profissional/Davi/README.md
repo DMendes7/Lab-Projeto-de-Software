@@ -87,7 +87,7 @@ O site está publicado e disponível no link:
 
 🔗 [Acessar Portfólio Online - Davi Mendes](https://davimendes.vercel.app/)
 
-🔗 [Acessar Portfólio Online - Paulo Tadeu](https://paulotadeu-khaki.vercel.app/index.html)
+🔗 [Acessar Portfólio Online - Paulo Tadeu](https://paulotadeu-beta.vercel.app/)
 
 ---
 
