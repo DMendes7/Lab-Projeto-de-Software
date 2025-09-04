@@ -1,0 +1,24 @@
+Resenha do Artigo: On the Criteria To Be Used in Decomposing Systems into Modules (David Parnas, 1972)
+------------------------------------------------------------------------------------------------------
+
+Introdução
+----------
+O texto do Parnas fala sobre modularização de sistemas. A ideia é que dividir o sistema em modulos
+n pode ser feito de qualquer jeito. Tem que pensar em como essas divisões ajudam na manutenção
+e na compreenção do software.
+
+Principais pontos
+-----------------
+- A forma mais comum era separar em etapas (input, processamento, output), mas isso deixa td mt preso.
+- Parnas sugere o "information hiding": cada modulo esconde decisões que podem mudar, tipo formato de dados.
+- Assim, qnd algo muda, só um modulo precisa ser alterado e o resto do sistema continua rodando.
+
+Reflexão
+--------
+O artigo mostra que modularizar bem é pensar no futuro do sistema. N é só cortar em pedaços, mas
+isolar o que pode mudar. Isso deixa o codigo mais flexivel e mais facil de manter.
+
+Conclusão
+---------
+Mesmo antigo, o texto é atual. Modularizar escondendo decisões é bem melhor doq seguir só o fluxo
+do programa, e até hj isso é usado em boas praticas de software.
