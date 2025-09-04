@@ -85,7 +85,7 @@ O site foi desenvolvido com HTML, CSS e JavaScript puros, e está dividido em se
 
 O site está publicado e disponível no link:
 
-🔗 [Acessar Portfólio Online](https://curriculo-davi-mendes.vercel.app)
+🔗 [Acessar Portfólio Online](https://davimendes.vercel.app/)
 
 ---
 
