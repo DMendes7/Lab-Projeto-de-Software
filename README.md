@@ -44,6 +44,12 @@ Cada resenha está organizada em sua respectiva pasta dentro de `Artigos/`.
 - **Artigo 3 — No Silver Bullet**  
   Resenha do texto clássico de Frederick Brooks, analisando a ideia de que não existe uma solução única e definitiva para os desafios do desenvolvimento de software.  
 
+- **Artigo 4 — On the Criteria To Be Used in Decomposing Systems into Modules**  
+  Resenha sobre critérios de modularização e suas implicações para a arquitetura de software.  
+
+- **Artigo 5 — Software Architecture: A Roadmap**  
+  Resenha que apresenta um panorama do campo de Arquitetura de Software e suas linhas de pesquisa e evolução.  
+
 ---
 
 ## 🛠️ Tecnologias Utilizadas
