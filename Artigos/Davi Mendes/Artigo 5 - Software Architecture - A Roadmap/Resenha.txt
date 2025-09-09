@@ -1,0 +1,36 @@
+Resenha do Artigo: Software Architecture: A Roadmap (David Garlan, 2000)
+------------------------------------------------------------------------
+
+Introdução
+----------
+O artigo do Garlan fala sobre o crescimento da area de arquitetura de software e o q ele enxerga
+como os proximos desafios. Ele mostra que arquitetura virou parte essencial do desenvolvimento
+e q tem papel de ponte entre requisitos e implementação. Uma boa arquitetura ajuda em desempenho,
+confiabilidade e manutençao, mas ainda tem mt coisa pra avançar.
+
+Principais pontos
+-----------------
+- Ontem: antes a arquitetura era mt ad hoc, diagramas de caixinha sem padrao, pouca analise formal.
+- Hoje: já temos linguagens proprias (ADLs), padroes de produto, estilos arquiteturais e até cursos.
+- Amanha: os desafios estao em lidar com sistemas distribuidos, internet, computaçao pervasiva e
+a necessidade de arquiteturas mais flexiveis e adaptaveis.
+- Papel da arquitetura: ajuda em compreensão de sistemas grandes, reuso, evoluçao, analise de
+propriedades e gerenciamento de projetos.
+
+Reflexão
+--------
+O texto mostra q arquitetura de software virou disciplina de verdade, mas ainda é "nova" comparado
+com outras engenharias. O q pega é que o mundo da tecnologia muda rapido (internet, mobilidade, 
+pervasive computing) e isso força a arquitetura a se reinventar.  
+
+Minha opinião
+-------------
+Achei o artigo massa pq ele mostra uma visão bem ampla: de onde viemos, onde estamos e pra onde
+vamos. Da pra ver q mt do que ele previu la atras realmente aconteceu (como uso de padroes,
+frameworks, serviços distribuidos). Ainda assim, fica claro q n existe receita pronta, é um campo
+em constante evolução.
+
+Conclusão
+---------
+Software architecture n é só desenho bonito, é essencial pra sistemas funcionarem e crescerem bem.
+O roadmap do Garlan mostra q o futuro pede arquiteturas mais dinamicas, adaptaveis e integradas.
