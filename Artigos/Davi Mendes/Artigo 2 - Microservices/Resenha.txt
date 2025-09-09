@@ -3,48 +3,32 @@ Resenha do Artigo: Microservices
 
 Introdução
 ----------
-O artigo sobre Microservices fala de um estilo arquitetural que vem ganhando muita força nos ultimos anos. 
-A ideia central é quebrar uma aplicação grande (monolito) em varios serviços pequenos, independentes, 
-que se comunicam entre si. Cada serviço é responsavel por uma parte especifica da aplicação e pode ser 
-desenvolvido, implantado e escalado de forma isolada.
-
-Esse modelo surgiu como resposta aos problemas de manutenção e evolução que os sistemas monoliticos 
-costumam ter, onde qualquer mudança exige mexer em todo o bloco de código.
+O texto fala sobre arquitetura de microservices, q basicamente é dividir uma aplicação
+grande (monolito) em varios serviços pequenos e independentes. Cada um cuida de uma parte
+do sistema e se comunica com os outros por API ou mensageria.
 
 Principais pontos
 -----------------
-- Serviços independentes: cada microservice tem seu proprio ciclo de vida, podendo ser atualizado sem 
-  afetar os outros.
-- Comunicação entre serviços: geralmente feita por APIs REST ou mensageria, garantindo que eles conversem.
-- Escalabilidade: é possivel escalar apenas o serviço que precisa de mais recurso, em vez de escalar o 
-  sistema todo.
-- Autonomia de equipes: times podem trabalhar em serviços diferentes ao mesmo tempo, com menos dependencia.
-- Tecnologias diversas: cada microservice pode usar a linguagem e banco mais adequados para o seu problema.
-- Desafios: apesar dos beneficios, surgem problemas como complexidade de integração, monitoramento, 
-  deploy distribuido e consistencia de dados.
+- Cada serviço tem seu ciclo de vida proprio, pode ser atualizado separado.
+- Escala só o q precisa, n precisa escalar o sistema inteiro.
+- Equipes podem trabalhar de forma autonoma em serviços diferentes.
+- Da pra usar tecnologias diferentes em cada serviço.
+- Mas tbm traz desafios: integração mais complexa, monitoramento dificil, consistencia
+de dados mais complicada.
 
 Reflexão
 --------
-O artigo mostra que microservices não são uma bala de prata. Eles resolvem problemas dos monolitos, 
-mas criam outros novos. Por exemplo, um monolito é mais simples de testar e de manter a consistencia 
-dos dados, enquanto microservices exigem toda uma estrutura de DevOps, automação de testes e monitoramento 
-pra funcionar bem.
-
-Outro ponto importante é que esse estilo só faz sentido em sistemas grandes, que realmente precisam 
-escalar e evoluir rápido. Pra aplicações menores, o custo de complexidade pode não valer a pena.
+Microservices resolvem mtos problemas do monolito, mas criam outros novos.
+É bom pra sistemas grandes, q precisam crescer rapido, mas pra projeto pequeno
+o custo e complexidade n compensam.
 
 Minha opinião
 -------------
-Achei o texto bem interessante pq explica de forma clara porque tanta empresa grande tá usando 
-microservices, tipo Netflix, Amazon, etc. É um modelo que ajuda muito quando se tem varios times 
-trabalhando juntos e o sistema precisa crescer rapido.
-
-Mas ao mesmo tempo da pra ver que não é algo que se aplica em qualquer lugar. Se eu fosse começar 
-um projeto pequeno, provavelmente faria um monolito mesmo, e so pensaria em microservices se a 
-aplicação realmente pedisse isso no futuro.  
+Achei legal pq explica pq empresas grandes tipo Netflix e Amazon usam isso.
+Mas da pra ver q n é moda pra td, só faz sentido quando o sistema realmente
+tem demanda e escala. Senão o monolito simples ainda é melhor.
 
 Conclusão
 ---------
-Microservices são uma alternativa moderna ao monolito, trazendo beneficios como escalabilidade, 
-autonomia e flexibilidade. Mas também exigem maturidade da equipe e investimento em infraestrutura.  
-A grande lição é: use quando fizer sentido, e não só pq virou "moda".
+Microservices dao flexibilidade e autonomia, mas exigem maturidade e estrutura
+pra funcionar direito.
