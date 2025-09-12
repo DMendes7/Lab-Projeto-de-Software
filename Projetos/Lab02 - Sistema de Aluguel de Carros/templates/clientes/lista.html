@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Clientes — Aluguel de Carros{% endblock %}
+{% block hero_title %}Clientes{% endblock %}
+{% block hero_sub %}Gerencie o cadastro dos seus clientes.{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+      <h2 style="margin:0;">Lista de clientes</h2>
+      <a href="{% url 'clientes:novo' %}" class="btn btn-primary">+ Novo cliente</a>
+    </div>
+
+    <div class="mt" style="overflow:auto;">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Profissão</th>
+            <th style="width:160px">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for c in clientes %}
+          <tr>
+            <td>{{ c.nome }}</td>
+            <td>{{ c.cpf }}</td>
+            <td>{{ c.profissao }}</td>
+            <td class="actions">
+              <a class="btn btn-ghost" href="{% url 'clientes:editar' c.pk %}">Editar</a>
+              <a class="btn btn-danger" href="{% url 'clientes:excluir' c.pk %}">Excluir</a>
+            </td>
+          </tr>
+        {% empty %}
+          <tr><td colspan="4">Nenhum cliente cadastrado.</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-br" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Aluguel de Carros{% endblock %}</title>
+
+  <link rel="icon" href="{% static 'img/logo.svg' %}">
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <script defer src="{% static 'js/main.js' %}"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell">
+      <a class="brand" href="{% url 'clientes:lista' %}">
+        <img src="{% static 'img/logo.svg' %}" alt="Logo" class="brand-logo">
+        <span class="brand-name">Aluguel<span>Carros</span></span>
+      </a>
+      <nav class="nav">
+        <a href="{% url 'clientes:lista' %}" class="nav-link">Clientes</a>
+        <!-- futuros: Pedidos, Automóveis -->
+      </nav>
+    </div>
+  </header>
+
+  <!-- hero com correção de aspas no CSS inline -->
+  <div class="hero" style="background-image: url('{% static "img/hero.jpg" %}');">
+    <div class="overlay"></div>
+    <div class="hero-inner shell">
+      <h1>{% block hero_title %}Sua frota, seu controle.{% endblock %}</h1>
+      <p>{% block hero_sub %}Administre clientes, pedidos e veículos com rapidez.{% endblock %}</p>
+    </div>
+  </div>
+
+  <main class="shell">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer shell">
+    <small>© {{ now|date:"Y" }} Aluguel de Carros — Lab02 •</small>
+  </footer>
+
+  <!-- Toast container -->
+  <div id="toast-root" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Mensagens do Django como JSON (evita erros do linter JS) -->
+  <script id="django-messages" type="application/json">
+    {% if messages %}
+      [
+        {% for m in messages %}
+          {"level":"{{ m.tags|default:'info' }}","text":"{{ m|escapejs }}"}{% if not forloop.last %},{% endif %}
+        {% endfor %}
+      ]
+    {% else %}[]{% endif %}
+  </script>
+
+  <!-- Leitura do JSON e exposição para main.js -->
+  <script>
+    (function () {
+      try {
+        const el = document.getElementById('django-messages');
+        window.__DJANGO_MESSAGES__ = JSON.parse(el.textContent || '[]');
+      } catch (e) {
+        window.__DJANGO_MESSAGES__ = [];
+        console.error('Falha ao ler mensagens do Django:', e);
+      }
+    })();
+  </script>
+</body>
+</html>
