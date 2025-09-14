@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes do Pedido - AutoRent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link th:href="@{/css/style.css?v=4}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- Toasts -->
+  <div th:if="${successMessage}" class="notification success" data-duration="4000">
+    <span th:text="${successMessage}">Operação realizada com sucesso.</span>
+    <button data-toast-close style="background:none;border:none;color:inherit;cursor:pointer;font-weight:bold;">×</button>
+  </div>
+  <div th:if="${errorMessage}" class="notification error" data-duration="6000">
+    <span th:text="${errorMessage}">Não foi possível realizar a operação.</span>
+    <button data-toast-close style="background:none;border:none;color:inherit;cursor:pointer;font-weight:bold;">×</button>
+  </div>
+
+  <header class="header">
+    <div class="nav-container">
+      <a th:href="@{/}" class="logo"><span class="logo-text">AutoRent</span></a>
+      <nav class="nav-menu">
+        <a th:href="@{/}" class="nav-link"><i class="fas fa-home"></i> Início</a>
+        <a th:href="@{/contratantes}" class="nav-link"><i class="fas fa-users"></i> Contratantes</a>
+        <a th:href="@{/automoveis}" class="nav-link"><i class="fas fa-car"></i> Automóveis</a>
+        <a th:href="@{/pedidos}" class="nav-link"><i class="fas fa-clipboard-list"></i> Pedidos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin:8px 0 18px;">
+      <a th:href="@{/pedidos}" class="btn btn-secondary btn-sm"><i class="fas fa-arrow-left"></i> Voltar</a>
+
+      <div class="status-badge" th:switch="${pedido.status}">
+        <span th:case="${T(com.carrental.model.StatusPedido).NOVO}" class="status-novo">NOVO</span>
+        <span th:case="${T(com.carrental.model.StatusPedido).EM_AVALIACAO}" class="status-em-avaliacao">EM_AVALIACAO</span>
+        <span th:case="${T(com.carrental.model.StatusPedido).APROVADO}" class="status-aprovado">APROVADO</span>
+        <span th:case="${T(com.carrental.model.StatusPedido).REPROVADO}" class="status-reprovado">REPROVADO</span>
+        <span th:case="${T(com.carrental.model.StatusPedido).EM_EXECUCAO}" class="status-em-execucao">EM_EXECUCAO</span>
+        <span th:case="${T(com.carrental.model.StatusPedido).CANCELADO}" class="status-cancelado">CANCELADO</span>
+      </div>
+    </div>
+
+    <!-- Detalhes -->
+    <div class="card">
+      <h2 class="card-title">🔎 Detalhes do Pedido <span th:text="'#' + ${pedido.id}"></span></h2>
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;">
+        <div>
+          <strong>Contratante</strong>
+          <div th:text="${pedido.contratante?.nome}">—</div>
+        </div>
+        <div>
+          <strong>Automóvel</strong>
+          <div th:text="${pedido.automovel?.marca + ' ' + pedido.automovel?.modelo}">—</div>
+        </div>
+        <div>
+          <strong>Período</strong>
+          <div class="nowrap"
+               th:text="${#temporals.format(pedido.periodoInicio,'dd/MM/yy')} + ' a ' + ${#temporals.format(pedido.periodoFim,'dd/MM/yy')}">—</div>
+        </div>
+        <div>
+          <strong>Data de Criação</strong>
+          <div class="nowrap" th:text="${#temporals.format(pedido.dataCriacao,'dd/MM/yy HH:mm')}">—</div>
+        </div>
+        <div>
+          <strong>RENAVAM</strong>
+          <div th:text="${pedido.automovel?.renavam}">—</div>
+        </div>
+        <div>
+          <strong>Placa</strong>
+          <div th:text="${pedido.automovel?.placa}">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ações agrupadas -->
+    <div class="card mt-3">
+      <div class="actions-grid">
+        <!-- Grupo 1: Edição/Manutenção -->
+        <section>
+          <h4 class="actions-title"><i class="fas fa-wrench"></i> Edição</h4>
+          <div class="btn-group wrap">
+            <a th:href="@{/pedidos/editar/{id}(id=${pedido.id})}" class="btn btn-sm">
+              <i class="fas fa-edit"></i> Editar
+            </a>
+            <a th:href="@{/pedidos/excluir/{id}(id=${pedido.id})}" class="btn btn-secondary btn-sm"
+               onclick="return confirm('Tem certeza que deseja excluir este pedido?')">
+              <i class="fas fa-trash"></i> Excluir
+            </a>
+            <a th:if="${pedido.status == T(com.carrental.model.StatusPedido).NOVO or pedido.status == T(com.carrental.model.StatusPedido).EM_AVALIACAO}"
+               th:href="@{/pedidos/cancelar/{id}(id=${pedido.id})}" class="btn btn-secondary btn-sm"
+               onclick="return confirm('Tem certeza que deseja cancelar este pedido?')">
+              <i class="fas fa-ban"></i> Cancelar
+            </a>
+          </div>
+        </section>
+
+        <!-- Grupo 2: Avaliação (só quando aplicável) -->
+        <section th:if="${pedido.status == T(com.carrental.model.StatusPedido).NOVO
+                        or pedido.status == T(com.carrental.model.StatusPedido).EM_AVALIACAO}">
+          <h4 class="actions-title"><i class="fas fa-clipboard-check"></i> Avaliação</h4>
+          <div class="btn-group wrap">
+            <a th:href="@{/pedidos/aprovar/{id}(id=${pedido.id})}" class="btn btn-sm">
+              <i class="fas fa-check"></i> Aprovar
+            </a>
+            <a th:href="@{/pedidos/reprovar/{id}(id=${pedido.id})}" class="btn btn-secondary btn-sm">
+              <i class="fas fa-times"></i> Reprovar
+            </a>
+          </div>
+          <p class="actions-hint">Defina o resultado da análise do pedido.</p>
+        </section>
+
+        <!-- Grupo 3: Execução (pós aprovação) -->
+        <section th:if="${pedido.status == T(com.carrental.model.StatusPedido).APROVADO}">
+          <h4 class="actions-title"><i class="fas fa-play"></i> Execução</h4>
+          <div class="btn-group wrap">
+            <a th:href="@{/pedidos/executar/{id}(id=${pedido.id})}" class="btn btn-sm">
+              <i class="fas fa-play"></i> Iniciar Contrato
+            </a>
+          </div>
+          <p class="actions-hint">Coloca o pedido em execução (contrato em andamento).</p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer"><p>&copy; 2025 AutoRent.</p></footer>
+  <script th:src="@{/js/notifications.js?v=4}"></script>
+</body>
+</html>

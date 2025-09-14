@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Pedidos - AutoRent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link th:href="@{/css/style.css?v=3}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- Toasts -->
+  <div th:if="${successMessage}" class="notification success" data-duration="4000">
+    <span th:text="${successMessage}">Operação realizada com sucesso.</span>
+    <button data-toast-close style="background:none;border:none;color:inherit;cursor:pointer;font-weight:bold;">×</button>
+  </div>
+  <div th:if="${errorMessage}" class="notification error" data-duration="6000">
+    <span th:text="${errorMessage}">Não foi possível realizar a operação.</span>
+    <button data-toast-close style="background:none;border:none;color:inherit;cursor:pointer;font-weight:bold;">×</button>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="nav-container">
+      <a th:href="@{/}" class="logo"><span class="logo-text">AutoRent</span></a>
+      <nav class="nav-menu">
+        <a th:href="@{/}" class="nav-link"><i class="fas fa-home"></i> Início</a>
+        <a th:href="@{/contratantes}" class="nav-link"><i class="fas fa-users"></i> Contratantes</a>
+        <a th:href="@{/automoveis}" class="nav-link"><i class="fas fa-car"></i> Automóveis</a>
+        <a th:href="@{/pedidos}" class="nav-link"><i class="fas fa-clipboard-list"></i> Pedidos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>📋 Lista de Pedidos</h1>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <a th:href="@{/}" class="btn btn-secondary btn-sm"><i class="fas fa-arrow-left"></i> Voltar</a>
+      <a th:href="@{/pedidos/novo}" class="btn btn-sm"><i class="fas fa-plus"></i> Novo Pedido</a>
+    </div>
+
+    <div class="table-container">
+      <table class="table-pedidos">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Contratante</th>
+            <th>Automóvel</th>
+            <th class="col-compact">Período</th>
+            <th>Status</th>
+            <th class="col-compact">Data Criação</th>
+            <th class="col-actions">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="pedido : ${pedidos}"
+              class="row-click"
+              th:attr="data-href=@{/pedidos/{id}(id=${pedido.id})}"
+              tabindex="0" role="link" aria-label="Abrir detalhes do pedido">
+            <td th:text="${pedido.id}"></td>
+
+            <!-- Sem links: a linha inteira navega -->
+            <td th:text="${pedido.contratante?.nome}"></td>
+            <td th:text="${pedido.automovel?.marca + ' ' + pedido.automovel?.modelo}"></td>
+
+            <td class="nowrap"
+                th:text="${#temporals.format(pedido.periodoInicio,'dd/MM/yy')} + ' a ' + ${#temporals.format(pedido.periodoFim,'dd/MM/yy')}">
+            </td>
+
+            <td>
+              <span class="status-badge" th:switch="${pedido.status}">
+                <span th:case="${T(com.carrental.model.StatusPedido).NOVO}" class="status-novo">NOVO</span>
+                <span th:case="${T(com.carrental.model.StatusPedido).EM_AVALIACAO}" class="status-em-avaliacao">EM_AVALIACAO</span>
+                <span th:case="${T(com.carrental.model.StatusPedido).APROVADO}" class="status-aprovado">APROVADO</span>
+                <span th:case="${T(com.carrental.model.StatusPedido).REPROVADO}" class="status-reprovado">REPROVADO</span>
+                <span th:case="${T(com.carrental.model.StatusPedido).EM_EXECUCAO}" class="status-em-execucao">EM_EXECUCAO</span>
+                <span th:case="${T(com.carrental.model.StatusPedido).CANCELADO}" class="status-cancelado">CANCELADO</span>
+              </span>
+            </td>
+
+            <td class="nowrap" th:text="${#temporals.format(pedido.dataCriacao,'dd/MM/yy')}"></td>
+
+            <!-- Botões: continuam clicáveis, mas não disparam navegação da linha -->
+            <td>
+              <div class="btn-group">
+                <a th:href="@{/pedidos/editar/{id}(id=${pedido.id})}" class="btn btn-sm no-row-nav">
+                  <i class="fas fa-edit"></i> Editar
+                </a>
+                <a th:href="@{/pedidos/excluir/{id}(id=${pedido.id})}" class="btn btn-secondary btn-sm no-row-nav"
+                   onclick="return confirm('Tem certeza que deseja excluir este pedido?')">
+                  <i class="fas fa-trash"></i> Excluir
+                </a>
+                <a th:if="${pedido.status == T(com.carrental.model.StatusPedido).NOVO or pedido.status == T(com.carrental.model.StatusPedido).EM_AVALIACAO}"
+                   th:href="@{/pedidos/cancelar/{id}(id=${pedido.id})}" class="btn btn-secondary btn-sm no-row-nav"
+                   onclick="return confirm('Tem certeza que deseja cancelar este pedido?')">
+                  <i class="fas fa-ban"></i> Cancelar
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card mt-4">
+      <h3 class="card-title">📊 Legenda de Status</h3>
+      <ul>
+        <li><span class="status-badge status-novo">NOVO</span> - Pedido recém-criado</li>
+        <li><span class="status-badge status-em-avaliacao">EM_AVALIACAO</span> - Em análise</li>
+        <li><span class="status-badge status-aprovado">APROVADO</span> - Pedido aprovado</li>
+        <li><span class="status-badge status-reprovado">REPROVADO</span> - Pedido reprovado</li>
+        <li><span class="status-badge status-em-execucao">EM_EXECUCAO</span> - Contrato em andamento</li>
+        <li><span class="status-badge status-cancelado">CANCELADO</span> - Pedido cancelado</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer class="footer"><p>&copy; 2025 AutoRent.</p></footer>
+
+  <!-- Navegação pela linha inteira, com acessibilidade -->
+  <script>
+    (function () {
+      function go(tr){ const href = tr?.dataset?.href; if(href){ window.location = href; } }
+
+      // clique na linha (exceto em elementos interativos)
+      document.addEventListener('click', function (e) {
+        const tr = e.target.closest('tr.row-click');
+        if (!tr) return;
+
+        // se clicou num botão/link dentro da linha, não navegar pela linha
+        const interactive = e.target.closest('a, button, .btn, input, label, select, textarea');
+        if (interactive && interactive.classList.contains('no-row-nav')) return;
+        if (interactive && !interactive.classList.contains('no-row-nav')) return; // qualquer interativo já tem seu próprio href
+
+        go(tr);
+      });
+
+      // teclado: Enter ou Espaço navegam
+      document.addEventListener('keydown', function (e) {
+        const tr = e.target.closest('tr.row-click');
+        if (!tr) return;
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          go(tr);
+        }
+      });
+    })();
+  </script>
+
+  <script th:src="@{/js/notifications.js?v=3}"></script>
+</body>
+</html>

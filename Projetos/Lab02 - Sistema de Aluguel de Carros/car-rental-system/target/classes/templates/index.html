@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoRent - Sistema de Aluguel de Carros</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link th:href="@{/css/style.css?v=2}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- Toast -->
+  <div th:if="${successMessage}" class="notification success" data-duration="4000">
+    <span th:text="${successMessage}"></span>
+    <button data-toast-close style="background:none;border:none;color:inherit;cursor:pointer;font-weight:bold;">×</button>
+  </div>
+  <div th:if="${errorMessage}" class="notification error" data-duration="6000">
+    <span th:text="${errorMessage}"></span>
+    <button data-toast-close style="background:none;border:none;color:inherit;cursor:pointer;font-weight:bold;">×</button>
+  </div>
+
+  <header class="header">
+    <div class="nav-container">
+      <a th:href="@{/}" class="logo"><span class="logo-text">AutoRent</span></a>
+      <nav class="nav-menu">
+        <a th:href="@{/}" class="nav-link"><i class="fas fa-home"></i> Início</a>
+        <a th:href="@{/contratantes}" class="nav-link"><i class="fas fa-users"></i> Contratantes</a>
+        <a th:href="@{/automoveis}" class="nav-link"><i class="fas fa-car"></i> Automóveis</a>
+        <a th:href="@{/pedidos}" class="nav-link"><i class="fas fa-clipboard-list"></i> Pedidos</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <h1 class="hero-title">AutoRent — Sistema de Aluguel de Carros</h1>
+    </div>
+  </section>
+
+  <main class="container">
+    <h2>Bem-vindo ao AutoRent</h2>
+    <p>Gerencie contratantes, automóveis e pedidos com praticidade.</p>
+    <div class="card-grid">
+      <div class="card">
+        <h3 class="card-title"><i class="fas fa-users"></i> Contratantes</h3>
+        <p>Cadastre e gerencie clientes do sistema.</p>
+        <a th:href="@{/contratantes}" class="btn">Gerenciar Contratantes</a>
+      </div>
+      <div class="card">
+        <h3 class="card-title"><i class="fas fa-car"></i> Automóveis</h3>
+        <p>Controle a frota disponível para locação.</p>
+        <a th:href="@{/automoveis}" class="btn">Gerenciar Automóveis</a>
+      </div>
+      <div class="card">
+        <h3 class="card-title"><i class="fas fa-clipboard-list"></i> Pedidos</h3>
+        <p>Acompanhe e altere o status dos pedidos.</p>
+        <a th:href="@{/pedidos}" class="btn">Gerenciar Pedidos</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer"><p>&copy; 2025 AutoRent.</p></footer>
+  <script th:src="@{/js/notifications.js?v=2}"></script>
+</body>
+</html>

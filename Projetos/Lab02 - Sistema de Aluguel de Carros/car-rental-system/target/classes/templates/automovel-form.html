@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="${automovel?.id != null} ? 'Editar Automóvel' : 'Novo Automóvel'">Automóvel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link th:href="@{/css/style.css?v=5}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- Toasts -->
+  <div th:if="${successMessage}" class="notification success" data-duration="4000">
+    <span th:text="${successMessage}">Operação realizada com sucesso.</span>
+    <button data-toast-close style="background:none;border:none;color:inherit;cursor:pointer;font-weight:bold;">×</button>
+  </div>
+  <div th:if="${errorMessage}" class="notification error" data-duration="6000">
+    <span th:text="${errorMessage}">Não foi possível realizar a operação.</span>
+    <button data-toast-close style="background:none;border:none;color:inherit;cursor:pointer;font-weight:bold;">×</button>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="nav-container">
+      <a th:href="@{/}" class="logo"><span class="logo-text">AutoRent</span></a>
+      <nav class="nav-menu">
+        <a th:href="@{/}" class="nav-link"><i class="fas fa-home"></i> Início</a>
+        <a th:href="@{/contratantes}" class="nav-link"><i class="fas fa-users"></i> Contratantes</a>
+        <a th:href="@{/automoveis}" class="nav-link"><i class="fas fa-car"></i> Automóveis</a>
+        <a th:href="@{/pedidos}" class="nav-link"><i class="fas fa-clipboard-list"></i> Pedidos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin:8px 0 18px;">
+      <a th:href="@{/automoveis}" class="btn btn-secondary btn-sm"><i class="fas fa-arrow-left"></i> Voltar</a>
+      <h1 class="card-title" style="margin:0" th:text="${automovel?.id != null} ? 'Editar Automóvel' : 'Novo Automóvel'">Automóvel</h1>
+    </div>
+
+    <div class="card">
+      <form th:action="@{/automoveis/salvar}" th:object="${automovel}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="form-group">
+          <label for="marca">Marca</label>
+          <input id="marca" type="text" class="form-control" placeholder="Ex.: Toyota" th:field="*{marca}" required>
+        </div>
+
+        <div class="form-group">
+          <label for="modelo">Modelo</label>
+          <input id="modelo" type="text" class="form-control" placeholder="Ex.: Corolla" th:field="*{modelo}" required>
+        </div>
+
+        <div class="form-group">
+          <label for="placa">Placa</label>
+          <input id="placa" type="text" class="form-control" placeholder="Ex.: ABC1D23" th:field="*{placa}" required>
+        </div>
+
+        <div class="form-group">
+          <label for="renavam">RENAVAM</label>
+          <input id="renavam" type="text" class="form-control" placeholder="Ex.: 0099887766" th:field="*{renavam}" required>
+        </div>
+
+        <div class="form-group">
+          <label for="ativo">Ativo</label>
+          <!-- Switch customizado -->
+          <label class="switch">
+            <input type="checkbox" id="ativo" name="ativo" th:field="*{ativo}">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="btn-group wrap mt-3">
+          <button type="submit" class="btn"><i class="fas fa-save"></i> Salvar</button>
+          <a th:href="@{/automoveis}" class="btn btn-secondary"><i class="fas fa-times"></i> Cancelar</a>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer class="footer"><p>&copy; 2025 AutoRent.</p></footer>
+  <script th:src="@{/js/notifications.js?v=5}"></script>
+</body>
+</html>

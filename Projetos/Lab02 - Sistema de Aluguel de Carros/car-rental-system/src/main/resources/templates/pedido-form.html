@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="${pedido.id} ? 'Editar Pedido - AutoRent' : 'Novo Pedido - AutoRent'">Pedido</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link th:href="@{/css/style.css?v=2}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- Toasts -->
+  <div th:if="${successMessage}" class="notification success" data-duration="4000">
+    <span th:text="${successMessage}">Operação realizada com sucesso.</span>
+    <button data-toast-close style="background:none;border:none;color:inherit;cursor:pointer;font-weight:bold;">×</button>
+  </div>
+  <div th:if="${errorMessage}" class="notification error" data-duration="6000">
+    <span th:text="${errorMessage}">Não foi possível realizar a operação.</span>
+    <button data-toast-close style="background:none;border:none;color:inherit;cursor:pointer;font-weight:bold;">×</button>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="nav-container">
+      <a th:href="@{/}" class="logo"><span class="logo-text">AutoRent</span></a>
+      <nav class="nav-menu">
+        <a th:href="@{/}" class="nav-link"><i class="fas fa-home"></i> Início</a>
+        <a th:href="@{/contratantes}" class="nav-link"><i class="fas fa-users"></i> Contratantes</a>
+        <a th:href="@{/automoveis}" class="nav-link"><i class="fas fa-car"></i> Automóveis</a>
+        <a th:href="@{/pedidos}" class="nav-link"><i class="fas fa-clipboard-list"></i> Pedidos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 th:text="${pedido.id} ? 'Editar Pedido' : 'Novo Pedido'">Pedido</h1>
+
+    <form th:action="@{/pedidos/salvar}" th:object="${pedido}" method="post" class="card">
+      <input type="hidden" th:field="*{id}">
+
+      <div class="form-group">
+        <label>Contratante</label>
+        <select class="form-control" th:field="*{contratante.id}" required>
+          <option value="" disabled selected>Selecione um contratante</option>
+          <option th:each="c : ${contratantes}" th:value="${c.id}" th:text="${c.nome}"></option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Automóvel</label>
+        <select class="form-control" th:field="*{automovel.id}" required>
+          <option value="" disabled selected>Selecione um automóvel</option>
+          <option th:each="a : ${automoveis}" th:value="${a.id}" th:text="${a.marca + ' ' + a.modelo + ' - ' + a.placa}"></option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Período Início</label>
+        <input class="form-control" type="date" th:field="*{periodoInicio}" required>
+      </div>
+
+      <div class="form-group">
+        <label>Período Fim</label>
+        <input class="form-control" type="date" th:field="*{periodoFim}" required>
+      </div>
+
+      <div class="mt-3">
+        <button type="submit" class="btn"><i class="fas fa-save"></i> Salvar</button>
+        <a th:href="@{/pedidos}" class="btn btn-secondary"><i class="fas fa-times"></i> Cancelar</a>
+      </div>
+    </form>
+  </main>
+
+  <footer class="footer"><p>&copy; 2025 AutoRent.</p></footer>
+  <script th:src="@{/js/notifications.js}"></script>
+</body>
+</html>

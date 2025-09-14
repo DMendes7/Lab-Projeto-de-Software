@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Automóveis - AutoRent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link th:href="@{/css/style.css?v=2}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- Toasts -->
+  <div th:if="${successMessage}" class="notification success" data-duration="4000">
+    <span th:text="${successMessage}">Operação realizada com sucesso.</span>
+    <button data-toast-close style="background:none;border:none;color:inherit;cursor:pointer;font-weight:bold;">×</button>
+  </div>
+  <div th:if="${errorMessage}" class="notification error" data-duration="6000">
+    <span th:text="${errorMessage}">Não foi possível realizar a operação.</span>
+    <button data-toast-close style="background:none;border:none;color:inherit;cursor:pointer;font-weight:bold;">×</button>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="nav-container">
+      <a th:href="@{/}" class="logo"><span class="logo-text">AutoRent</span></a>
+      <nav class="nav-menu">
+        <a th:href="@{/}" class="nav-link"><i class="fas fa-home"></i> Início</a>
+        <a th:href="@{/contratantes}" class="nav-link"><i class="fas fa-users"></i> Contratantes</a>
+        <a th:href="@{/automoveis}" class="nav-link"><i class="fas fa-car"></i> Automóveis</a>
+        <a th:href="@{/pedidos}" class="nav-link"><i class="fas fa-clipboard-list"></i> Pedidos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>🚗 Lista de Automóveis</h1>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <a th:href="@{/}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Voltar</a>
+      <a th:href="@{/automoveis/novo}" class="btn"><i class="fas fa-plus"></i> Novo Automóvel</a>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th><th>Placa</th><th>Marca</th><th>Modelo</th><th>Ano</th><th>RENAVAM</th><th>Status</th><th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="automovel : ${automoveis}">
+            <td th:text="${automovel.id}"></td>
+            <td th:text="${automovel.placa}"></td>
+            <td th:text="${automovel.marca}"></td>
+            <td th:text="${automovel.modelo}"></td>
+            <td th:text="${automovel.ano}"></td>
+            <td th:text="${automovel.renavam}"></td>
+            <td>
+              <span th:if="${automovel.ativo}" class="status-badge status-aprovado">Ativo</span>
+              <span th:unless="${automovel.ativo}" class="status-badge status-reprovado">Inativo</span>
+            </td>
+            <td>
+              <a th:href="@{/automoveis/editar/{id}(id=${automovel.id})}" class="btn" style="padding:6px 10px;margin:2px;"><i class="fas fa-edit"></i> Editar</a>
+              <a th:href="@{/automoveis/excluir/{id}(id=${automovel.id})}" class="btn btn-secondary" style="padding:6px 10px;margin:2px;" onclick="return confirm('Tem certeza que deseja excluir este automóvel?')"><i class="fas fa-trash"></i> Excluir</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer class="footer"><p>&copy; 2025 AutoRent.</p></footer>
+  <script th:src="@{/js/notifications.js}"></script>
+</body>
+</html>
