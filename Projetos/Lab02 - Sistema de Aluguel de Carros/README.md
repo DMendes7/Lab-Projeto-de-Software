@@ -1,6 +1,6 @@
 # 🚗 AutoRent - Sistema de Aluguel de Carros
 
-![Hero Banner](img/hero-banner.png)
+![Hero Banner](car-rental-system/src/main/resources/static/img/hero-banner.png)
 
 AutoRent é um sistema acadêmico desenvolvido como **projeto de laboratório** para a disciplina de Engenharia de Software.  
 O objetivo é simular um sistema moderno de gerenciamento de uma locadora de automóveis, com foco em **boas práticas de desenvolvimento**, **UI/UX moderna** e **funcionalidades completas**.
@@ -23,25 +23,25 @@ O objetivo é simular um sistema moderno de gerenciamento de uma locadora de aut
 ## 🖼️ Screenshots
 
 ### Tela Inicial
-![Tela Inicial](car-rental-system/src/main/resources/static/img/detalhe-pedido.png)
+![Tela Inicial](car-rental-system/src/main/resources/static/img/home.png)
 
 ### Lista de Automóveis
-![Lista de Automóveis](car-rental-system/src/main/resources/staticimg/lista-automoveis.png)
+![Lista de Automóveis](car-rental-system/src/main/resources/static/img/ista-automoveis.png)
 
 ### Cadastro de Automóvel
-![Cadastro Automóvel](car-rental-system/src/main/resources/staticimg/cadastro-automovel.png)
+![Cadastro Automóvel](car-rental-system/src/main/resources/static/img/cadastro-automovel.png)
 
 ### Lista de Contratantes
-![Lista Contratantes](car-rental-system/src/main/resources/staticimg/lista-contratantes.png)
+![Lista Contratantes](car-rental-system/src/main/resources/static/img/lista-contratantes.png)
 
 ### Cadastro de Contratante
-![Cadastro Contratante](car-rental-system/src/main/resources/staticimg/cadastro-contratante.png)
+![Cadastro Contratante](car-rental-system/src/main/resources/static/img/cadastro-contratante.png)
 
 ### Lista de Pedidos
-![Lista Pedidos](car-rental-system/src/main/resources/staticimg/lista-pedidos.png)
+![Lista Pedidos](car-rental-system/src/main/resources/static/img/lista-pedidos.png)
 
 ### Detalhes de Pedido + Aprovação
-![Detalhes Pedido](car-rental-system/src/main/resources/staticimg/detalhes-pedido.png)
+![Detalhes Pedido](car-rental-system/src/main/resources/static/img/detalhes-pedido.png)
 
 ---
 
@@ -61,7 +61,8 @@ O objetivo é simular um sistema moderno de gerenciamento de uma locadora de aut
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/car-rental-system.git
+   git clone https://github.com/DMendes7/Lab-Projeto-de-Software.git
+   cd Projetos/Lab02 - Sistema de Aluguel de Carros
    cd car-rental-system
    ```
 
