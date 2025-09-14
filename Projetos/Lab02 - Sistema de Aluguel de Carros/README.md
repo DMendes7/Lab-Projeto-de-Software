@@ -84,13 +84,32 @@ O objetivo é simular um sistema moderno de gerenciamento de uma locadora de aut
 car-rental-system/
 ├── src/
 │   ├── main/
-│   │   ├── java/com/carrental/...    # Código fonte
+│   │   ├── java/com/carrental/controller/...
+│   │   ├── java/com/carrental/model/...
+│   │   ├── java/com/carrental/service/...
 │   │   ├── resources/
-│   │   │   ├── static/css            # Estilos (style.css)
-│   │   │   ├── static/js             # Scripts (notifications.js)
-│   │   │   └── templates             # Páginas HTML (Thymeleaf)
-│   └── test/                         # Testes automatizados
-├── img/                              # Imagens para o README
+│   │   │   ├── static/css/style.css
+│   │   │   ├── static/js/notifications.js
+│   │   │   ├── static/img/...
+│   │   │   └── templates/
+│   │   │       ├── index.html
+│   │   │       ├── automovel-form.html
+│   │   │       ├── automovel-list.html
+│   │   │       ├── contratante-form.html
+│   │   │       ├── contratante-list.html
+│   │   │       ├── pedido-form.html
+│   │   │       └── pedido-list.html
+│   └── test/...
+├── img/
+│   ├── hero-banner.png
+│   ├── tela-inicial.png
+│   ├── lista-automoveis.png
+│   ├── cadastro-automovel.png
+│   ├── lista-contratantes.png
+│   ├── cadastro-contratante.png
+│   ├── lista-pedidos.png
+│   └── detalhes-pedido.png
+├── pom.xml
 └── README.md
 ```
 
