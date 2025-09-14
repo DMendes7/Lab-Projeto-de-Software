@@ -1,0 +1,12 @@
+Resenha – Software Architecture: A Roadmap
+
+O artigo Software Architecture: A Roadmap (2000), de Mary Shaw e David Garlan, apresenta um panorama abrangente sobre o estado e os rumos da Arquitetura de Software como disciplina emergente na Engenharia de Software. 
+Os autores destacam que a arquitetura atua como um nível de abstração intermediário entre requisitos e implementação, descrevendo a estrutura de sistemas complexos em termos de componentes, conectores e padrões organizacionais .
+
+O texto enfatiza que a arquitetura de software não é apenas um diagrama técnico, mas sim uma forma de capturar decisões críticas de projeto, que impactam diretamente a evolução, manutenção, desempenho e confiabilidade dos sistemas. 
+Entre os tópicos centrais, destacam-se: a importância da documentação arquitetural, o uso de estilos arquiteturais (como camadas, pipe-and-filter, cliente-servidor), a necessidade de métodos de avaliação e análise de arquiteturas e a crescente integração entre arquitetura e práticas de desenvolvimento ágil .
+
+Os autores também ressaltam desafios de pesquisa e prática, como: desenvolver melhores técnicas de especificação formal, criar ferramentas de suporte para análise e simulação de arquiteturas, e aproximar arquitetos das necessidades do negócio. Além disso, indicam que a arquitetura deve ser vista como um processo evolutivo, capaz de lidar com mudanças tecnológicas, novos domínios de aplicação e pressões de mercado.
+
+Para nós, estudantes de Engenharia de Software, o artigo é essencial por mostrar que a arquitetura de software funciona como um guia estratégico no desenvolvimento de sistemas. 
+Ela ajuda a lidar com a complexidade e a tomar decisões que terão efeitos de longo prazo. Mais do que um conjunto de diagramas, a arquitetura é um instrumento de comunicação, planejamento e governança técnica, sendo fundamental para construir sistemas escaláveis e sustentáveis.
