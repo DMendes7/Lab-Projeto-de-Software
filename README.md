@@ -50,6 +50,9 @@ Cada resenha está organizada em sua respectiva pasta dentro de `Artigos/`.
 - **Artigo 5 — Software Architecture: A Roadmap**  
   Resenha que apresenta um panorama do campo de Arquitetura de Software e suas linhas de pesquisa e evolução.  
 
+- **Artigo 6 — Hotspot Patterns: The Formal Definition and Automatic Detection of Architecture Smells**  
+  Resenha sobre a definição formal de “architecture smells” e o uso de padrões para sua detecção.  
+
 ---
 
 ## 🛠️ Tecnologias Utilizadas
