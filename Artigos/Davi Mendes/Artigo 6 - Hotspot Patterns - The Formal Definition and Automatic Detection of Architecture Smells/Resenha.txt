@@ -1,0 +1,35 @@
+Resenha do Artigo: Hotspot Patterns (Mo, Cai, Kazman, Xiao)
+------------------------------------------------------------
+
+Introdução
+----------
+O artigo fala sobre "hotspot patterns", q são problemas recorrentes na arquitetura de software
+(q acabam virando cheiro ruim, tipo smells) e q geram mt custo de manutenção. A ideia é mostrar
+como certos padroes de problemas aparecem sempre e como detecta-los automaticamente.
+
+Principais pontos
+-----------------
+- Foram definidos 5 tipos principais: Unstable Interface, Implicit Cross-module Dependency,
+  Unhealthy Inheritance Hierarchy, Cross-Module Cycle e Cross-Package Cycle.
+- Esses padroes foram analisados em varios projetos open source e 1 comercial, mostrando q
+  arquivos envolvidos nesses hotspots tem bem mais erros e mudanças.
+- Quanto mais hotspots um arquivo ta envolvido, mais bugado e caro de manter ele fica.
+- Os q mais impactam sao Unstable Interface e Cross-Module Cycle.
+
+Reflexão
+--------
+O legal é q o artigo mostra q nem todo "code smell" das ferramentas realmente importa. Os
+hotspots focam no q realmente gera dor de cabeça pra manter. Isso ajuda devs a saber onde
+priorizar refatoração e o q deixar pra depois.
+
+Minha opinião
+-------------
+Achei interessante pq da uma visão bem pratica. Em vez de so falar de teoria de modularidade,
+eles trazem dados mostrando q certos problemas realmente estouram em bugs. Curti a ideia de
+usar histórico do projeto + arquitetura pra identificar esses pontos.
+
+Conclusão
+---------
+Hotspot patterns ajudam a entender pq alguns sistemas viram pesados de manter. Saber detecta-los
+permite agir antes do software virar um caos total. É tipo ter um mapa de onde a arquitetura ta
+apodrecendo.
