@@ -1,0 +1,14 @@
+Resenha – Hotspot Patterns
+
+O artigo Hotspot Patterns apresenta uma proposta interessante para lidar com a complexidade de sistemas de software a partir da identificação de pontos de variação recorrentes (hotspots) dentro de frameworks e arquiteturas reutilizáveis. 
+A ideia central é que, ao invés de projetar sistemas completamente fechados ou totalmente abertos, é possível estruturar o design prevendo áreas específicas que poderão mudar, enquanto o restante da arquitetura permanece estável.
+
+O texto descreve diferentes padrões de hotspots, mostrando como eles podem ser aplicados em contextos reais. 
+Esses padrões funcionam como guias para identificar onde a extensão ou adaptação do sistema será necessária, permitindo que desenvolvedores construam soluções flexíveis sem comprometer a integridade geral da arquitetura. 
+Além disso, o trabalho destaca que o uso de hotspots reduz o risco de “reinventar a roda” e promove a reutilização sistemática de software, aproximando-se da filosofia de frameworks orientados a objetos.
+
+Entre os exemplos mais relevantes, estão hotspots voltados para interfaces, pontos de integração e comportamento de componentes, que permitem que diferentes aplicações compartilhem uma base comum, mas ainda consigam se adaptar a necessidades específicas. 
+A aplicação de padrões de hotspots também é discutida em relação à manutenibilidade e evolução dos sistemas, já que eles tornam o código mais preparado para mudanças.
+
+Para nós, estudantes de Engenharia de Software, a principal contribuição desse artigo é mostrar como antecipar a variabilidade de um sistema durante o projeto, evitando arquiteturas rígidas que se tornam rapidamente obsoletas. 
+Ao mesmo tempo, ele evidencia que não se trata de abrir tudo à customização, mas sim de escolher estrategicamente onde permitir flexibilidade, equilibrando estabilidade e adaptabilidade.
