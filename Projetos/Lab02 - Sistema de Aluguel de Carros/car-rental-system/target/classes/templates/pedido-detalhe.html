@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -61,9 +63,7 @@
         <div>
           <strong>Período</strong>
           <div class="nowrap"
-               th:text="${#temporals.format(pedido.periodoInicio,'dd/MM/yy')} + ' a ' + ${#temporals.format(pedido.periodoFim,'dd/MM/yy')}">
-            —
-          </div>
+               th:text="${#temporals.format(pedido.periodoInicio,'dd/MM/yy')} + ' a ' + ${#temporals.format(pedido.periodoFim,'dd/MM/yy')}">—</div>
         </div>
 
         <div>
@@ -83,8 +83,8 @@
       </div>
     </div>
 
-    <!-- Ações agrupadas -->
-    <div class="card mt-3">
+    <!-- AÇÕES: apenas ADMIN -->
+    <div class="card mt-3" sec:authorize="hasRole('ADMIN')">
       <div class="actions-grid">
         <!-- Grupo 1: Edição/Manutenção -->
         <section>
@@ -105,7 +105,7 @@
           </div>
         </section>
 
-        <!-- Grupo 2: Avaliação (quando aplicável) -->
+        <!-- Grupo 2: Avaliação -->
         <section th:if="${pedido.status == T(com.carrental.model.StatusPedido).NOVO
                         or pedido.status == T(com.carrental.model.StatusPedido).EM_AVALIACAO}">
           <h4 class="actions-title"><i class="fas fa-clipboard-check"></i> Avaliação</h4>
@@ -120,7 +120,7 @@
           <p class="actions-hint">Defina o resultado da análise do pedido.</p>
         </section>
 
-        <!-- Grupo 3: Execução (pós aprovação) -->
+        <!-- Grupo 3: Execução -->
         <section th:if="${pedido.status == T(com.carrental.model.StatusPedido).APROVADO}">
           <h4 class="actions-title"><i class="fas fa-play"></i> Execução</h4>
           <div class="btn-group wrap">

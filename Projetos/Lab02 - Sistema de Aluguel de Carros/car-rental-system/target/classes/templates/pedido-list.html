@@ -14,8 +14,7 @@
   <link th:href="@{/css/style.css?v=5}" rel="stylesheet">
 
   <!-- Ícones -->
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
   <!-- Toasts -->
@@ -53,7 +52,8 @@
             <th class="col-compact">Período</th>
             <th>Status</th>
             <th class="col-compact">Data Criação</th>
-            <th class="col-actions">Ações</th>
+            <!-- Cabeçalho da coluna Ações só para ADMIN -->
+            <th class="col-actions" sec:authorize="hasRole('ADMIN')">Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -80,16 +80,14 @@
                 <span th:case="${T(com.carrental.model.StatusPedido).REPROVADO}" class="status-reprovado">REPROVADO</span>
                 <span th:case="${T(com.carrental.model.StatusPedido).EM_EXECUCAO}" class="status-em-execucao">EM_EXECUCAO</span>
                 <span th:case="${T(com.carrental.model.StatusPedido).CANCELADO}" class="status-cancelado">CANCELADO</span>
-                <span th:case="*"
-                      class="status-novo"
-                      th:text="${pedido.status}">STATUS</span>
+                <span th:case="*" class="status-novo" th:text="${pedido.status}">STATUS</span>
               </span>
             </td>
 
             <td class="nowrap" th:text="${#temporals.format(pedido.dataCriacao,'dd/MM/yy')}">01/01/25</td>
 
-            <!-- Botões: continuam clicáveis, mas não disparam navegação da linha -->
-            <td>
+            <!-- Coluna de ações só para ADMIN -->
+            <td sec:authorize="hasRole('ADMIN')">
               <div class="btn-group">
                 <a th:href="@{/pedidos/editar/{id}(id=${pedido.id})}" class="btn btn-sm no-row-nav">
                   <i class="fas fa-edit"></i> Editar
