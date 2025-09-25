@@ -1,17 +1,16 @@
--- H2: garantir que a JPA já criou as tabelas (propriedade abaixo) e limpar com FK desativada
+-- H2: garantir que a JPA já criou as tabelas e limpar em ordem segura
 SET REFERENTIAL_INTEGRITY FALSE;
 
--- zera as tabelas (TRUNCATE reseta identity em H2)
 TRUNCATE TABLE pedido;
 TRUNCATE TABLE automovel;
-TRUNCATE TABLE contratante;
+TRUNCATE TABLE contratantes;
 
 SET REFERENTIAL_INTEGRITY TRUE;
 
 -- =========================
 -- CONTRATANTES (IDs 1..3)
 -- =========================
-INSERT INTO contratante (id, nome, documento, email, profissao, rg, endereco, role, senha_hash, created_at)
+INSERT INTO contratantes (id, nome, documento, email, profissao, rg, endereco, role, senha_hash, created_at)
 VALUES
   (1, 'Administrador', '00000000000', 'admingia',        'Administrador', 'ADM-1',   'Sede',         'ADMIN', 'dummy', CURRENT_TIMESTAMP),
   (2, 'Alice Demo',    '11111111111', 'alice@demo.com',  'Designer',      'RG-ALICE','Rua A, 100',   'CLIENT','dummy', CURRENT_TIMESTAMP),
