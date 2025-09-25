@@ -3,7 +3,6 @@ package com.carrental.service;
 import com.carrental.model.Automovel;
 import com.carrental.repository.AutomovelRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,53 +10,26 @@ import java.util.Optional;
 @Service
 public class AutomovelService {
 
-    private final AutomovelRepository automovelRepository;
+    private final AutomovelRepository repository;
 
-    public AutomovelService(AutomovelRepository automovelRepository) {
-        this.automovelRepository = automovelRepository;
+    public AutomovelService(AutomovelRepository repository) {
+        this.repository = repository;
     }
 
-    /* ===== API nova (que eu havia proposto) ===== */
-    public List<Automovel> listarTodos() {
-        return automovelRepository.findAll();
-    }
+    /* ---------------- Compatibilidade (EN + PT) ---------------- */
 
-    public Optional<Automovel> findById(Long id) {
-        return automovelRepository.findById(id);
-    }
+    // EN
+    public List<Automovel> findAll() { return repository.findAll(); }
 
-    @Transactional
-    public Automovel salvar(Automovel a) {
-        return automovelRepository.save(a);
-    }
+    public Optional<Automovel> findById(Long id) { return repository.findById(id); }
 
-    @Transactional
-    public Automovel atualizar(Automovel a) {
-        return automovelRepository.save(a);
-    }
+    public Automovel save(Automovel a) { return repository.save(a); }
 
-    @Transactional
-    public void excluir(Long id) {
-        automovelRepository.deleteById(id);
-    }
+    public void deleteById(Long id) { repository.deleteById(id); }
 
-    /* ===== ALIASES para compatibilidade com controllers antigos ===== */
-    public List<Automovel> findAll() {                 // usado no AutomovelController
-        return listarTodos();
-    }
-
-    @Transactional
-    public Automovel save(Automovel a) {               // usado no AutomovelController
-        return salvar(a);
-    }
-
-    @Transactional
-    public void deleteById(Long id) {                  // usado no AutomovelController
-        excluir(id);
-    }
-
-    @Transactional
-    public Automovel update(Automovel a) {             // caso algum controller chame update(...)
-        return atualizar(a);
-    }
+    // PT (aliases)
+    public List<Automovel> listarTodos() { return findAll(); }
+    public Optional<Automovel> buscarPorId(Long id) { return findById(id); }
+    public Automovel salvar(Automovel a) { return save(a); }
+    public void excluir(Long id) { deleteById(id); }
 }

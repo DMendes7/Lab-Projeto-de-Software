@@ -1,4 +1,5 @@
 com/carrental/service/PedidoService.class
+com/carrental/security/CustomUserDetailsService.class
 com/carrental/CarRentalApplication.class
 com/carrental/model/Rendimento.class
 com/carrental/service/AutomovelService.class
@@ -8,11 +9,15 @@ com/carrental/model/Empregador.class
 com/carrental/model/StatusPedido.class
 com/carrental/model/Pedido.class
 com/carrental/config/DataSeeder.class
+com/carrental/config/WebSecurityConfig.class
 com/carrental/controller/AutomovelController.class
 com/carrental/model/Automovel.class
+com/carrental/config/WebConfig.class
 com/carrental/controller/PedidoController.class
+com/carrental/controller/LoginController.class
 com/carrental/repository/PedidoRepository.class
 com/carrental/controller/HomeController.class
 com/carrental/repository/ContratanteRepository.class
 com/carrental/repository/AutomovelRepository.class
 com/carrental/controller/ContratanteController.class
+com/carrental/model/UserRole.class

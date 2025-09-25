@@ -1,61 +1,68 @@
 package com.carrental.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "contratantes")
 public class Contratante {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @NotBlank(message = "Nome é obrigatório")
+
+    @Column(nullable = false)
     private String nome;
-    
-    @NotBlank(message = "RG é obrigatório")
-    private String rg;
-    
-    @NotBlank(message = "CPF é obrigatório")
-    private String cpf;
-    
-    @NotBlank(message = "Endereço é obrigatório")
+
+    @Column(nullable = false, unique = true)
+    private String documento;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
     private String endereco;
-    
     private String profissao;
-    
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "contratante_id")
-    @Size(max = 3, message = "Máximo de 3 rendimentos permitidos")
-    private List<Rendimento> rendimentos = new ArrayList<>();
-    
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "contratante_id")
-    private List<Empregador> empregadores = new ArrayList<>();
-    
+    private String rg;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private UserRole role; // ADMIN | CLIENT
+
+    @Column(name = "senha_hash", nullable = false)
+    private String senhaHash;
+
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+    // --- Getters/Setters ---
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-    
+
     public String getNome() { return nome; }
     public void setNome(String nome) { this.nome = nome; }
-    
-    public String getRg() { return rg; }
-    public void setRg(String rg) { this.rg = rg; }
-    
-    public String getCpf() { return cpf; }
-    public void setCpf(String cpf) { this.cpf = cpf; }
-    
+
+    public String getDocumento() { return documento; }
+    public void setDocumento(String documento) { this.documento = documento; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
     public String getEndereco() { return endereco; }
     public void setEndereco(String endereco) { this.endereco = endereco; }
-    
+
     public String getProfissao() { return profissao; }
     public void setProfissao(String profissao) { this.profissao = profissao; }
-    
-    public List<Rendimento> getRendimentos() { return rendimentos; }
-    public void setRendimentos(List<Rendimento> rendimentos) { this.rendimentos = rendimentos; }
-    
-    public List<Empregador> getEmpregadores() { return empregadores; }
-    public void setEmpregadores(List<Empregador> empregadores) { this.empregadores = empregadores; }
+
+    public String getRg() { return rg; }
+    public void setRg(String rg) { this.rg = rg; }
+
+    public UserRole getRole() { return role; }
+    public void setRole(UserRole role) { this.role = role; }
+
+    public String getSenhaHash() { return senhaHash; }
+    public void setSenhaHash(String senhaHash) { this.senhaHash = senhaHash; }
+
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }

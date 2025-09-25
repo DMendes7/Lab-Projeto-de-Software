@@ -1,63 +1,57 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lista de Contratantes - AutoRent</title>
+  <title>Contratantes - AutoRent</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link th:href="@{/css/style.css?v=2}" rel="stylesheet">
+  <link th:href="@{/css/style.css?v=3}" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-  <!-- Toasts -->
-  <div th:if="${successMessage}" class="notification success" data-duration="4000">
-    <span th:text="${successMessage}">Operação realizada com sucesso.</span>
-    <button data-toast-close style="background:none;border:none;color:inherit;cursor:pointer;font-weight:bold;">×</button>
-  </div>
-  <div th:if="${errorMessage}" class="notification error" data-duration="6000">
-    <span th:text="${errorMessage}">Não foi possível realizar a operação.</span>
-    <button data-toast-close style="background:none;border:none;color:inherit;cursor:pointer;font-weight:bold;">×</button>
-  </div>
-
   <!-- Header -->
-  <header class="header">
-    <div class="nav-container">
-      <a th:href="@{/}" class="logo"><span class="logo-text">AutoRent</span></a>
-      <nav class="nav-menu">
-        <a th:href="@{/}" class="nav-link"><i class="fas fa-home"></i> Início</a>
-        <a th:href="@{/contratantes}" class="nav-link"><i class="fas fa-users"></i> Contratantes</a>
-        <a th:href="@{/automoveis}" class="nav-link"><i class="fas fa-car"></i> Automóveis</a>
-        <a th:href="@{/pedidos}" class="nav-link"><i class="fas fa-clipboard-list"></i> Pedidos</a>
-      </nav>
-    </div>
-  </header>
+  <div th:replace="~{fragments/header :: header}"></div>
 
   <main class="container">
-    <h1>👥 Lista de Contratantes</h1>
+    <h1>Contratantes</h1>
+
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-      <a th:href="@{/}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Voltar</a>
-      <a th:href="@{/contratantes/novo}" class="btn"><i class="fas fa-plus"></i> Novo Contratante</a>
+      <a th:href="@{/}" class="btn btn-secondary btn-sm"><i class="fas fa-arrow-left"></i> Voltar</a>
+      <a th:href="@{/contratantes/novo}" class="btn btn-sm"><i class="fas fa-plus"></i> Novo Contratante</a>
     </div>
 
     <div class="table-container">
-      <table>
+      <table class="table">
         <thead>
           <tr>
-            <th>ID</th><th>Nome</th><th>CPF</th><th>RG</th><th>Endereço</th><th>Profissão</th><th>Ações</th>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Documento</th>
+            <th>E-mail</th>
+            <th>Profissão</th>
+            <th>RG</th>
+            <th>Role</th>
+            <th class="col-actions">Ações</th>
           </tr>
         </thead>
         <tbody>
-          <tr th:each="contratante : ${contratantes}">
-            <td th:text="${contratante.id}"></td>
-            <td th:text="${contratante.nome}"></td>
-            <td th:text="${contratante.cpf}"></td>
-            <td th:text="${contratante.rg}"></td>
-            <td th:text="${contratante.endereco}"></td>
-            <td th:text="${contratante.profissao}"></td>
+          <tr th:each="c : ${contratantes}">
+            <td th:text="${c.id}"></td>
+            <td th:text="${c.nome}"></td>
+            <td th:text="${c.documento}"></td>
+            <td th:text="${c.email}"></td>
+            <td th:text="${c.profissao}"></td>
+            <td th:text="${c.rg}"></td>
+            <td th:text="${c.role}"></td>
             <td>
-              <a th:href="@{/contratantes/editar/{id}(id=${contratante.id})}" class="btn" style="padding:6px 10px;margin:2px;"><i class="fas fa-edit"></i> Editar</a>
-              <a th:href="@{/contratantes/excluir/{id}(id=${contratante.id})}" class="btn btn-secondary" style="padding:6px 10px;margin:2px;" onclick="return confirm('Tem certeza que deseja excluir este contratante?')"><i class="fas fa-trash"></i> Excluir</a>
+              <div class="btn-group">
+                <a th:href="@{/contratantes/editar/{id}(id=${c.id})}" class="btn btn-sm"><i class="fas fa-edit"></i> Editar</a>
+                <a th:href="@{/contratantes/excluir/{id}(id=${c.id})}" class="btn btn-secondary btn-sm"
+                   onclick="return confirm('Tem certeza que deseja excluir este contratante?')">
+                  <i class="fas fa-trash"></i> Excluir
+                </a>
+              </div>
             </td>
           </tr>
         </tbody>
@@ -66,6 +60,5 @@
   </main>
 
   <footer class="footer"><p>&copy; 2025 AutoRent.</p></footer>
-  <script th:src="@{/js/notifications.js}"></script>
 </body>
 </html>

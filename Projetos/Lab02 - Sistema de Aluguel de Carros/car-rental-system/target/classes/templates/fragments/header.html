@@ -1,0 +1,68 @@
+<!-- templates/fragments/header.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<body>
+<div th:fragment="header">
+  <header class="topbar">
+    <nav class="nav">
+      <a class="brand" th:href="@{/}">
+        <span class="brand-icon">◎</span>
+        <span>AutoRent</span>
+      </a>
+
+      <ul class="menu">
+        <li><a th:href="@{/}" class="nav-link"><i class="fa fa-home"></i> Início</a></li>
+
+        <!-- Apenas ADMIN vê Contratantes e Automóveis -->
+        <li sec:authorize="hasRole('ADMIN')">
+          <a th:href="@{/contratantes}" class="nav-link"><i class="fa fa-users"></i> Contratantes</a>
+        </li>
+        <li sec:authorize="hasRole('ADMIN')">
+          <a th:href="@{/automoveis}" class="nav-link"><i class="fa fa-car"></i> Automóveis</a>
+        </li>
+
+        <!-- Pedidos visível para ADMIN e CLIENTE -->
+        <li sec:authorize="isAuthenticated()">
+          <a th:href="@{/pedidos}" class="nav-link"><i class="fa fa-clipboard-list"></i> Pedidos</a>
+        </li>
+      </ul>
+
+      <div class="auth">
+        <!-- Não logado -->
+        <a th:href="@{/login}" class="btn" sec:authorize="!isAuthenticated()">Entrar</a>
+
+        <!-- Logado -->
+        <div class="user" sec:authorize="isAuthenticated()">
+          <span class="chip">
+            <i class="fa fa-user-circle"></i>
+            <span sec:authentication="name">user</span>
+          </span>
+          <form th:action="@{/logout}" method="post" style="display:inline;">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <button type="submit" class="btn">Sair</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- estilos mínimos; seu style.css continua valendo -->
+  <style>
+    .topbar{background:#12131a;border-bottom:1px solid #232435}
+    .nav{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:24px;padding:14px 20px}
+    .brand{display:flex;gap:10px;align-items:center;color:#fff;text-decoration:none;font-weight:700}
+    .brand-icon{display:inline-flex;width:22px;height:22px;border:2px solid #8b5cf6;border-radius:50%;align-items:center;justify-content:center}
+    .menu{display:flex;gap:14px;list-style:none;margin:0;padding:0}
+    .nav-link{color:#d7d8df;text-decoration:none;padding:8px 10px;border-radius:10px}
+    .nav-link:hover{background:#1a1b27}
+    .auth{margin-left:auto;display:flex;align-items:center;gap:10px}
+    .btn{background:#7c3aed;color:#fff;border:none;border-radius:10px;padding:8px 14px;text-decoration:none;cursor:pointer}
+    .btn:hover{opacity:.9}
+    .chip{color:#c6c7d2;display:inline-flex;gap:6px;align-items:center}
+  </style>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</div>
+</body>
+</html>

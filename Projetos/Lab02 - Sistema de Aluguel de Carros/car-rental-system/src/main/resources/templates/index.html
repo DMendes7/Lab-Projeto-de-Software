@@ -21,17 +21,7 @@
     <button data-toast-close style="background:none;border:none;color:inherit;cursor:pointer;font-weight:bold;">×</button>
   </div>
 
-  <header class="header">
-    <div class="nav-container">
-      <a th:href="@{/}" class="logo"><span class="logo-text">AutoRent</span></a>
-      <nav class="nav-menu">
-        <a th:href="@{/}" class="nav-link"><i class="fas fa-home"></i> Início</a>
-        <a th:href="@{/contratantes}" class="nav-link"><i class="fas fa-users"></i> Contratantes</a>
-        <a th:href="@{/automoveis}" class="nav-link"><i class="fas fa-car"></i> Automóveis</a>
-        <a th:href="@{/pedidos}" class="nav-link"><i class="fas fa-clipboard-list"></i> Pedidos</a>
-      </nav>
-    </div>
-  </header>
+  <div th:replace="~{fragments/header :: header}"></div>
 
   <section class="hero">
     <div class="hero-inner">

@@ -1,13 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lista de Pedidos - AutoRent</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Fonte + CSS do projeto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link th:href="@{/css/style.css?v=3}" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link th:href="@{/css/style.css?v=5}" rel="stylesheet">
+
+  <!-- Ícones -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
   <!-- Toasts -->
@@ -20,25 +28,19 @@
     <button data-toast-close style="background:none;border:none;color:inherit;cursor:pointer;font-weight:bold;">×</button>
   </div>
 
-  <!-- Header -->
-  <header class="header">
-    <div class="nav-container">
-      <a th:href="@{/}" class="logo"><span class="logo-text">AutoRent</span></a>
-      <nav class="nav-menu">
-        <a th:href="@{/}" class="nav-link"><i class="fas fa-home"></i> Início</a>
-        <a th:href="@{/contratantes}" class="nav-link"><i class="fas fa-users"></i> Contratantes</a>
-        <a th:href="@{/automoveis}" class="nav-link"><i class="fas fa-car"></i> Automóveis</a>
-        <a th:href="@{/pedidos}" class="nav-link"><i class="fas fa-clipboard-list"></i> Pedidos</a>
-      </nav>
-    </div>
-  </header>
+  <!-- Header compartilhado -->
+  <div th:replace="~{fragments/header :: header}"></div>
 
   <main class="container">
     <h1>📋 Lista de Pedidos</h1>
 
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
       <a th:href="@{/}" class="btn btn-secondary btn-sm"><i class="fas fa-arrow-left"></i> Voltar</a>
-      <a th:href="@{/pedidos/novo}" class="btn btn-sm"><i class="fas fa-plus"></i> Novo Pedido</a>
+
+      <!-- Somente ADMIN vê o botão "Novo Pedido" -->
+      <a sec:authorize="hasRole('ADMIN')" th:href="@{/pedidos/novo}" class="btn btn-sm">
+        <i class="fas fa-plus"></i> Novo Pedido
+      </a>
     </div>
 
     <div class="table-container">
@@ -59,14 +61,15 @@
               class="row-click"
               th:attr="data-href=@{/pedidos/{id}(id=${pedido.id})}"
               tabindex="0" role="link" aria-label="Abrir detalhes do pedido">
-            <td th:text="${pedido.id}"></td>
+            <td th:text="${pedido.id}">1</td>
 
             <!-- Sem links: a linha inteira navega -->
-            <td th:text="${pedido.contratante?.nome}"></td>
-            <td th:text="${pedido.automovel?.marca + ' ' + pedido.automovel?.modelo}"></td>
+            <td th:text="${pedido.contratante?.nome}">Cliente</td>
+            <td th:text="${pedido.automovel?.marca + ' ' + pedido.automovel?.modelo}">Marca Modelo</td>
 
             <td class="nowrap"
                 th:text="${#temporals.format(pedido.periodoInicio,'dd/MM/yy')} + ' a ' + ${#temporals.format(pedido.periodoFim,'dd/MM/yy')}">
+              01/01/25 a 07/01/25
             </td>
 
             <td>
@@ -77,10 +80,13 @@
                 <span th:case="${T(com.carrental.model.StatusPedido).REPROVADO}" class="status-reprovado">REPROVADO</span>
                 <span th:case="${T(com.carrental.model.StatusPedido).EM_EXECUCAO}" class="status-em-execucao">EM_EXECUCAO</span>
                 <span th:case="${T(com.carrental.model.StatusPedido).CANCELADO}" class="status-cancelado">CANCELADO</span>
+                <span th:case="*"
+                      class="status-novo"
+                      th:text="${pedido.status}">STATUS</span>
               </span>
             </td>
 
-            <td class="nowrap" th:text="${#temporals.format(pedido.dataCriacao,'dd/MM/yy')}"></td>
+            <td class="nowrap" th:text="${#temporals.format(pedido.dataCriacao,'dd/MM/yy')}">01/01/25</td>
 
             <!-- Botões: continuam clicáveis, mas não disparam navegação da linha -->
             <td>
@@ -88,10 +94,12 @@
                 <a th:href="@{/pedidos/editar/{id}(id=${pedido.id})}" class="btn btn-sm no-row-nav">
                   <i class="fas fa-edit"></i> Editar
                 </a>
-                <a th:href="@{/pedidos/excluir/{id}(id=${pedido.id})}" class="btn btn-secondary btn-sm no-row-nav"
-                   onclick="return confirm('Tem certeza que deseja excluir este pedido?')">
-                  <i class="fas fa-trash"></i> Excluir
-                </a>
+                <form th:action="@{/pedidos/excluir/{id}(id=${pedido.id})}" method="post" class="no-row-nav" style="display:inline">
+                  <button type="submit" class="btn btn-secondary btn-sm"
+                          onclick="return confirm('Tem certeza que deseja excluir este pedido?')">
+                    <i class="fas fa-trash"></i> Excluir
+                  </button>
+                </form>
                 <a th:if="${pedido.status == T(com.carrental.model.StatusPedido).NOVO or pedido.status == T(com.carrental.model.StatusPedido).EM_AVALIACAO}"
                    th:href="@{/pedidos/cancelar/{id}(id=${pedido.id})}" class="btn btn-secondary btn-sm no-row-nav"
                    onclick="return confirm('Tem certeza que deseja cancelar este pedido?')">
@@ -129,10 +137,8 @@
         const tr = e.target.closest('tr.row-click');
         if (!tr) return;
 
-        // se clicou num botão/link dentro da linha, não navegar pela linha
-        const interactive = e.target.closest('a, button, .btn, input, label, select, textarea');
-        if (interactive && interactive.classList.contains('no-row-nav')) return;
-        if (interactive && !interactive.classList.contains('no-row-nav')) return; // qualquer interativo já tem seu próprio href
+        const interactive = e.target.closest('a, button, .btn, input, label, select, textarea, form');
+        if (interactive) return; // elementos interativos cuidam da própria navegação/ação
 
         go(tr);
       });
@@ -149,6 +155,6 @@
     })();
   </script>
 
-  <script th:src="@{/js/notifications.js?v=3}"></script>
+  <script th:src="@{/js/notifications.js?v=5}"></script>
 </body>
 </html>

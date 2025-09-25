@@ -21,17 +21,7 @@
   </div>
 
   <!-- Header -->
-  <header class="header">
-    <div class="nav-container">
-      <a th:href="@{/}" class="logo"><span class="logo-text">AutoRent</span></a>
-      <nav class="nav-menu">
-        <a th:href="@{/}" class="nav-link"><i class="fas fa-home"></i> Início</a>
-        <a th:href="@{/contratantes}" class="nav-link"><i class="fas fa-users"></i> Contratantes</a>
-        <a th:href="@{/automoveis}" class="nav-link"><i class="fas fa-car"></i> Automóveis</a>
-        <a th:href="@{/pedidos}" class="nav-link"><i class="fas fa-clipboard-list"></i> Pedidos</a>
-      </nav>
-    </div>
-  </header>
+  <div th:replace="~{fragments/header :: header}"></div>
 
   <main class="container">
     <h1>🚗 Lista de Automóveis</h1>

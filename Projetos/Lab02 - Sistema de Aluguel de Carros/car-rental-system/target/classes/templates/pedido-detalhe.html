@@ -4,9 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Detalhes do Pedido - AutoRent</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link th:href="@{/css/style.css?v=4}" rel="stylesheet">
+
+  <!-- mantém o mesmo CSS do projeto -->
+  <link th:href="@{/css/style.css?v=5}" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -20,21 +23,14 @@
     <button data-toast-close style="background:none;border:none;color:inherit;cursor:pointer;font-weight:bold;">×</button>
   </div>
 
-  <header class="header">
-    <div class="nav-container">
-      <a th:href="@{/}" class="logo"><span class="logo-text">AutoRent</span></a>
-      <nav class="nav-menu">
-        <a th:href="@{/}" class="nav-link"><i class="fas fa-home"></i> Início</a>
-        <a th:href="@{/contratantes}" class="nav-link"><i class="fas fa-users"></i> Contratantes</a>
-        <a th:href="@{/automoveis}" class="nav-link"><i class="fas fa-car"></i> Automóveis</a>
-        <a th:href="@{/pedidos}" class="nav-link"><i class="fas fa-clipboard-list"></i> Pedidos</a>
-      </nav>
-    </div>
-  </header>
+  <!-- Header (fragmento compartilhado) -->
+  <div th:replace="~{fragments/header :: header}"></div>
 
   <main class="container">
     <div style="display:flex;justify-content:space-between;align-items:center;margin:8px 0 18px;">
-      <a th:href="@{/pedidos}" class="btn btn-secondary btn-sm"><i class="fas fa-arrow-left"></i> Voltar</a>
+      <a th:href="@{/pedidos}" class="btn btn-secondary btn-sm">
+        <i class="fas fa-arrow-left"></i> Voltar
+      </a>
 
       <div class="status-badge" th:switch="${pedido.status}">
         <span th:case="${T(com.carrental.model.StatusPedido).NOVO}" class="status-novo">NOVO</span>
@@ -46,34 +42,43 @@
       </div>
     </div>
 
+    <!-- Título -->
+    <h1 class="card-title" th:text="'🔎 Detalhes do Pedido #' + ${pedido.id}">🔎 Detalhes do Pedido</h1>
+
     <!-- Detalhes -->
     <div class="card">
-      <h2 class="card-title">🔎 Detalhes do Pedido <span th:text="'#' + ${pedido.id}"></span></h2>
       <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;">
         <div>
           <strong>Contratante</strong>
-          <div th:text="${pedido.contratante?.nome}">—</div>
+          <div th:text="${pedido.contratante != null} ? ${pedido.contratante.nome} : '—'">—</div>
         </div>
+
         <div>
           <strong>Automóvel</strong>
-          <div th:text="${pedido.automovel?.marca + ' ' + pedido.automovel?.modelo}">—</div>
+          <div th:text="${pedido.automovel != null} ? ${pedido.automovel.marca + ' ' + pedido.automovel.modelo} : '—'">—</div>
         </div>
+
         <div>
           <strong>Período</strong>
           <div class="nowrap"
-               th:text="${#temporals.format(pedido.periodoInicio,'dd/MM/yy')} + ' a ' + ${#temporals.format(pedido.periodoFim,'dd/MM/yy')}">—</div>
+               th:text="${#temporals.format(pedido.periodoInicio,'dd/MM/yy')} + ' a ' + ${#temporals.format(pedido.periodoFim,'dd/MM/yy')}">
+            —
+          </div>
         </div>
+
         <div>
           <strong>Data de Criação</strong>
           <div class="nowrap" th:text="${#temporals.format(pedido.dataCriacao,'dd/MM/yy HH:mm')}">—</div>
         </div>
+
         <div>
           <strong>RENAVAM</strong>
-          <div th:text="${pedido.automovel?.renavam}">—</div>
+          <div th:text="${pedido.automovel != null} ? ${pedido.automovel.renavam} : '—'">—</div>
         </div>
+
         <div>
           <strong>Placa</strong>
-          <div th:text="${pedido.automovel?.placa}">—</div>
+          <div th:text="${pedido.automovel != null} ? ${pedido.automovel.placa} : '—'">—</div>
         </div>
       </div>
     </div>
@@ -100,7 +105,7 @@
           </div>
         </section>
 
-        <!-- Grupo 2: Avaliação (só quando aplicável) -->
+        <!-- Grupo 2: Avaliação (quando aplicável) -->
         <section th:if="${pedido.status == T(com.carrental.model.StatusPedido).NOVO
                         or pedido.status == T(com.carrental.model.StatusPedido).EM_AVALIACAO}">
           <h4 class="actions-title"><i class="fas fa-clipboard-check"></i> Avaliação</h4>
@@ -130,6 +135,6 @@
   </main>
 
   <footer class="footer"><p>&copy; 2025 AutoRent.</p></footer>
-  <script th:src="@{/js/notifications.js?v=4}"></script>
+  <script th:src="@{/js/notifications.js?v=5}"></script>
 </body>
 </html>

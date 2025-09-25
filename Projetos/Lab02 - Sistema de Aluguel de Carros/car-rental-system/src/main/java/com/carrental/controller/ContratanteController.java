@@ -2,74 +2,57 @@ package com.carrental.controller;
 
 import com.carrental.model.Contratante;
 import com.carrental.service.ContratanteService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.util.Optional;
 
 @Controller
 @RequestMapping("/contratantes")
 public class ContratanteController {
-    
-    @Autowired
-    private ContratanteService service;
-    
+
+    private final ContratanteService contratanteService;
+
+    public ContratanteController(ContratanteService contratanteService) {
+        this.contratanteService = contratanteService;
+    }
+
     @GetMapping
-    public String listContratantes(Model model,
-                                 @RequestParam(value = "success", required = false) Boolean success,
-                                 @RequestParam(value = "error", required = false) Boolean error) {
-        model.addAttribute("contratantes", service.findAll());
-        
-        if (Boolean.TRUE.equals(success)) {
-            model.addAttribute("successMessage", "Operação realizada com sucesso!");
-        }
-        if (Boolean.TRUE.equals(error)) {
-            model.addAttribute("errorMessage", "Erro ao realizar a operação. Tente novamente.");
-        }
-        
+    public String listar(Model model) {
+        model.addAttribute("contratantes", contratanteService.listarTodos());
         return "contratante-list";
     }
-    
+
     @GetMapping("/novo")
-    public String showForm(Model model,
-                          @RequestParam(value = "error", required = false) Boolean error) {
+    public String novo(Model model) {
         model.addAttribute("contratante", new Contratante());
-        
-        if (Boolean.TRUE.equals(error)) {
-            model.addAttribute("errorMessage", "Erro ao salvar contratante. Verifique os dados.");
-        }
-        
         return "contratante-form";
     }
-    
-    @PostMapping("/salvar")
-    public String saveContratante(@ModelAttribute Contratante contratante) {
-        try {
-            service.save(contratante);
-            return "redirect:/contratantes?success=true";
-        } catch (Exception e) {
-            return "redirect:/contratantes/novo?error=true";
-        }
-    }
-    
+
     @GetMapping("/editar/{id}")
-    public String editContratante(@PathVariable Long id, Model model) {
-        Optional<Contratante> contratante = service.findById(id);
-        if (contratante.isPresent()) {
-            model.addAttribute("contratante", contratante.get());
-            return "contratante-form";
+    public String editar(@PathVariable Long id, Model model, RedirectAttributes ra) {
+        Optional<Contratante> opt = contratanteService.buscarPorId(id);
+        if (opt.isEmpty()) {
+            ra.addFlashAttribute("errorMessage", "Contratante não encontrado.");
+            return "redirect:/contratantes";
         }
-        return "redirect:/contratantes?error=true";
+        model.addAttribute("contratante", opt.get());
+        return "contratante-form";
     }
-    
+
+    @PostMapping("/salvar")
+    public String salvar(@ModelAttribute Contratante contratante, RedirectAttributes ra) {
+        contratanteService.salvar(contratante);
+        ra.addFlashAttribute("successMessage", "Contratante salvo com sucesso.");
+        return "redirect:/contratantes";
+    }
+
     @GetMapping("/excluir/{id}")
-    public String deleteContratante(@PathVariable Long id) {
-        try {
-            service.deleteById(id);
-            return "redirect:/contratantes?success=true";
-        } catch (Exception e) {
-            return "redirect:/contratantes?error=true";
-        }
+    public String excluir(@PathVariable Long id, RedirectAttributes ra) {
+        contratanteService.deleteById(id);
+        ra.addFlashAttribute("successMessage", "Contratante excluído com sucesso.");
+        return "redirect:/contratantes";
     }
 }
