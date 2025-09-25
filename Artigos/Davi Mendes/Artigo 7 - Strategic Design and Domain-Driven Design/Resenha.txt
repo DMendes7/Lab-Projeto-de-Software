@@ -1,0 +1,34 @@
+Resenha do Artigo: Domain-Driven Design (Capítulos 4, 5 e 6)
+------------------------------------------------------------
+
+Introdução
+----------
+Nesses capitulos o texto foca em design estrategico dentro do DDD. A ideia é mostrar como
+organizar o dominio em contextos e como esses contextos se relacionam. É mais sobre visão
+macro do sistema doq detalhes de código.
+
+Principais pontos
+-----------------
+- Cap. 4: fala sobre "Bounded Context". Cada contexto delimitado tem seu modelo claro e isso
+  evita confusão. Importante ter fronteiras bem definidas pra n misturar coisas.
+- Cap. 5: trata das relaçoes entre contextos, tipo "Shared Kernel", "Customer/Supplier" e
+  "Conformist". É sobre como os times e sistemas se conectam quando existem varios contextos.
+- Cap. 6: entra na parte de "Context Map", q é um mapa visual das relações entre os contextos,
+  ajudando a enxergar dependencias e alinhar comunicação entre equipes.
+
+Reflexão
+--------
+O texto mostra q n adianta so modelar bem dentro de um contexto, é preciso pensar em como os
+contextos se integram. É basicamente aceitar q sistemas grandes sempre vão ter varias partes
+e q a chave é deixar claro os limites e a forma de comunicação.
+
+Minha opinião
+-------------
+Achei util pq deixa claro q DDD n é só sobre classes e entidades, mas tbm sobre estrategia e
+organização entre times. Pra projetos grandes isso faz muita diferença. 
+
+Conclusão
+---------
+Os capitulos 4, 5 e 6 deixam evidente q design estrategico é essencial pra manter sistemas
+complexos sob controle. Contextos bem definidos + mapa das relações = menos confusão e mais
+clareza no projeto.
