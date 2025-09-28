@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Cadastrar Empresa Parceira{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>Nova Empresa Parceira</h1>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-row cols-2">
+      <div><label>Nome</label><input name="nome" required></div>
+      <div><label>CNPJ</label><input name="cnpj" required></div>
+      <div><label>E-mail</label><input name="email" type="email" required></div>
+      <div><label>Ativa?</label><select name="ativa"><option value="false">Não</option><option value="true">Sim</option></select></div>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">Salvar</button>
+      <a class="btn" href="{% url 'vantagens_list' %}">Cancelar</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

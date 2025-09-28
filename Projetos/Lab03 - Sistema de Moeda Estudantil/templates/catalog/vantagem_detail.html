@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Vantagem{% endblock %}
+
+{% block content %}
+<div class="card">
+  <h1 style="margin-bottom:.25rem;">
+    {{ vantagem.titulo|default:"Vantagem" }}
+  </h1>
+  <p class="muted" style="margin-top:0;">
+    {{ vantagem.descricao|default:"Descrição da vantagem." }}
+  </p>
+
+  <!-- bloco de meta com bom espaçamento e quebra de linha quando necessário -->
+  <div style="
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin:14px 0 4px;">
+    <span class="badge">Custo: {{ vantagem.custo_moedas|default:"—" }} moedas</span>
+    {% if vantagem.empresa %}
+      <span class="badge" style="background:rgba(255,255,255,.06); color:#cfe0f5; border-color:var(--border);">
+        Empresa: {{ vantagem.empresa.nome }}
+      </span>
+    {% endif %}
+  </div>
+
+  <!-- ações separadas das badges com espaço adequado -->
+  <div class="mt-2" style="margin-top:16px;">
+    <div style="display:flex; gap:12px; flex-wrap:wrap;">
+      {% if request.user.is_authenticated and request.user.role|upper == 'ALUNO' %}
+        <form method="post" style="margin:0">
+          {% csrf_token %}
+          <button class="btn btn-accent" type="submit">Resgatar</button>
+        </form>
+      {% endif %}
+      <a class="btn btn-ghost" href="{% url 'vantagens_list' %}">Voltar</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Cadastro de Aluno — Moeda Estudantil{% endblock %}
+
+{% block content %}
+<h1>Cadastro de Aluno</h1>
+<p>Preencha seus dados para criar sua conta de aluno.</p>
+
+<form method="post" class="form">
+  {% csrf_token %}
+
+  <div class="grid">
+    <div>
+      <label>Usuário</label>
+      {{ form.username }}
+      {{ form.username.errors }}
+    </div>
+    <div>
+      <label>E-mail</label>
+      {{ form.email }}
+      {{ form.email.errors }}
+    </div>
+  </div>
+
+  <div class="grid">
+    <div>
+      <label>Senha</label>
+      {{ form.password1 }}
+      {{ form.password1.errors }}
+    </div>
+    <div>
+      <label>Confirmação de Senha</label>
+      {{ form.password2 }}
+      {{ form.password2.errors }}
+    </div>
+  </div>
+
+  <div class="grid">
+    <div>
+      <label>CPF</label>
+      {{ form.cpf }}
+      {{ form.cpf.errors }}
+    </div>
+    <div>
+      <label>RG</label>
+      {{ form.rg }}
+      {{ form.rg.errors }}
+    </div>
+  </div>
+
+  <div class="grid">
+    <div>
+      <label>Endereço</label>
+      {{ form.endereco }}
+      {{ form.endereco.errors }}
+    </div>
+    <div>
+      <label>Curso</label>
+      {{ form.curso }}
+      {{ form.curso.errors }}
+    </div>
+  </div>
+
+  <div>
+    <label>Instituição</label>
+    {{ form.instituicao }}
+    {{ form.instituicao.errors }}
+  </div>
+
+  <button class="btn" type="submit">Criar conta</button>
+</form>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Catálogo de Vantagens{% endblock %}
+
+{% block content %}
+<div class="card">
+  <h1>Catálogo de Vantagens</h1>
+
+  {% if vantagens %}
+    <div class="grid grid-1">
+      {% for v in vantagens %}
+        <div class="card" style="display:flex;gap:1rem;align-items:stretch;">
+          {# Thumb à esquerda (foto -> foto_url -> placeholder) #}
+          <div style="width:110px;flex:0 0 110px;display:flex;align-items:center;justify-content:center;">
+            {% if v.image_url %}
+              <img
+                src="{{ v.image_url }}"
+                alt="Imagem de {{ v.titulo }}"
+                style="width:110px;height:110px;object-fit:cover;border-radius:12px;border:1px solid rgba(255,255,255,.06)"
+                loading="lazy"
+              >
+            {% else %}
+              <div class="icon" aria-hidden="true" style="width:72px;height:72px;border-radius:12px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;">
+                💠
+              </div>
+            {% endif %}
+          </div>
+
+          {# Conteúdo #}
+          <div style="flex:1;min-width:0;">
+            <h3 style="margin-top:.25rem">{{ v.titulo }}</h3>
+            <p class="help" style="margin:.35rem 0 1rem 0">{{ v.descricao|default:''|truncatechars:200 }}</p>
+
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:.75rem;flex-wrap:wrap">
+              <span class="badge">Custo: {{ v.custo_moedas }} moedas</span>
+
+              <div style="margin-left:auto">
+                {# Aluno pode resgatar (bloqueia se já tem) #}
+                {% if request.user.is_authenticated and request.user.role|upper == 'ALUNO' %}
+                  {% if v.id in redeemed_ids %}
+                    <button class="btn" disabled style="opacity:.6;cursor:not-allowed;">Já resgatado</button>
+                  {% else %}
+                    <form method="post" action="{% url 'resgatar_vantagem' v.id %}" style="margin:0;display:inline">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-accent">Resgatar</button>
+                    </form>
+                  {% endif %}
+                {% else %}
+                  <a class="btn" href="{% url 'vantagem_detail' v.id %}">Ver detalhes</a>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="help" style="margin-top:.5rem">
+              Empresa: <strong>{{ v.empresa.nome }}</strong>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="table-empty">Nenhuma vantagem cadastrada.</div>
+  {% endif %}
+</div>
+{% endblock %}

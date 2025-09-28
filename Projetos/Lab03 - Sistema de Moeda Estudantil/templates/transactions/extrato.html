@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Extrato — Moeda Estudantil{% endblock %}
+
+{% block content %}
+<h1>Extrato</h1>
+
+<div class="card">
+  <p><strong>Saldo atual:</strong> {{ saldo_atual }}</p>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Data/Hora</th>
+      <th>Tipo</th>
+      <th>Valor</th>
+      <th>Descrição</th>
+      <th>Referência</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for t in transacoes %}
+      <tr>
+        <td>{{ t.data_hora|date:"d/m/Y H:i" }}</td>
+        <td>{{ t.tipo }}</td>
+        <td>
+          {% if t.tipo == 'ENVIO' or t.tipo == 'RESGATE' %}
+            -{{ t.valor }}
+          {% else %}
+            +{{ t.valor }}
+          {% endif %}
+        </td>
+        <td>{{ t.descricao }}</td>
+        <td>{{ t.referencia }}</td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="5">Nenhuma transação encontrada.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

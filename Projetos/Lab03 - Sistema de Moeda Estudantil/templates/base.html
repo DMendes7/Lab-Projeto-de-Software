@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  {% load static %}
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>{% block title %}Moeda Estudantil{% endblock %}</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/main.css' %}?v=2025-09-27-3">
+  <link rel="stylesheet" href="{% static 'css/forms.css' %}?v=2025-09-27-3">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav">
+        <!-- TÍTULO: grande, clicável e sem sublinhado/cor de link -->
+        <a href="{% url 'role_home' %}"
+           class="logo"
+           style="text-decoration:none;color:inherit;
+                  font-size:28px;font-weight:800;line-height:1;
+                  display:inline-flex;gap:.5rem;align-items:center;">
+          <span aria-hidden="true">💰</span>
+          <span>Moeda Estudantil</span>
+        </a>
+
+        <button class="nav-toggle" aria-label="Abrir menu"
+                onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+
+        <div class="nav-links">
+          <a href="{% url 'vantagens_list' %}">Catálogo</a>
+          {% if request.user.is_authenticated and request.user.role|upper == 'PROFESSOR' %}
+            <a href="{% url 'enviar_moedas' %}">Enviar Moedas</a>
+          {% endif %}
+          <a href="{% url 'extrato' %}">Extrato</a>
+
+          {% if request.user.is_authenticated %}
+            {% if request.user.is_staff or request.user.is_superuser %}
+              <a href="{% url 'admin:index' %}">Admin</a>
+            {% endif %}
+          {% endif %}
+        </div>
+
+        <div class="nav-auth">
+          {% if request.user.is_authenticated %}
+            <span class="user-chip">{{ request.user.username }}</span>
+            <form method="post" action="{% url 'logout' %}">
+              {% csrf_token %}
+              <button class="btn btn-ghost" type="submit">sair</button>
+            </form>
+          {% else %}
+            {% if request.resolver_match and request.resolver_match.url_name != 'signup_aluno' %}
+              <a class="btn btn-ghost" href="{% url 'signup_aluno' %}">Cadastrar</a>
+            {% endif %}
+            {% if request.resolver_match and request.resolver_match.url_name != 'login' %}
+              <a class="btn" href="{% url 'login' %}">Entrar</a>
+            {% endif %}
+          {% endif %}
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container">
+      {% include 'partials/messages.html' %}
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <span>© {{ now|date:"Y" }} Moeda Estudantil</span>
+      <span class="muted">Projeto acadêmico</span>
+    </div>
+  </footer>
+</body>
+</html>

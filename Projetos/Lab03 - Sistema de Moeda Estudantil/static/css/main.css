@@ -1,0 +1,145 @@
+:root{
+  --bg:#070b12;             /* fundo mais escuro */
+  --panel:#121c2a;
+  --panel-2:#0f1825;
+  --border:#213147;
+  --text:#e6eef7;
+  --muted:#98a6b8;
+  --accent:#f0c35a;        /* dourado moeda */
+  --accent-2:#7bdcb5;      /* verde sutil */
+  --danger:#ff7272;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+*{ box-sizing:border-box }
+html,body{ height:100% }
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;
+  background:
+    radial-gradient(1200px 600px at 20% -10%, #0e1730 0%, transparent 60%),
+    radial-gradient(1000px 800px at 110% -30%, #0d1426 0%, transparent 60%),
+    var(--bg);
+  color:var(--text);
+  letter-spacing:.2px;
+}
+
+.container{ width:min(1100px,92vw); margin-inline:auto }
+
+/* ---------- Header / Nav ---------- */
+.site-header{
+  position:sticky; top:0; z-index:50;
+  border-bottom:1px solid var(--border);
+  backdrop-filter:saturate(1.2) blur(6px);
+}
+.nav{ display:flex; align-items:center; gap:16px; padding:14px 0 }
+
+/* título/marca clicável (novo) */
+.brand,
+.logo{
+  display:flex; align-items:center; gap:10px;
+  text-decoration:none; color:var(--text);
+}
+.brand-emoji{ font-size:22px; filter:drop-shadow(0 3px 8px rgba(0,0,0,.35)) }
+
+/* texto do título maior e forte */
+.brand-text{
+  font-size:1.6rem; font-weight:800; letter-spacing:.3px
+}
+/* suporte se estiver usando <a class="logo"> */
+.logo{
+  font-size:1.6rem; font-weight:800; letter-spacing:.3px
+}
+.brand:hover,
+.logo:hover{ opacity:.95 }
+
+/* navegação */
+.nav-links{ display:flex; gap:18px; margin-left:16px }
+.nav-links a{
+  color:var(--muted); text-decoration:none; padding:8px 6px; border-radius:8px
+}
+.nav-links a:hover{ color:var(--text); background:rgba(255,255,255,.04) }
+
+.nav-auth{ margin-left:auto; display:flex; align-items:center; gap:10px }
+.user-chip{
+  background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  border:1px solid var(--border);
+  padding:6px 10px; border-radius:999px; font-size:.9rem;
+}
+
+.btn{
+  border:none; background:linear-gradient(180deg,#ffd67e,#f0c35a);
+  color:#1f1b14; font-weight:700; padding:8px 14px; border-radius:10px;
+  box-shadow:0 6px 18px rgba(240,195,90,.25); cursor:pointer;
+}
+.btn:hover{ transform:translateY(-1px); box-shadow:0 10px 22px rgba(240,195,90,.35) }
+.btn:active{ transform:translateY(0) }
+.btn-ghost{ background:transparent; border:1px solid var(--border); color:var(--text) }
+.btn-ghost:hover{ background:rgba(255,255,255,.05) }
+
+.nav-toggle{ display:none; margin-left:8px; background:transparent; color:var(--text);
+  border:1px solid var(--border); border-radius:8px; padding:6px 10px }
+@media (max-width:840px){
+  .nav-toggle{ display:block }
+  .nav-links{ display:none }
+  .nav-links.open{
+    display:flex; position:absolute; left:0; right:0; top:60px; background:var(--panel);
+    border-top:1px solid var(--border); padding:12px 4vw; gap:16px; flex-direction:column
+  }
+}
+
+/* ---------- Página / Tipografia ---------- */
+.page{ padding:40px 0 70px }
+h1{ font-size:2.2rem; margin:24px 0 26px }
+h2{ font-size:1.4rem; margin:0 0 10px }
+.muted{ color:var(--muted) }
+
+/* ---------- Cards / Grid ---------- */
+.card{
+  background:linear-gradient(180deg, var(--panel), var(--panel-2));
+  border:1px solid var(--border); border-radius:var(--radius);
+  padding:22px; box-shadow:var(--shadow);
+}
+
+.grid3{ display:grid; gap:18px; grid-template-columns:repeat(12,1fr) }
+.grid3 > .card:nth-child(1){ grid-column:span 12 }
+.grid3 > .card{ grid-column:span 12 }
+@media (min-width:900px){
+  .grid3 > .card:nth-child(1){ grid-column:span 6 }
+  .grid3 > .card:nth-child(2){ grid-column:span 3 }
+  .grid3 > .card:nth-child(3){ grid-column:span 3 }
+}
+
+/* ---------- Tabela / Tag / Badges ---------- */
+.table{
+  width:100%; border-collapse:separate; border-spacing:0;
+  background:var(--panel); border:1px solid var(--border);
+  border-radius:14px; overflow:hidden;
+}
+.table th,.table td{ padding:14px 16px; text-align:left }
+.table thead th{ background:#101826; color:#c7d3e3; font-weight:600 }
+.table tbody tr + tr td{ border-top:1px solid var(--border) }
+.table tbody tr:hover td{ background:rgba(255,255,255,.03) }
+
+.tag{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:6px 10px; border:1px solid var(--border);
+  border-radius:999px; background:rgba(255,255,255,.04)
+}
+.badge{
+  display:inline-block; padding:3px 8px; border-radius:999px; font-size:.8rem;
+  background:rgba(123,220,181,.15); color:#aef0d2; border:1px solid rgba(123,220,181,.35)
+}
+
+/* ---------- Mensagens ---------- */
+.alert{ padding:12px 16px; border-radius:10px; margin:10px 0; border:1px solid var(--border) }
+.alert-success{ background:rgba(123,220,181,.1); border-color:rgba(123,220,181,.35) }
+.alert-error{ background:rgba(255,114,114,.1); border-color:rgba(255,114,114,.35) }
+
+/* ---------- Rodapé ---------- */
+.site-footer{
+  border-top:1px solid var(--border); padding:22px 0; color:var(--muted);
+  background:linear-gradient(180deg, rgba(255,255,255,.03), transparent)
+}
+.footer-wrap{ display:flex; justify-content:space-between; align-items:center }

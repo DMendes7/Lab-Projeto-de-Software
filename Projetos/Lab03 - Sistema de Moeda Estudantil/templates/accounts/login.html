@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Entrar — Moeda Estudantil{% endblock %}
+
+{% block content %}
+<h1>Entrar</h1>
+
+<div class="grid3">
+  <div class="card" style="grid-column: span 7;">
+    <form method="post" class="form" novalidate>
+      {% csrf_token %}
+      <div class="grid">
+        <div style="grid-column: span 2;">
+          <label for="id_username">Usuário:</label>
+          <input type="text" name="username" required id="id_username" autocomplete="username">
+        </div>
+        <div style="grid-column: span 2;">
+          <label for="id_password">Senha:</label>
+          <input type="password" name="password" required id="id_password" autocomplete="current-password">
+        </div>
+      </div>
+
+      <div class="actions" style="display:flex; gap:10px; justify-content:flex-end; margin-top:14px;">
+        <button class="btn" type="submit">Acessar</button>
+      </div>
+
+      {% if form.errors %}
+        <ul class="errorlist">
+          <li>Usuário ou senha inválidos.</li>
+        </ul>
+      {% endif %}
+      <p class="help">Use o superusuário criado ou uma conta de aluno/professor.</p>
+    </form>
+  </div>
+
+  <div class="card" style="grid-column: span 5;">
+    <h2>Sobre</h2>
+    <p>Sistema acadêmico de reconhecimento por moedas: professores enviam moedas, alunos resgatam vantagens de empresas parceiras.</p>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Dashboard do Professor — Moeda Estudantil{% endblock %}
+
+{% block content %}
+<h1>Área do Professor</h1>
+
+<div class="grid3">
+  <div class="card">
+    <h2>Saldo</h2>
+    <p><span class="tag">💰 Carteira</span></p>
+    <p><strong>Saldo atual:</strong> {{ saldo_atual }}</p>
+    <a class="btn" href="{% url 'enviar_moedas' %}">Enviar Moedas</a>
+  </div>
+
+  <div class="card">
+    <h2>Extrato</h2>
+    <p>Veja os envios realizados e o histórico.</p>
+    <a class="btn" href="{% url 'extrato' %}">Ver extrato</a>
+  </div>
+
+  <div class="card">
+    <h2>Catálogo</h2>
+    <p>Consulte as vantagens disponíveis.</p>
+    <a class="btn" href="{% url 'vantagens_list' %}">Abrir catálogo</a>
+  </div>
+</div>
+{% endblock %}

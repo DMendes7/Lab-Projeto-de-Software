@@ -1,0 +1,82 @@
+:root{
+  --panel:#121c2a;
+  --panel-2:#0f1825;
+  --border:#213147;
+  --text:#e6eef7;
+  --muted:#98a6b8;
+  --danger:#ff7272;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+/* -------- Form container -------- */
+.form{
+  width:min(680px,100%);
+  margin:10px auto;
+  background:linear-gradient(180deg,var(--panel),var(--panel-2));
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:20px;
+  box-shadow:var(--shadow);
+}
+
+/* Grid responsivo dentro do form */
+.form .grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:16px;
+}
+@media (min-width:840px){
+  .form .grid{ grid-template-columns:1fr 1fr }
+}
+
+/* Labels e campos */
+.form label{
+  display:block;
+  font-weight:600;
+  margin:2px 0 6px;
+}
+
+.form input[type="text"],
+.form input[type="email"],
+.form input[type="password"],
+.form input[type="number"],
+.form textarea,
+.form select{
+  width:100%;
+  padding:12px 12px;
+  border-radius:10px;
+  border:1px solid #2a3952;
+  background:#0b1320;
+  color:var(--text);
+  outline:none;
+}
+
+.form textarea{ resize:vertical }
+
+.form input:focus,
+.form textarea:focus,
+.form select:focus{
+  border-color:#3d69a8;
+  box-shadow:0 0 0 3px rgba(61,105,168,.35);
+}
+
+/* Erros e ajuda */
+.form .errorlist{
+  list-style:none;
+  color:var(--danger);
+  padding:0;
+  margin:6px 0 0;
+}
+.form .help{
+  color:var(--muted);
+  font-size:.88rem;
+  margin-top:6px;
+}
+
+/* Ações do formulário */
+.form .actions{
+  margin-top:14px;
+  display:flex;
+  gap:10px;
+  justify-content:flex-end;
+}
