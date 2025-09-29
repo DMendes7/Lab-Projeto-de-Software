@@ -1,3 +1,4 @@
+# moeda_estudantil/settings.py
 from pathlib import Path
 import os
 
@@ -8,6 +9,7 @@ DEBUG = os.getenv("DEBUG", "true").lower() == "true"
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
 
 INSTALLED_APPS = [
+    # Django
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -15,8 +17,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
+    # WhiteNoise helper (opcional, útil no runserver)
     "whitenoise.runserver_nostatic",
 
+    # Nossos apps (domínio)
     "apps.accounts",
     "apps.institutions",
     "apps.partners",
@@ -24,20 +28,21 @@ INSTALLED_APPS = [
     "apps.wallet",
     "apps.transactions",
 
+    # util/infra
     "apps.notifications",
     "apps.core",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # estáticos quando DEBUG=False
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "apps.core.middleware.SimpleSecurityHeaders",
+    "apps.core.middleware.SimpleSecurityHeaders",  # nosso middleware
 ]
 
 ROOT_URLCONF = "moeda_estudantil.urls"
@@ -80,26 +85,23 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
+# Armazenamento
 STORAGES = {
-    "default": {  # necessário para ImageField/FileField
+    "default": {  # necessário para ImageField/FileField (uploads)
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
-    "staticfiles": {
+    "staticfiles": {  # WhiteNoise
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
 
-DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "no-reply@moedaestudantil.local")
-EMAIL_BACKEND = (
-    "django.core.mail.backends.console.EmailBackend"
-    if DEBUG
-    else "django.core.mail.backends.smtp.EmailBackend"
-)
-EMAIL_HOST = os.getenv("EMAIL_HOST", "localhost")
-EMAIL_PORT = int(os.getenv("EMAIL_PORT", "25"))
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
-EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "false").lower() == "true"
-EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL", "false").lower() == "true"
+# ✉️ E-mail: usar SMTP do Gmail SEMPRE (inclusive em DEBUG)
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
 
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+EMAIL_HOST_USER = "moeda.academica@gmail.com"
+EMAIL_HOST_PASSWORD = "lhge bjpf xfyy pehe"  # 16 caracteres gerados pelo Google
+DEFAULT_FROM_EMAIL = "Moeda Acadêmica <moeda.academica@gmail.com>"

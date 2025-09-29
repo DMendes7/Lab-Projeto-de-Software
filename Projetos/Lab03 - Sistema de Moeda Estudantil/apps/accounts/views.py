@@ -3,14 +3,17 @@ from decimal import Decimal
 from typing import Any
 
 from django.contrib import messages
+from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.template import TemplateDoesNotExist
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 
+# IMPORTANTE: traga o formulário de cadastro de aluno
+from .forms import AlunoSignupForm  # <- usa o form definido no app
 
 # -----------------------------
 # Helpers para obter o saldo
@@ -65,8 +68,6 @@ def _effective_role(user) -> str:
     3) EMPRESA
     4) ALUNO
     5) fallback: campo user.role (se existir)
-
-    Retorna a sigla em UPPER.
     """
     if not getattr(user, "is_authenticated", False):
         return ""
@@ -74,7 +75,6 @@ def _effective_role(user) -> str:
     if getattr(user, "is_superuser", False):
         return "ADMIN"
 
-    # nomes de grupos em upper
     group_names = {name.upper() for name in user.groups.values_list("name", flat=True)}
 
     if "ADMIN" in group_names:
@@ -86,14 +86,11 @@ def _effective_role(user) -> str:
     if "ALUNO" in group_names:
         return "ALUNO"
 
-    # fallback: campo role do usuário, se existir
     return (getattr(user, "role", "") or "").upper()
 
 
 class CustomLoginView(LoginView):
-    """
-    Login com redirecionamento para a home por papel (role_home).
-    """
+    """Login com redirecionamento para a home por papel (role_home)."""
     template_name = "accounts/login.html"
     redirect_authenticated_user = True
 
@@ -102,9 +99,7 @@ class CustomLoginView(LoginView):
 
 
 class CustomLogoutView(LogoutView):
-    """
-    Logout simples. O Django já cuida do básico.
-    """
+    """Logout simples. O Django já cuida do básico."""
     next_page = reverse_lazy("login")
 
 
@@ -119,7 +114,6 @@ def role_home(request: HttpRequest) -> HttpResponse:
     role = _effective_role(request.user)
 
     if role == "ADMIN":
-        # Vai para o admin do Django
         try:
             return redirect("admin:index")
         except Exception:
@@ -132,17 +126,14 @@ def role_home(request: HttpRequest) -> HttpResponse:
         return redirect("dashboard_professor")
 
     if role == "EMPRESA":
-        # Se não existir, cai no fallback genérico mais abaixo
         try:
             return redirect("dashboard_empresa")
         except Exception:
             pass
 
-    # Fallback genérico: tenta renderizar um template simples
     try:
         return render(request, "accounts/home.html", {"role": role})
     except TemplateDoesNotExist:
-        # Se o template não existir, responde algo funcional para não quebrar.
         return HttpResponse(
             "<h1>Moeda Estudantil</h1>"
             "<p>Bem-vindo! Crie um template em <code>templates/accounts/home.html</code> "
@@ -155,10 +146,6 @@ class DashboardAlunoView(LoginRequiredMixin, TemplateView):
     template_name = "accounts/dashboard_aluno.html"
 
     def get(self, request, *args, **kwargs):
-        """
-        Mantém o comportamento anterior, apenas incluindo `saldo_atual`
-        que é o que o template espera.
-        """
         context = {"saldo_atual": _get_saldo(request.user)}
         try:
             return render(request, self.template_name, context)
@@ -192,30 +179,29 @@ class DashboardProfessorView(LoginRequiredMixin, TemplateView):
             )
 
 
-# --- Cadastros (stubs mínimos) ---------------------------------------------
+# --- Cadastros --------------------------------------------------------------
+
 def signup_aluno(request: HttpRequest) -> HttpResponse:
     """
-    Stub de cadastro de aluno para manter as URLs funcionando.
-    Troque por sua view/CBV real quando desejar.
+    Cadastro real de aluno usando AlunoSignupForm.
+    - GET: exibe o formulário
+    - POST: valida, cria user+perfil Aluno e redireciona para login
     """
     if request.method == "POST":
-        messages.success(request, "Cadastro de aluno concluído (exemplo). Faça login.")
-        return redirect("login")
+        form = AlunoSignupForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            messages.success(request, "Cadastro realizado! Faça login para começar.")
+            return redirect("login")
+    else:
+        form = AlunoSignupForm()
 
-    try:
-        return render(request, "accounts/signup_aluno.html", {})
-    except TemplateDoesNotExist:
-        return HttpResponse(
-            "<h2>Cadastro de Aluno</h2>"
-            "<p>Crie o template <code>templates/accounts/signup_aluno.html</code> "
-            "ou troque esta view pelo seu formulário real.</p>"
-        )
+    return render(request, "accounts/signup_aluno.html", {"form": form})
 
 
 def signup_professor(request: HttpRequest) -> HttpResponse:
     """
-    Stub de cadastro de professor para manter as URLs funcionando.
-    Troque por sua view/CBV real quando desejar.
+    (Opcional) Mantém um stub simples; ajuste se você tiver um form específico.
     """
     if request.method == "POST":
         messages.success(request, "Cadastro de professor concluído (exemplo). Faça login.")

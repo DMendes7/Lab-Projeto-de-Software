@@ -6,6 +6,9 @@ from django.contrib.auth import get_user_model
 from apps.wallet.services import CarteiraService
 from apps.transactions.models import Transacao
 
+# 🚀 novo: envio de e-mail
+from apps.notifications.email import send_moedas_recebidas
+
 User = get_user_model()
 
 TIPO_ENVIO = "ENVIO"
@@ -20,6 +23,7 @@ class TransacaoService:
         """
         Debita a carteira do professor e credita a do aluno, registrando as transações.
         Lança ValueError se saldo insuficiente ou valor inválido.
+        Também dispara e-mail de notificação para o aluno.
         """
         if valor is None or int(valor) <= 0:
             raise ValueError("O valor deve ser um inteiro positivo.")
@@ -54,6 +58,14 @@ class TransacaoService:
             descricao=motivo,
             referencia=f"de:{professor.username}",
         )
+
+        # 3) ✉️ Notificar por e-mail o aluno
+        try:
+            send_moedas_recebidas(aluno=aluno, professor=professor, valor=valor, motivo=motivo)
+        except Exception:
+            # Evita quebrar a transação por falha de e-mail
+            # (opcional: logar o erro com logging)
+            pass
 
     @staticmethod
     @transaction.atomic
@@ -97,7 +109,6 @@ class TransacaoService:
         # Referência padrão se não vier
         if not referencia:
             if vantagem is not None:
-                # tenta usar id/slug se existir
                 ident = getattr(vantagem, "id", None) or getattr(vantagem, "pk", None) or getattr(vantagem, "slug", None)
                 referencia = f"vantagem:{ident}" if ident is not None else "vantagem"
 

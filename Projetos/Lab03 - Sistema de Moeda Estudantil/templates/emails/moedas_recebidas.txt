@@ -1,0 +1,11 @@
+Olá, {{ aluno.get_full_name|default:aluno.username }}!
+
+Você recebeu {{ valor }} moedas no {{ site_name }}.
+
+Quem enviou: {{ professor.get_full_name|default:professor.username }}
+{% if motivo %}Motivo: {{ motivo }}{% endif %}
+
+Acesse seu extrato:
+{{ site_url }}/transacoes/extrato/
+
+— Este é um e-mail automático enviado por {{ from_email_public }}. Não responda.
