@@ -53,6 +53,12 @@ Cada resenha está organizada em sua respectiva pasta dentro de `Artigos/`.
 - **Artigo 6 — Hotspot Patterns: The Formal Definition and Automatic Detection of Architecture Smells**  
   Resenha sobre a definição formal de “architecture smells” e o uso de padrões para sua detecção.  
 
+- **Artigo 7 — Strategic Design and Domain-Driven Design**  
+  Resenha sobre práticas de DDD e como o design estratégico auxilia na organização e evolução de sistemas complexos.  
+
+- **Artigo 8 — Managing Technical Debt**  
+  Resenha sobre o conceito de dívida técnica, suas causas, riscos e formas de gerenciamento.  
+
 ---
 
 ## 🛠️ Tecnologias Utilizadas
