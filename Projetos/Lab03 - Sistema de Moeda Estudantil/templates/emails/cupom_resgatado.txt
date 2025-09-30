@@ -1,0 +1,13 @@
+{{ site_name }} — Cupom de Resgate
+
+Olá, {{ aluno.get_full_name|default:aluno.username }}!
+
+Você resgatou "{{ vantagem.titulo }}" (custo: {{ custo }} moedas).
+
+CÓDIGO: {{ codigo }}
+
+Parceiro: {{ vantagem.empresa.nome }}
+
+Acesse seu extrato: {{ site_url }}/transacoes/extrato/
+
+Este e-mail foi enviado por {{ site_name }} <{{ from_email_public }}>. Não responda.
