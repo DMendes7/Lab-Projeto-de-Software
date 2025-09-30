@@ -1,0 +1,35 @@
+Resenha do Artigo: Managing Technical Debt (Steve McConnell, 2008)
+-------------------------------------------------------------------
+
+Introdução
+----------
+O texto fala sobre "divida tecnica", q é qnd a gnt toma atalhos no desenvolvimento
+pra ganhar tempo, mas q depois gera custo extra de manutenção. Igual divida financeira,
+pode ser util em certos casos, mas se acumular demais vira problema.
+
+Principais pontos
+-----------------
+- Dois tipos: divida nao intencional (erro, baixa qualidade, falta de experiencia) e
+divida intencional (quando a escolha é consciente pra entregar logo).
+- Curto prazo x longo prazo: curto prazo é tipo um "cartao de credito", precisa pagar logo.
+Longo prazo pode durar anos, mas exige controle.
+- Sempre tem "juros": quanto mais divida tecnica, mais tempo e esforço gasto so pra manter
+o sistema de pé em vez de evoluir ele.
+- Pra gerir melhor, precisa rastrear as dividas, comunicar de forma clara e planejar
+como e qnd pagar.
+
+Reflexão
+--------
+O texto mostra q nem toda divida tecnica é ruim, mas precisa ser usada de forma consciente.
+Se a equipe só vai empurrando pra frente sem controle, o sistema trava e fica caro de mexer.
+
+Minha opinião
+-------------
+Achei massa pq explica de um jeito simples, comparando com finanças, o q ajuda ate o pessoal
+de negocio entender. É basicamente assumir q as vezes faz sentido pegar um "emprestimo tecnico",
+mas sempre com plano de pagamento.
+
+Conclusão
+---------
+Gerenciar divida tecnica é aceitar q ela existe, decidir qnd vale a pena pegar e saber qnd pagar.
+Se n cuidar, a taxa de juros come todo o projeto.
