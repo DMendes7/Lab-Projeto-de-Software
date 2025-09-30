@@ -126,12 +126,6 @@ LABORATÓRIO 03 - Sistema de Moeda Estudantil
 
 ---
 
-### 👛 Resgate de Vantagem
-> Caminho: `templates/wallet/resgatar_vantagem.html`  
-![Resgate Vantagem](docs/screens/resgatar_vantagem.png)
-
----
-
 ### 🏢 Dashboard da Empresa Parceira
 > Caminho: `templates/partners/resgates_list.html`  
 ![Dashboard Empresa](docs/screens/dashboard_empresa.png)
