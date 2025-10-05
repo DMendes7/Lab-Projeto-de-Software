@@ -1,7 +1,10 @@
+# apps/partners/urls.py
 from django.urls import path
-from .views import EmpresaCreateView, ResgatesListView
+from .views import EmpresaResgatesListView, ConsumirCupomView
+
+app_name = "partners"
 
 urlpatterns = [
-    path("nova/", EmpresaCreateView.as_view(), name="empresa_create"),
-    path("resgates/", ResgatesListView.as_view(), name="resgates_list"),
+    path("dashboard/", EmpresaResgatesListView.as_view(), name="dashboard"),
+    path("consumir/<int:cupom_id>/", ConsumirCupomView.as_view(), name="consumir_cupom"),
 ]

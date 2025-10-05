@@ -1,8 +1,330 @@
-{% extends 'base.html' %}
-{% block title %}Resgates{% endblock %}
+{% extends "base.html" %}
+{% block title %}Dashboard da Empresa — Resgates{% endblock %}
+
 {% block content %}
+<style>
+  /* Estilos customizados para o layout do Dashboard (mantidos/aprimorados) */
+  
+  /* Layout principal do cabeçalho: Filtros + Estatísticas */
+  .header-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; 
+    gap: 1.5rem;
+    margin-bottom: 2rem; /* Mais espaço antes da tabela */
+    flex-wrap: wrap; 
+  }
+
+  /* Barra de Estatísticas - Estilo compacto e limpo */
+  .stats-bar {
+    display: flex;
+    gap: 2rem; /* Mais espaço entre os stats */
+    padding: 1rem 1.5rem; 
+    /* Usa a cor do painel com uma leve transparência para destacar */
+    background-color: var(--panel, #121c2a); 
+    border: 1px solid var(--border, #213147);
+    border-radius: 12px;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,.2);
+  }
+
+  .stats-bar .stat {
+    display: flex;
+    flex-direction: column;
+    padding: 0; /* Remove padding interno para ser mais compacto */
+  }
+
+  .stats-bar .stat-title {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    margin-bottom: 0.25rem;
+    white-space: nowrap;
+  }
+
+  .stats-bar .stat-value {
+    font-size: 1.4rem;
+    font-weight: 700; /* Mais destaque */
+    color: var(--text, #e6eef7);
+  }
+
+  /* Layout do Formulário de Filtro */
+  .form-filter-grid {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-end;
+  }
+
+  .form-filter-grid > div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-filter-grid label {
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+    opacity: 0.8;
+  }
+  
+  /* Ajuste para INPUTS de data e SELECT (conforme solicitado anteriormente) */
+  .form-filter-grid input[type="date"],
+  .form-filter-grid select {
+    background-color: transparent; 
+    /* Usando o acento (dourado) como cor da borda */
+    border: 1px solid var(--accent, #f0c35a); 
+    color: var(--text, #ffffff); 
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    height: 40px; /* Altura padrão para alinhar com o botão */
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-size: 1rem;
+  }
+
+  .form-filter-grid input[type="date"]:focus,
+  .form-filter-grid select:focus {
+    outline: none;
+    border-color: #ffd700; 
+    box-shadow: 0 0 0 1px #ffd700;
+  }
+
+  /* Estilo da Tabela (usa a classe .table do main.css) */
+  .table {
+    /* O main.css já define .table, mas vamos garantir o espaçamento e a aparência */
+    margin-top: 1.5rem;
+    border-radius: var(--radius, 16px);
+  }
+
+  .table thead th {
+    /* Usa a cor de destaque (dourado) na borda inferior do cabeçalho */
+    border-bottom: 2px solid var(--accent, #f0c35a); 
+  }
+  
+  /* Estilos das Badges */
+  .badge-consumed {
+    /* Verde para Consumido */
+    background-color: rgba(123,220,181,.15); /* Cor de fundo do badge 'Sim' em main.css */
+    color: var(--accent-2, #aef0d2); 
+    border: 1px solid rgba(123,220,181,.35);
+    padding: 0.3rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .badge-not-consumed {
+    /* Vermelho/Cinzento para Não Consumido */
+    background-color: rgba(255, 114, 114, 0.1); 
+    color: var(--danger, #ff7272); 
+    border: 1px solid rgba(255, 114, 114, 0.35);
+    padding: 0.3rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* Estilos do Modal (Overlay) */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.7); 
+    display: none; align-items: center; justify-content: center;
+    z-index: 1000;
+  }
+  .modal {
+    background: var(--card-bg, #0b0f1a);
+    color: inherit;
+    border-radius: 12px;
+    padding: 1.5rem; 
+    max-width: 480px; 
+    width: 95%;
+    box-shadow: 0 15px 40px rgba(0,0,0,.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .modal h3 { margin: 0 0 1rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem;}
+  .modal .row { display:flex; gap:.5rem; margin:.75rem 0; align-items: center; }
+  .modal .label { width: 120px; font-weight: 500; opacity:.85; }
+  .modal .value { font-weight: 400; }
+  .modal .actions { display:flex; gap:.75rem; justify-content:flex-end; margin-top:1.5rem; }
+  .modal code { 
+    padding:.2rem .5rem; border-radius:6px; 
+    background: rgba(255,255,255,.08); 
+    font-weight: 600; 
+  }
+  .clickable-row { cursor: pointer; }
+</style>
+
 <div class="card">
-  <h1>Resgates</h1>
-  <div class="table-empty">Lista de cupons/resgates (a preencher na implementação).</div>
+  <h1>📊 Resgates - {{ empresa.nome }}</h1>
+  <p class="help">Veja os cupons resgatados das suas vantagens.</p>
+
+  <div class="header-controls">
+    <form method="get" class="form" style="padding: 0; border: none; background: none; box-shadow: none;">
+      <div class="form-filter-grid">
+        <div>
+          <label for="{{ form.data_ini.id_for_label }}">De</label>
+          {{ form.data_ini }}
+        </div>
+        <div>
+          <label for="{{ form.data_fim.id_for_label }}">Até</label>
+          {{ form.data_fim }}
+        </div>
+        <div>
+          <label for="{{ form.vantagem.id_for_label }}">Vantagem</label>
+          {{ form.vantagem }}
+        </div>
+        <div style="display:flex;align-items:flex-end">
+          <button class="btn" type="submit">Filtrar</button>
+        </div>
+      </div>
+    </form>
+
+    <div class="stats-bar">
+      <div class="stat">
+        <div class="stat-title">Total de Resgates</div>
+        <div class="stat-value">{{ total }}</div>
+      </div>
+      <div class="stat">
+        <div class="stat-title">Período Selecionado</div>
+        <div class="stat-value">
+          {% if form.cleaned_data.data_ini %}{{ form.cleaned_data.data_ini|date:"d/m/Y" }}{% else %}—{% endif %}
+          &nbsp;→&nbsp;
+          {% if form.cleaned_data.data_fim %}{{ form.cleaned_data.data_fim|date:"d/m/Y" }}{% else %}—{% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% if resgates %}
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>Aluno</th>
+            <th>Vantagem</th>
+            <th>Código</th>
+            <th>Resgatado em</th>
+            <th>Consumido?</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cupom in resgates %}
+          <tr class="clickable-row"
+              data-cupom-id="{{ cupom.id }}"
+              data-aluno="{{ cupom.usuario.get_full_name|default:cupom.usuario.username }}"
+              data-vantagem="{{ cupom.vantagem.titulo }}"
+              data-codigo="{{ cupom.codigo }}"
+              data-gerado="{{ cupom.gerado_em|date:'d/m/Y H:i' }}"
+              data-consumido="{% if cupom.consumido_em %}{{ cupom.consumido_em|date:'d/m/Y H:i' }}{% else %}{% endif %}">
+            <td>{{ cupom.usuario.get_full_name|default:cupom.usuario.username }}</td>
+            <td>{{ cupom.vantagem.titulo }}</td>
+            <td><code>{{ cupom.codigo }}</code></td>
+            <td>{{ cupom.gerado_em|date:"d/m/Y H:i" }}</td>
+            <td>
+              {% if cupom.consumido_em %}
+                <span class="badge-consumed">Sim, {{ cupom.consumido_em|date:"H:i" }}</span>
+              {% else %}
+                <span class="badge-not-consumed">Não</span>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="table-empty mt-3">Nenhum resgate encontrado para os filtros aplicados.</div>
+  {% endif %}
 </div>
+
+{# -------- Modal (overlay) -------- #}
+<div id="modalOverlay" class="modal-overlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <h3 id="modalTitle">Detalhes do Resgate</h3>
+    <div class="row"><div class="label">Aluno</div><div class="value" id="mAluno">—</div></div>
+    <div class="row"><div class="label">Vantagem</div><div class="value" id="mVantagem">—</div></div>
+    <div class="row"><div class="label">Código</div><div><code id="mCodigo">—</code></div></div>
+    <div class="row"><div class="label">Resgatado em</div><div class="value" id="mGerado">—</div></div>
+    <div class="row"><div class="label">Consumido</div><div class="value" id="mConsumido">Não</div></div>
+
+    <form id="mForm" method="post" class="actions">
+      {% csrf_token %}
+      <button type="button" class="btn btn-ghost" id="mFechar">Fechar</button>
+      <button type="submit" class="btn" id="mConsumirBtn">Marcar como consumido</button>
+    </form>
+    <p id="mHint" class="help" style="margin:.5rem 0 0 0; text-align: right; font-size: 0.9rem; opacity: 0.7;"></p>
+  </div>
+</div>
+
+<script>
+(function(){
+  const overlay = document.getElementById('modalOverlay');
+  const mAluno = document.getElementById('mAluno');
+  const mVantagem = document.getElementById('mVantagem');
+  const mCodigo = document.getElementById('mCodigo');
+  const mGerado = document.getElementById('mGerado');
+  const mConsumido = document.getElementById('mConsumido');
+  const mForm = document.getElementById('mForm');
+  const mBtn = document.getElementById('mConsumirBtn');
+  const mHint = document.getElementById('mHint');
+  const closeBtn = document.getElementById('mFechar');
+
+  function openModal(row){
+    const id = row.dataset.cupomId;
+    const aluno = row.dataset.aluno || '—';
+    const vantagem = row.dataset.vantagem || '—';
+    const codigo = row.dataset.codigo || '—';
+    const gerado = row.dataset.gerado || '—';
+    const consumido = row.dataset.consumido || '';
+
+    mAluno.textContent = aluno;
+    mVantagem.textContent = vantagem;
+    mCodigo.textContent = codigo;
+    mGerado.textContent = gerado;
+
+    // define ação do form
+    mForm.action = "{% url 'partners:consumir_cupom' 0 %}".replace('/0/', `/${id}/`);
+
+    // Atualiza a visualização do Consumido no modal
+    if (consumido) {
+      mConsumido.innerHTML = `Sim, ${consumido}`;
+      mBtn.disabled = true;
+      mBtn.style.display = 'none';
+      mHint.textContent = "Este cupom já foi consumido e não pode ter seu status alterado.";
+    } else {
+      mConsumido.textContent = "Não";
+      mBtn.disabled = false;
+      mBtn.style.display = 'inline-block';
+      mHint.textContent = "Ao confirmar, o cupom será marcado como consumido de forma permanente.";
+    }
+
+    overlay.style.display = 'flex';
+    overlay.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeModal(){
+    overlay.style.display = 'none';
+    overlay.setAttribute('aria-hidden', 'true');
+  }
+
+  document.querySelectorAll('.clickable-row').forEach(tr => {
+    tr.addEventListener('click', () => openModal(tr));
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeModal();
+  });
+
+  // Habilitar fechamento com a tecla ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.getAttribute('aria-hidden') === 'false') {
+      closeModal();
+    }
+  });
+
+})();
+</script>
 {% endblock %}

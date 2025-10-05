@@ -8,15 +8,38 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" href="img/topicon.png" type="static/image/x-icon.png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/main.css' %}?v=2025-09-27-3">
   <link rel="stylesheet" href="{% static 'css/forms.css' %}?v=2025-09-27-3">
+  <style>
+    /* Estilo para simular o botão de usuário da imagem (user-chip) */
+    .user-chip-btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-weight: 500;
+      background-color: var(--card-bg, #0b0f1a); /* Fundo escuro */
+      color: inherit;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: background-color 0.2s;
+      /* Garantir que esteja alinhado com o botão sair */
+      line-height: 1.5; 
+      vertical-align: middle;
+    }
+    .nav-auth button.btn-ghost {
+      /* Ajuste fino no botão "sair" */
+      height: auto;
+      min-height: auto;
+      padding: 0.5rem 1rem;
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
     <div class="container">
       <nav class="nav">
-        <!-- TÍTULO: grande, clicável e sem sublinhado/cor de link -->
         <a href="{% url 'role_home' %}"
            class="logo"
            style="text-decoration:none;color:inherit;
@@ -31,10 +54,18 @@
 
         <div class="nav-links">
           <a href="{% url 'vantagens_list' %}">Catálogo</a>
+
           {% if request.user.is_authenticated and request.user.role|upper == 'PROFESSOR' %}
             <a href="{% url 'enviar_moedas' %}">Enviar Moedas</a>
           {% endif %}
-          <a href="{% url 'extrato' %}">Extrato</a>
+
+          {% if request.user.is_authenticated %}
+            {% with role=request.user.role|upper %}
+              {% if role == 'ALUNO' or role == 'PROFESSOR' %}
+                <a href="{% url 'extrato' %}">Extrato</a>
+              {% endif %}
+            {% endwith %}
+          {% endif %}
 
           {% if request.user.is_authenticated %}
             {% if request.user.is_staff or request.user.is_superuser %}
@@ -45,7 +76,7 @@
 
         <div class="nav-auth">
           {% if request.user.is_authenticated %}
-            <span class="user-chip">{{ request.user.username }}</span>
+            <span class="user-chip-btn">{{ request.user.username }}</span>
             <form method="post" action="{% url 'logout' %}">
               {% csrf_token %}
               <button class="btn btn-ghost" type="submit">sair</button>

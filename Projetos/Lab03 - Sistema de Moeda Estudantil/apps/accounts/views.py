@@ -12,8 +12,8 @@ from django.template import TemplateDoesNotExist
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 
-# IMPORTANTE: traga o formulário de cadastro de aluno
-from .forms import AlunoSignupForm  # <- usa o form definido no app
+from .forms import AlunoSignupForm
+
 
 # -----------------------------
 # Helpers para obter o saldo
@@ -57,15 +57,17 @@ def _get_saldo(user) -> Decimal:
 
 
 # -----------------------------
-# Papel efetivo (Opção A)
+# Papel efetivo (ajustado)
 # -----------------------------
 def _effective_role(user) -> str:
     """
-    Determina o papel efetivo priorizando grupos:
+    Determina o papel efetivo priorizando grupos, mas também
+    aceitando valores do campo user.role.
 
+    Ordem:
     1) ADMIN (superuser ou grupo 'ADMIN')
     2) PROF / PROFESSOR
-    3) EMPRESA
+    3) EMPRESA (também aceita 'PARCEIRO')
     4) ALUNO
     5) fallback: campo user.role (se existir)
     """
@@ -81,12 +83,16 @@ def _effective_role(user) -> str:
         return "ADMIN"
     if "PROF" in group_names or "PROFESSOR" in group_names:
         return "PROF"
-    if "EMPRESA" in group_names:
+    # >>> ajuste chave: tratar PARCEIRO como EMPRESA
+    if "EMPRESA" in group_names or "PARCEIRO" in group_names:
         return "EMPRESA"
     if "ALUNO" in group_names:
         return "ALUNO"
 
-    return (getattr(user, "role", "") or "").upper()
+    role_field = (getattr(user, "role", "") or "").upper()
+    if role_field in {"EMPRESA", "PARCEIRO"}:
+        return "EMPRESA"
+    return role_field
 
 
 class CustomLoginView(LoginView):
@@ -105,8 +111,7 @@ class CustomLogoutView(LogoutView):
 
 def role_home(request: HttpRequest) -> HttpResponse:
     """
-    Redireciona para a página inicial conforme o papel *efetivo* do usuário,
-    inferido por grupos (Opção A).
+    Redireciona para a página inicial conforme o papel *efetivo* do usuário.
     """
     if not request.user.is_authenticated:
         return redirect("login")
@@ -126,11 +131,10 @@ def role_home(request: HttpRequest) -> HttpResponse:
         return redirect("dashboard_professor")
 
     if role == "EMPRESA":
-        try:
-            return redirect("dashboard_empresa")
-        except Exception:
-            pass
+        # >>> vai para o dashboard de parceiro/empresa
+        return redirect("partners:dashboard")
 
+    # fallback
     try:
         return render(request, "accounts/home.html", {"role": role})
     except TemplateDoesNotExist:
@@ -180,12 +184,9 @@ class DashboardProfessorView(LoginRequiredMixin, TemplateView):
 
 
 # --- Cadastros --------------------------------------------------------------
-
 def signup_aluno(request: HttpRequest) -> HttpResponse:
     """
     Cadastro real de aluno usando AlunoSignupForm.
-    - GET: exibe o formulário
-    - POST: valida, cria user+perfil Aluno e redireciona para login
     """
     if request.method == "POST":
         form = AlunoSignupForm(request.POST)
@@ -201,7 +202,7 @@ def signup_aluno(request: HttpRequest) -> HttpResponse:
 
 def signup_professor(request: HttpRequest) -> HttpResponse:
     """
-    (Opcional) Mantém um stub simples; ajuste se você tiver um form específico.
+    (Opcional) Stub simples; ajuste se tiver um form específico.
     """
     if request.method == "POST":
         messages.success(request, "Cadastro de professor concluído (exemplo). Faça login.")

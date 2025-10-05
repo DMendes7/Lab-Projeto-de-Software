@@ -9,7 +9,7 @@
     <div class="grid grid-1">
       {% for v in vantagens %}
         <div class="card" style="display:flex;gap:1rem;align-items:stretch;">
-          {# Thumb à esquerda (foto -> foto_url -> placeholder) #}
+          <!-- Thumb à esquerda (foto -> foto_url -> placeholder) -->
           <div style="width:110px;flex:0 0 110px;display:flex;align-items:center;justify-content:center;">
             {% if v.image_url %}
               <img
@@ -25,7 +25,7 @@
             {% endif %}
           </div>
 
-          {# Conteúdo #}
+          <!-- Conteúdo -->
           <div style="flex:1;min-width:0;">
             <h3 style="margin-top:.25rem">{{ v.titulo }}</h3>
             <p class="help" style="margin:.35rem 0 1rem 0">{{ v.descricao|default:''|truncatechars:200 }}</p>
@@ -34,7 +34,6 @@
               <span class="badge">Custo: {{ v.custo_moedas }} moedas</span>
 
               <div style="margin-left:auto">
-                {# Aluno pode resgatar (bloqueia se já tem) #}
                 {% if request.user.is_authenticated and request.user.role|upper == 'ALUNO' %}
                   {% if v.id in redeemed_ids %}
                     <button class="btn" disabled style="opacity:.6;cursor:not-allowed;">Já resgatado</button>
