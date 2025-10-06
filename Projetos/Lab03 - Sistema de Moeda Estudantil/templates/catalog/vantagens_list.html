@@ -2,62 +2,149 @@
 {% block title %}Catálogo de Vantagens{% endblock %}
 
 {% block content %}
-<div class="card">
-  <h1>Catálogo de Vantagens</h1>
+<style>
+  /* Estilos específicos para a lista de vantagens */
+  .vantagens-list {
+    display: grid;
+    gap: 24px; /* Aumenta o espaçamento entre os cards */
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 768px) {
+    .vantagens-list {
+      grid-template-columns: 1fr 1fr; /* Duas colunas em telas médias */
+    }
+  }
+  @media (min-width: 1100px) {
+    .vantagens-list {
+      grid-template-columns: 1fr 1fr 1fr; /* Três colunas em telas grandes */
+    }
+  }
+  
+  /* Estilo para o cartão de vantagem */
+  .vantagem-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Garante que todos os cartões tenham a mesma altura */
+    padding: 0; 
+  }
 
-  {% if vantagens %}
-    <div class="grid grid-1">
-      {% for v in vantagens %}
-        <div class="card" style="display:flex;gap:1rem;align-items:stretch;">
-          <!-- Thumb à esquerda (foto -> foto_url -> placeholder) -->
-          <div style="width:110px;flex:0 0 110px;display:flex;align-items:center;justify-content:center;">
-            {% if v.image_url %}
-              <img
-                src="{{ v.image_url }}"
-                alt="Imagem de {{ v.titulo }}"
-                style="width:110px;height:110px;object-fit:cover;border-radius:12px;border:1px solid rgba(255,255,255,.06)"
-                loading="lazy"
-              >
-            {% else %}
-              <div class="icon" aria-hidden="true" style="width:72px;height:72px;border-radius:12px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;">
-                💠
-              </div>
-            {% endif %}
-          </div>
+  .vantagem-card .image-thumb {
+      height: 180px;
+      width: 100%;
+      overflow: hidden;
+      /* Arredonda os cantos superiores do thumbnail */
+      border-top-left-radius: var(--card-radius, 12px); 
+      border-top-right-radius: var(--card-radius, 12px);
+  }
+  .vantagem-card .image-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+  }
+  .vantagem-card .image-thumb .icon-placeholder {
+      /* Placeholder visualmente melhor */
+      background: var(--panel-2, rgba(255,255,255,.06)); 
+      color: var(--muted, #94a3b8);
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+  }
 
-          <!-- Conteúdo -->
-          <div style="flex:1;min-width:0;">
-            <h3 style="margin-top:.25rem">{{ v.titulo }}</h3>
-            <p class="help" style="margin:.35rem 0 1rem 0">{{ v.descricao|default:''|truncatechars:200 }}</p>
+  /* Área de conteúdo da descrição e título */
+  .vantagem-content {
+    flex: 1; /* Ocupa o espaço restante */
+    padding: 22px; /* ✅ Adiciona o padding que estava faltando aqui */
+  }
 
-            <div style="display:flex;justify-content:space-between;align-items:center;gap:.75rem;flex-wrap:wrap">
-              <span class="badge">Custo: {{ v.custo_moedas }} moedas</span>
+  /* Estilo para a área de ações/footer */
+  .vantagem-card .actions-footer {
+      border-top: 1px solid var(--border);
+      padding: 16px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto; /* Empurra o footer para o final */
+      background: var(--panel-2);
+      /* Garante que o rodapé acompanhe o arredondamento inferior do card */
+      border-bottom-left-radius: var(--card-radius, 12px); 
+      border-bottom-right-radius: var(--card-radius, 12px);
+  }
 
-              <div style="margin-left:auto">
-                {% if request.user.is_authenticated and request.user.role|upper == 'ALUNO' %}
-                  {% if v.id in redeemed_ids %}
-                    <button class="btn" disabled style="opacity:.6;cursor:not-allowed;">Já resgatado</button>
-                  {% else %}
-                    <form method="post" action="{% url 'resgatar_vantagem' v.id %}" style="margin:0;display:inline">
-                      {% csrf_token %}
-                      <button type="submit" class="btn btn-accent">Resgatar</button>
-                    </form>
-                  {% endif %}
-                {% else %}
-                  <a class="btn" href="{% url 'vantagem_detail' v.id %}">Ver detalhes</a>
-                {% endif %}
-              </div>
+  /* Ajuste no botão "Resgatar" e "Ver Detalhes" */
+  .vantagem-card .btn-accent {
+    font-weight: 600;
+  }
+</style>
+
+<h1 style="margin-bottom: 25px;">🛍️ Catálogo de Vantagens</h1>
+
+{% if vantagens %}
+  <div class="vantagens-list">
+    {% for v in vantagens %}
+      <div class="card vantagem-card">
+
+        <div class="image-thumb">
+          {% if v.image_url %}
+            <img
+              src="{{ v.image_url }}"
+              alt="Imagem de {{ v.titulo }}"
+              loading="lazy"
+            >
+          {% else %}
+            <div class="icon-placeholder" aria-hidden="true">
+              ✨
             </div>
-
-            <div class="help" style="margin-top:.5rem">
-              Empresa: <strong>{{ v.empresa.nome }}</strong>
-            </div>
+          {% endif %}
+        </div>
+        
+        <div class="vantagem-content">
+          <h3 style="margin-top:.25rem">{{ v.titulo }}</h3>
+          <p class="help" style="margin:.35rem 0 1rem 0; color: var(--muted);">
+            {{ v.descricao|default:''|truncatechars:120 }}
+          </p>
+          <div class="help" style="margin-top: 1rem; font-size: 0.9em; color: var(--text-2);">
+             Empresa: <strong>{{ v.empresa.nome }}</strong>
           </div>
         </div>
-      {% endfor %}
-    </div>
-  {% else %}
-    <div class="table-empty">Nenhuma vantagem cadastrada.</div>
-  {% endif %}
-</div>
+
+        <div class="actions-footer">
+          <span class="badge" style="
+              background: rgba(240,195,90,.15); /* Cor de moeda */
+              color: var(--accent); 
+              border: 1px solid rgba(240,195,90,.35);">
+              Custo: {{ v.custo_moedas }} moedas
+          </span>
+        
+          <div>
+            {% if request.user.is_authenticated and request.user.role|upper == 'ALUNO' %}
+              {% if v.id in redeemed_ids %}
+                <button 
+                  class="btn" 
+                  disabled 
+                  style="opacity:.6;cursor:not-allowed; background: var(--panel); color: var(--muted); box-shadow:none;">
+                  Já resgatado
+                </button>
+              {% else %}
+                <form method="post" action="{% url 'resgatar_vantagem' v.id %}" style="margin:0;display:inline">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-accent">Resgatar</button>
+                </form>
+              {% endif %}
+            {% else %}
+              <a class="btn btn-ghost" href="{% url 'vantagem_detail' v.id %}">Ver detalhes</a>
+            {% endif %}
+          </div>
+        </div>
+
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="card">
+    <div class="alert alert-error">Nenhuma vantagem cadastrada.</div>
+  </div>
+{% endif %}
 {% endblock %}

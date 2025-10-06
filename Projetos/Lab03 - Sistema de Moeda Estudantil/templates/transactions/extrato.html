@@ -1,41 +1,110 @@
 {% extends "base.html" %}
-{% block title %}Extrato — Moeda Academica{% endblock %}
+{% block title %}Extrato - Moeda Academica{% endblock %}
 
 {% block content %}
-<h1>Extrato</h1>
+<style>
+  /* Estilo para destacar o saldo */
+  .saldo-display {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent, #f0c35a); /* Dourado moeda */
+    margin-top: 5px;
+  }
+  
+  /* Estilos das Badges */
+  .badge-credit {
+    background-color: rgba(123,220,181,.15);
+    color: var(--accent-2, #aef0d2);
+    border: 1px solid rgba(123,220,181,.35);
+    padding: 0.3rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  
+  .badge-debit {
+    background-color: rgba(255, 114, 114, 0.1); 
+    color: var(--danger, #ff7272); 
+    border: 1px solid rgba(255, 114, 114, 0.35);
+    padding: 0.3rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  
+  /* Estilos dos Valores */
+  .value-credit {
+    color: var(--accent-2, #aef0d2);
+    font-weight: 700;
+  }
+  
+  .value-debit {
+    color: var(--danger, #ff7272);
+    font-weight: 700;
+  }
 
-<div class="card">
-  <p><strong>Saldo atual:</strong> {{ saldo_atual }}</p>
+  /* Estilo do container da tabela, se necessário */
+  .table-wrap {
+    overflow-x: auto;
+  }
+
+</style>
+
+<h1>Extrato</h1>
+<p class="muted">Veja todas as movimentações de sua carteira.</p>
+
+<div class="card" style="margin-bottom: 25px;">
+  <h2>Saldo Atual</h2>
+  <div class="saldo-display">{{ saldo_atual }}</div>
+  <p class="help">Este é o seu saldo disponível para novas transações.</p>
 </div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Data/Hora</th>
-      <th>Tipo</th>
-      <th>Valor</th>
-      <th>Descrição</th>
-      <th>Referência</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for t in transacoes %}
+<div class="table-wrap">
+  <table class="table">
+    <thead>
       <tr>
-        <td>{{ t.data_hora|date:"d/m/Y H:i" }}</td>
-        <td>{{ t.tipo }}</td>
-        <td>
-          {% if t.tipo == 'ENVIO' or t.tipo == 'RESGATE' %}
-            -{{ t.valor }}
-          {% else %}
-            +{{ t.valor }}
-          {% endif %}
-        </td>
-        <td>{{ t.descricao }}</td>
-        <td>{{ t.referencia }}</td>
+        <th>Data/Hora</th>
+        <th>Tipo</th>
+        <th>Valor</th>
+        <th>Descrição</th>
+        <th>Referência</th>
       </tr>
-    {% empty %}
-      <tr><td colspan="5">Nenhuma transação encontrada.</td></tr>
-    {% endfor %}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      {% for t in transacoes %}
+        
+        <tr>
+          <td>{{ t.data_hora|date:'d/m/Y H:i' }}</td>
+          
+          <td>
+            {% if t.tipo == 'ENVIO' or t.tipo == 'RESGATE' %}
+              <span class="badge-debit">{{ t.tipo }}</span>
+            {% else %}
+              <span class="badge-credit">{{ t.tipo }}</span>
+            {% endif %}
+          </td>
+          
+          <td class="
+            {% if t.tipo == 'ENVIO' or t.tipo == 'RESGATE' %}
+              value-debit
+            {% else %}
+              value-credit
+            {% endif %}
+          ">
+            {% if t.tipo == 'ENVIO' or t.tipo == 'RESGATE' %}
+              -{{ t.valor }}
+            {% else %}
+              +{{ t.valor }}
+            {% endif %}
+          </td>
+          
+          <td>{{ t.descricao }}</td>
+          <td>{{ t.referencia }}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="5">Nenhuma transação encontrada.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% endblock %}

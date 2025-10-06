@@ -1,21 +1,102 @@
 {% extends "base.html" %}
-{% block title %}Entrar — Moeda Academica{% endblock %}
+{% block title %}Entrar - Moeda Academica{% endblock %}
 
 {% block content %}
-<h1>Entrar</h1>
+<style>
+  /* Estilo para ajustar o grid da tela de login */
+  .login-grid {
+    display: grid;
+    gap: 30px; /* Mais espaço entre as colunas */
+    /* Garante que o grid use 12 colunas para controle fino de largura */
+    grid-template-columns: repeat(12, 1fr); 
+    margin-top: 50px; 
+  }
 
-<div class="grid3">
-  <div class="card" style="grid-column: span 7;">
+  /* Ajuste responsivo para telas maiores (900px) */
+  @media (min-width: 900px) {
+    .login-grid > .card-login {
+      grid-column: span 5; /* 5 colunas para o formulário */
+      order: 2; /* Formulário à direita */
+      /* Alinhamento no centro da tela para um visual mais limpo */
+      margin-left: auto;
+    }
+    .login-grid > .card-info {
+      grid-column: span 7; /* 7 colunas para a informação / boas-vindas */
+      order: 1;
+      padding: 40px; 
+      /* Alinhamento no centro da tela */
+      margin-right: auto; 
+    }
+  }
+  
+  /* Ajustes para o card de Boas-Vindas */
+  .welcome-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+    color: var(--text);
+  }
+  .welcome-highlight {
+    color: var(--accent); /* Dourado moeda em destaque */
+    font-size: 2.3rem;
+    font-weight: 800;
+  }
+  .welcome-body {
+    font-size: 1.1rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-top: 20px;
+    padding-left: 20px;
+    border-left: 3px solid var(--accent); /* Linha de destaque */
+  }
+  
+  /* Garantindo que o formulário de login no card seja limpo */
+  .card-login .form {
+    background: none;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    margin: 0;
+  }
+</style>
+
+<div class="login-grid container">
+  
+  <div class="card card-info">
+    <div style="font-size: 4rem; text-align: center; margin-bottom: 20px;">
+      <span style="filter:drop-shadow(0 0 10px rgba(240,195,90,.5));">💰</span>
+    </div>
+    
+    <div class="welcome-title">
+        Bem-vindo à <span class="welcome-highlight">Moeda Acadêmica</span>
+    </div>
+    
+    <div class="welcome-body">
+      <p>O sistema de reconhecimento que conecta performance estudantil à economia local.</p>
+      
+      <p>Professores enviam moedas, alunos acumulam e resgatam vantagens exclusivas nas empresas parceiras. **Seu futuro vale mais.**</p>
+    </div>
+  </div>
+
+  <div class="card card-login">
+    <h2 style="margin-top: 0; font-size: 1.8rem;">Acesso à Plataforma</h2>
+    <p class="muted" style="margin-bottom: 20px;">Utilize suas credenciais para continuar.</p>
+    
     <form method="post" class="form" novalidate>
       {% csrf_token %}
-      <div class="grid">
-        <div style="grid-column: span 2;">
+      
+      <div class="grid" style="grid-template-columns: 1fr;"> 
+        
+        <div>
           <label for="id_username">Usuário:</label>
           <input type="text" name="username" required id="id_username" autocomplete="username">
         </div>
-        <div style="grid-column: span 2;">
+        
+        <div style="margin-bottom: 15px;">
           <label for="id_password">Senha:</label>
           <input type="password" name="password" required id="id_password" autocomplete="current-password">
+          <p class="help">Esqueceu a senha? Entre em contato com o suporte.</p>
         </div>
       </div>
 
@@ -28,13 +109,12 @@
           <li>Usuário ou senha inválidos.</li>
         </ul>
       {% endif %}
-      <p class="help">Use o superusuário criado ou uma conta de aluno/professor.</p>
+      
+      <p class="help" style="margin-top: 20px;">
+        Se você é um novo aluno e ainda não tem uma conta: 
+        <a href="{% url 'signup_aluno' %}" style="color: var(--accent); font-weight: 600;">Cadastre-se aqui</a>.
+      </p>
     </form>
-  </div>
-
-  <div class="card" style="grid-column: span 5;">
-    <h2>Sobre</h2>
-    <p>Sistema acadêmico de reconhecimento por moedas: professores enviam moedas, alunos resgatam vantagens de empresas parceiras.</p>
   </div>
 </div>
 {% endblock %}

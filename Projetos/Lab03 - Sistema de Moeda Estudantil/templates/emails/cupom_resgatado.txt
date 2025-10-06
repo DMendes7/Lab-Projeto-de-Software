@@ -2,12 +2,15 @@
 
 Olá, {{ aluno.get_full_name|default:aluno.username }}!
 
-Você resgatou "{{ vantagem.titulo }}" (custo: {{ custo }} moedas).
+Parabéns! Você resgatou a vantagem: "{{ vantagem.titulo }}" (custo: {{ custo }} moedas).
 
-CÓDIGO: {{ codigo }}
+------------------------------------
+CÓDIGO DE RESGATE: {{ codigo|upper }}
+------------------------------------
 
 Parceiro: {{ vantagem.empresa.nome }}
 
-Acesse seu extrato: {{ site_url }}/transacoes/extrato/
+Acesse seu extrato para acompanhar o débito:
+{{ site_url }}/transacoes/extrato/
 
-Este e-mail foi enviado por {{ site_name }} <{{ from_email_public }}>. Não responda.
+— Este é um e-mail automático enviado por {{ from_email_public }}. Não responda.

@@ -17,101 +17,137 @@ html,body{ height:100% }
 body{
   margin:0;
   font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;
+  
+  /* Gradiente e cor de fundo */
   background:
     radial-gradient(1200px 600px at 20% -10%, #0e1730 0%, transparent 60%),
     radial-gradient(1000px 800px at 110% -30%, #0d1426 0%, transparent 60%),
     var(--bg);
+    
   color:var(--text);
   letter-spacing:.2px;
+  
+  /* Mantido: Garante que o gradiente não role */
+  background-attachment: fixed; 
 }
 
 .container{ width:min(1100px,92vw); margin-inline:auto }
 
-/* ---------- Header / Nav ---------- */
+/* ---------- Header / Nav (CORRIGIDO) ---------- */
 .site-header{
   position:sticky; top:0; z-index:50;
+  
+  /* CORREÇÃO DO FUNDO: Adiciona um fundo semi-transparente que se mistura com o body */
+  background: rgba(12, 28, 42, 0.7); 
+  
   border-bottom:1px solid var(--border);
   backdrop-filter:saturate(1.2) blur(6px);
 }
-.nav{ display:flex; align-items:center; gap:16px; padding:14px 0 }
 
-/* título/marca clicável (novo) */
-.brand,
-.logo{
-  display:flex; align-items:center; gap:10px;
-  text-decoration:none; color:var(--text);
-}
-.brand-emoji{ font-size:22px; filter:drop-shadow(0 3px 8px rgba(0,0,0,.35)) }
+/* Garante que o conteúdo não fique escondido sob o cabeçalho fixo */
+.site-main{ padding-top:20px; padding-bottom:100px; }
 
-/* texto do título maior e forte */
-.brand-text{
-  font-size:1.6rem; font-weight:800; letter-spacing:.3px
+/* ---------- Layout Grids ---------- */
+.grid3{
+  display:grid; grid-template-columns:1fr; gap:20px;
 }
-/* suporte se estiver usando <a class="logo"> */
-.logo{
-  font-size:1.6rem; font-weight:800; letter-spacing:.3px
+@media (min-width:720px){
+  .grid3{ grid-template-columns:1fr 1fr }
 }
-.brand:hover,
-.logo:hover{ opacity:.95 }
-
-/* navegação */
-.nav-links{ display:flex; gap:18px; margin-left:16px }
-.nav-links a{
-  color:var(--muted); text-decoration:none; padding:8px 6px; border-radius:8px
-}
-.nav-links a:hover{ color:var(--text); background:rgba(255,255,255,.04) }
-
-.nav-auth{ margin-left:auto; display:flex; align-items:center; gap:10px }
-.user-chip{
-  background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-  border:1px solid var(--border);
-  padding:6px 10px; border-radius:999px; font-size:.9rem;
+@media (min-width:1100px){
+  .grid3{ grid-template-columns:1fr 1fr 1fr }
 }
 
-.btn{
-  border:none; background:linear-gradient(180deg,#ffd67e,#f0c35a);
-  color:#1f1b14; font-weight:700; padding:8px 14px; border-radius:10px;
-  box-shadow:0 6px 18px rgba(240,195,90,.25); cursor:pointer;
-}
-.btn:hover{ transform:translateY(-1px); box-shadow:0 10px 22px rgba(240,195,90,.35) }
-.btn:active{ transform:translateY(0) }
-.btn-ghost{ background:transparent; border:1px solid var(--border); color:var(--text) }
-.btn-ghost:hover{ background:rgba(255,255,255,.05) }
+/* Para grids de 4 colunas (se necessário) */
+.grid4{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px }
 
-.nav-toggle{ display:none; margin-left:8px; background:transparent; color:var(--text);
-  border:1px solid var(--border); border-radius:8px; padding:6px 10px }
-@media (max-width:840px){
-  .nav-toggle{ display:block }
-  .nav-links{ display:none }
-  .nav-links.open{
-    display:flex; position:absolute; left:0; right:0; top:60px; background:var(--panel);
-    border-top:1px solid var(--border); padding:12px 4vw; gap:16px; flex-direction:column
-  }
-}
 
-/* ---------- Página / Tipografia ---------- */
-.page{ padding:40px 0 70px }
-h1{ font-size:2.2rem; margin:24px 0 26px }
-h2{ font-size:1.4rem; margin:0 0 10px }
-.muted{ color:var(--muted) }
-
-/* ---------- Cards / Grid ---------- */
+/* ---------- Cards (Caixas de Conteúdo) ---------- */
 .card{
-  background:linear-gradient(180deg, var(--panel), var(--panel-2));
-  border:1px solid var(--border); border-radius:var(--radius);
-  padding:22px; box-shadow:var(--shadow);
+  background:linear-gradient(180deg,var(--panel),var(--panel-2));
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:20px;
+  box-shadow:var(--shadow);
+}
+/* Estilo hover para links que são cards inteiros */
+a.card{ display:block; text-decoration:none }
+a.card:hover{ 
+  background:linear-gradient(180deg,rgba(18,28,42,.95),rgba(15,24,37,.95));
+  border-color:rgba(33,49,71,.6);
+  transform:translateY(-2px);
+  transition:all .2s ease;
 }
 
-.grid3{ display:grid; gap:18px; grid-template-columns:repeat(12,1fr) }
-.grid3 > .card:nth-child(1){ grid-column:span 12 }
-.grid3 > .card{ grid-column:span 12 }
-@media (min-width:900px){
-  .grid3 > .card:nth-child(1){ grid-column:span 6 }
-  .grid3 > .card:nth-child(2){ grid-column:span 3 }
-  .grid3 > .card:nth-child(3){ grid-column:span 3 }
+
+/* ---------- Tipografia / Helpers ---------- */
+h1,h2,h3,h4{ color:var(--text); font-weight:700; margin:0 0 10px 0 }
+p{ margin:0 0 14px 0 }
+h1{ font-size:2.2rem }
+h2{ font-size:1.5rem }
+h3{ font-size:1.2rem }
+
+.muted{ color:var(--muted) }
+.help{ font-size:.9rem; color:var(--muted); margin-top:4px }
+
+/* ---------- Botões ---------- */
+.actions{ 
+  margin-top:20px; 
+  display:flex; 
+  gap:12px; 
+  justify-content:flex-end 
 }
+.btn{
+  display:inline-block;
+  padding:10px 18px;
+  border-radius:10px;
+  font-size:1rem;
+  font-weight:600;
+  text-decoration:none;
+  cursor:pointer;
+  border:1px solid transparent;
+  transition:all .2s ease;
+}
+
+/* Botão Padrão */
+.btn{ 
+  background:var(--panel-2); 
+  color:var(--text); 
+  border-color:var(--border); 
+}
+.btn:hover{ 
+  background:rgba(255,255,255,.05); 
+  border-color:rgba(33,49,71,.8); 
+}
+
+/* Botão de Destaque */
+.btn-accent{ 
+  background:var(--accent); 
+  color:#070b12 !important; 
+  border-color:var(--accent); 
+  box-shadow:0 6px 15px rgba(240,195,90,.3);
+}
+.btn-accent:hover{ 
+  background:rgba(240,195,90,.85); 
+  border-color:rgba(240,195,90,.85);
+}
+
+/* Botão Fantasma (sem fundo, só borda) */
+.btn-ghost{
+  background:transparent;
+  color:var(--text);
+  border-color:var(--border);
+}
+.btn-ghost:hover{ 
+  background:rgba(255,255,255,.05); 
+}
+
 
 /* ---------- Tabela / Tag / Badges ---------- */
+.table-wrap{
+  overflow-x:auto; /* Garante que a tabela não quebre o layout em telas muito pequenas */
+  margin-top:20px;
+}
 .table{
   width:100%; border-collapse:separate; border-spacing:0;
   background:var(--panel); border:1px solid var(--border);
@@ -128,18 +164,20 @@ h2{ font-size:1.4rem; margin:0 0 10px }
   border-radius:999px; background:rgba(255,255,255,.04)
 }
 .badge{
-  display:inline-block; padding:3px 8px; border-radius:999px; font-size:.8rem;
-  background:rgba(123,220,181,.15); color:#aef0d2; border:1px solid rgba(123,220,181,.35)
+  display:inline-block; padding:4px 10px; border-radius:999px; font-size:.85rem;
+  background:rgba(123,220,181,.15); color:var(--accent-2); border:1px solid rgba(123,220,181,.35);
 }
 
-/* ---------- Mensagens ---------- */
-.alert{ padding:12px 16px; border-radius:10px; margin:10px 0; border:1px solid var(--border) }
-.alert-success{ background:rgba(123,220,181,.1); border-color:rgba(123,220,181,.35) }
-.alert-error{ background:rgba(255,114,114,.1); border-color:rgba(255,114,114,.35) }
-
-/* ---------- Rodapé ---------- */
-.site-footer{
-  border-top:1px solid var(--border); padding:22px 0; color:var(--muted);
-  background:linear-gradient(180deg, rgba(255,255,255,.03), transparent)
+/* ---------- Alertas e Mensagens de Erro ---------- */
+.alert{
+  padding:14px 20px; border-radius:10px; font-weight:600; margin-bottom:15px;
 }
-.footer-wrap{ display:flex; justify-content:space-between; align-items:center }
+.alert-error{
+  background:rgba(255,114,114,.1); color:var(--danger); border:1px solid rgba(255,114,114,.3);
+}
+.errorlist{
+  list-style:none; padding:0; margin:10px 0;
+}
+.errorlist li{
+  color:var(--danger); font-size:.9rem; margin-top:4px;
+}

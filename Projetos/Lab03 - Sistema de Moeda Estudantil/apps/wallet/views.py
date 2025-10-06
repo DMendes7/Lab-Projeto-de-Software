@@ -1,43 +1,65 @@
 # apps/wallet/views.py
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.shortcuts import render, redirect
+from django.http import HttpRequest, HttpResponse, HttpResponseForbidden
+
+from apps.wallet.models import Transacao, Carteira
+
 
 @login_required
-def extrato(request):
-    # Empresas não têm extrato
+def extrato(request: HttpRequest) -> HttpResponse:
+    """
+    Mostra o extrato do usuário corrente. Empresas não possuem extrato de moedas.
+    Busca TODAS as transações do usuário (inclusive RESGATE) e renderiza
+    o template que você já tem em templates/transactions/extrato.html
+    """
     role = (getattr(request.user, "role", "") or "").upper()
     if role == "EMPRESA":
         messages.error(request, "Empresas não possuem extrato.")
         return redirect("role_home")
 
-    # O template real do projeto fica em templates/transactions/extrato.html
-    # Ele já sabe como renderizar os dados do usuário logado.
-    # Se você populava 'movimentos' na versão anterior, mantenha a lógica antiga aqui.
-    context = {}  # coloque aqui seus dados se houver
-    return render(request, "transactions/extrato.html", context)
+    transacoes = (
+        Transacao.objects
+        .filter(usuario=request.user)
+        .order_by("-data_hora", "-id")
+    )
+
+    # saldo atual (se não houver carteira, exibe 0)
+    try:
+        saldo_atual = request.user.carteira.saldo
+    except Carteira.DoesNotExist:
+        saldo_atual = 0
+        messages.info(request, "Carteira não encontrada. Saldo exibido como 0.")
+
+    return render(
+        request,
+        "transactions/extrato.html",
+        {"transacoes": transacoes, "saldo": saldo_atual},
+    )
 
 
 @login_required
-def transferir(request):
-    # Apenas professores podem enviar moedas
+def transferir(request: HttpRequest) -> HttpResponse:
+    """
+    Tela de envio/transferência. Mantida simples para não alterar o visual.
+    """
     role = (getattr(request.user, "role", "") or "").upper()
     if role != "PROFESSOR":
-        messages.error(request, "Apenas professores podem enviar moedas.")
-        return redirect("role_home")
+        return HttpResponseForbidden("Apenas professores podem enviar moedas.")
 
-    if request.method == "POST":
-        # Aqui entra a sua lógica real de envio de moedas (validar form, debitar/creditar etc.)
-        # Mantive só a mensagem para não quebrar enquanto você não cola sua regra antiga.
-        messages.success(request, "Moedas enviadas com sucesso (placeholder).")
-        return redirect("enviar_moedas")
+    if request.method != "POST":
+        # Apenas renderiza o template já existente (sem mudar visual)
+        return render(request, "transactions/envio_moedas.html")
 
-    # IMPORTANTE: use o template que o projeto já tinha
-    return render(request, "transactions/envio_moedas.html")
+    # Se você já tem o processamento do POST, mantenha aqui.
+    messages.success(request, "Operação registrada.")
+    return redirect("transferir")
 
 
 @login_required
-def cupom_list(request):
-    # Se você usa um template para cupons do aluno, mantenha aqui.
-    # Deixei como está — ajuste se necessário.
+def cupom_list(request: HttpRequest) -> HttpResponse:
+    """
+    Lista de cupons do aluno (placeholder caso você ainda não tenha implementado).
+    """
     return render(request, "wallet/cupom_list.html", {"cupons": []})

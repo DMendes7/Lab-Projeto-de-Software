@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>{{ site_name }} — Moedas Recebidas</title>
   <style>
-    /* Reset básico */
+    /* Reset básico para e-mail */
     * { box-sizing: border-box; }
     body { margin:0; background:#0b1020; color:#dbe7ff; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
     a { color: inherit; }
@@ -17,67 +17,72 @@
       border-radius: 18px; padding: 28px 28px 24px; box-shadow: 0 6px 30px rgba(2,6,23,.35);
     }
 
-    /* Cabeçalho */
+    /* Cabeçalho e Títulos */
     .pill {
       display:inline-flex; align-items:center; gap:10px;
       background:linear-gradient(135deg, #1f2937 0%, #0b1220 100%);
-      color:#e2e8f0; padding:8px 14px; border-radius:999px; font-weight:700; letter-spacing:.2px;
-      border:1px solid rgba(148,163,184,.2);
+      color:#e2e8f0; padding:8px 14px; border-radius:999px; font-weight:700;
+      border: 1px solid rgba(148,163,184,.1); /* Borda sutil */
     }
-    .pill-emoji { font-size:18px; }
-    .title { margin:14px 0 6px; font-size:28px; line-height:1.2; letter-spacing:.2px; font-weight:800; color:#f8fafc; }
-    .subtitle { margin:0 0 18px; color:#94a3b8; font-size:14px; }
-
-    /* Bloco valor */
-    .amount {
-      display:inline-block; margin: 8px 0 14px;
-      font-size:36px; font-weight:900; letter-spacing:1px; color:#fde68a;
-      background: rgba(234,179,8,.08); border:1px dashed rgba(234,179,8,.4);
-      border-radius:14px; padding:12px 18px;
-      box-shadow: inset 0 0 0 1px rgba(234,179,8,.15), 0 6px 20px rgba(234,179,8,.08);
+    .title { font-size: 24px; color: #e6eef7; margin: 18px 0 8px; }
+    .subtitle { font-size: 16px; color: #98a6b8; margin: 0 0 20px; }
+    
+    /* Destaque do Valor */
+    .amount { 
+      font-size: 32px; font-weight: 800; 
+      color: #7bdcb5; /* --accent-2 (Verde Sutil) para destaque positivo */
+      margin: 10px 0 20px 0;
+      padding: 10px 0;
+      border-top: 1px solid rgba(148,163,184,.1);
+      border-bottom: 1px solid rgba(148,163,184,.1);
+      text-align: center;
     }
+    
+    /* Detalhes */
+    .info { margin-bottom: 25px; }
+    .row { font-size: 15px; color: #dbe7ff; margin: 8px 0; }
+    .row strong { color: #e6eef7; font-weight: 600; }
+    .divider { border: 0; height: 1px; background: rgba(148,163,184,.1); margin: 20px 0; }
 
-    /* Info */
-    .info { margin: 10px 0 0; }
-    .row { margin: 6px 0; color:#cbd5e1; }
-    .row strong { color:#e2e8f0; }
-
-    /* CTA */
+    /* Botão */
     .cta {
-      margin-top: 20px;
-      display:inline-block; text-decoration:none; font-weight:800;
-      background:linear-gradient(180deg,#fbbf24 0%, #f59e0b 100%);
-      color:#0b1020; padding:12px 18px; border-radius:12px;
-      box-shadow: 0 10px 30px rgba(245,158,11,.35), 0 0 0 1px rgba(0,0,0,.35) inset;
+      background: #f0c35a; /* Dourado Moeda */
+      color: #0b1020 !important;
+      text-decoration: none;
+      display: inline-block;
+      padding: 14px 20px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 16px;
     }
 
-    /* Divider & Footer */
-    .divider { height:1px; border:0; margin:24px 0; background:linear-gradient(90deg,transparent, rgba(148,163,184,.25), transparent); }
-    .footer { color:#93a3c0; font-size:12px; line-height:1.5; text-align:center; margin-top:6px; }
-    .from a { color:#a5b4fc; text-decoration:none; }
+    /* Cores de fundo claro (para modo claro) */
     @media (prefers-color-scheme: light) {
       body { background:#f4f7ff; color:#0f172a; }
       .card { background:#ffffff; border-color: rgba(15,23,42,.06); }
+      .pill { background:#eef2ff; color:#334155; border: 1px solid rgba(15,23,42,.06); }
       .title { color:#0f172a; }
       .subtitle { color:#475569; }
+      .amount { color: #10b981; }
       .row { color:#334155; }
       .row strong { color:#0f172a; }
+      .divider { background: #e5e7eb; }
+      .cta { background: #e5a420; color: #ffffff !important; }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="card">
-      <div class="pill"><span class="pill-emoji">💰</span> Moedas Recebidas</div>
+      <div class="pill"><span class="pill-emoji">💰</span> Notificação de Crédito</div>
       <h1 class="title">Olá, {{ aluno.get_full_name|default:aluno.username }}!</h1>
-      <p class="subtitle">Você acabou de receber moedas no <strong>{{ site_name }}</strong>.</p>
+      <p class="subtitle">Você tem um novo crédito! O professor **{{ professor.get_full_name|default:professor.username }}** acabou de enviar moedas para sua carteira.</p>
 
       <div>
         <div class="amount">+ {{ valor }}</div>
       </div>
 
       <div class="info">
-        <p class="row"><strong>Enviado por:</strong> {{ professor.get_full_name|default:professor.username }}</p>
         {% if motivo %}
           <p class="row"><strong>Motivo:</strong> {{ motivo }}</p>
         {% endif %}
@@ -85,18 +90,17 @@
 
       <hr class="divider"/>
 
-      <p class="row">Acesse o sistema para conferir seu novo saldo e o lançamento no extrato.</p>
-      <p>
-        <a class="cta" href="{{ site_url }}/transacoes/extrato/">Ver extrato</a>
+      <p class="row" style="text-align:center;">
+        Acesse o sistema para conferir seu saldo atualizado e o histórico de transações.
       </p>
-
-      <hr class="divider"/>
-
-      <p class="footer">
-        Este é um e-mail automático enviado por <span class="from"><a href="mailto:{{ from_email_public }}">{{ from_email_public }}</a></span>.<br/>
-        Por favor, não responda diretamente.
+      <p style="text-align: center; margin-top: 25px;">
+        <a class="cta" href="{{ site_url }}/transacoes/extrato/" target="_blank" rel="noreferrer">Ver Extrato</a>
       </p>
     </div>
+    
+    <p style="text-align: center; font-size: 12px; color: #5a6578; margin-top: 20px;">
+      Este é um e-mail automático enviado por {{ site_name }}.
+    </p>
   </div>
 </body>
 </html>

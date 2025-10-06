@@ -1,23 +1,45 @@
 {% extends "base.html" %}
-{% block title %}Cadastro de Aluno — Moeda Academica{% endblock %}
+{% block title %}Cadastro de Aluno - Moeda Academica{% endblock %}
 
 {% block content %}
-<h1>Cadastro de Aluno</h1>
-<p>Preencha seus dados para criar sua conta de aluno.</p>
+<style>
+  /* Estilo para garantir que os campos de formulário fiquem com um visual limpo e espaçado */
+  .form-section-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--accent); /* Cor de destaque para os títulos de seção */
+    margin: 25px 0 15px 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  /* Ajuste no formulário para garantir que os elementos do Django fiquem alinhados com o design */
+  .form .grid > div > label + input,
+  .form .grid > div > label + select {
+      margin-top: 0; /* Remover margin se o Django injetar algum */
+  }
+</style>
+
+<h1>📝 Cadastro de Aluno</h1>
+<p class="muted" style="font-size: 1.1rem; margin-bottom: 30px;">
+  Crie sua conta para começar a acumular moedas e resgatar vantagens exclusivas.
+</p>
 
 <form method="post" class="form">
   {% csrf_token %}
+  
+  <div class="form-section-title">Acesso & Segurança</div>
 
   <div class="grid">
     <div>
       <label>Usuário</label>
       {{ form.username }}
-      {{ form.username.errors }}
+      {% for error in form.username.errors %}<ul class="errorlist"><li>{{ error }}</li></ul>{% endfor %}
     </div>
     <div>
       <label>E-mail</label>
       {{ form.email }}
-      {{ form.email.errors }}
+      {% for error in form.email.errors %}<ul class="errorlist"><li>{{ error }}</li></ul>{% endfor %}
     </div>
   </div>
 
@@ -25,47 +47,67 @@
     <div>
       <label>Senha</label>
       {{ form.password1 }}
-      {{ form.password1.errors }}
+      {% for error in form.password1.errors %}<ul class="errorlist"><li>{{ error }}</li></ul>{% endfor %}
+      <p class="help">Mínimo de 8 caracteres, com letras e números.</p>
     </div>
     <div>
       <label>Confirmação de Senha</label>
       {{ form.password2 }}
-      {{ form.password2.errors }}
+      {% for error in form.password2.errors %}<ul class="errorlist"><li>{{ error }}</li></ul>{% endfor %}
     </div>
   </div>
+
+  <div class="form-section-title">Documentação</div>
 
   <div class="grid">
     <div>
       <label>CPF</label>
       {{ form.cpf }}
-      {{ form.cpf.errors }}
+      {% for error in form.cpf.errors %}<ul class="errorlist"><li>{{ error }}</li></ul>{% endfor %}
     </div>
     <div>
       <label>RG</label>
       {{ form.rg }}
-      {{ form.rg.errors }}
+      {% for error in form.rg.errors %}<ul class="errorlist"><li>{{ error }}</li></ul>{% endfor %}
     </div>
   </div>
+
+  <div class="form-section-title">Informações Acadêmicas e Endereço</div>
 
   <div class="grid">
     <div>
       <label>Endereço</label>
       {{ form.endereco }}
-      {{ form.endereco.errors }}
+      {% for error in form.endereco.errors %}<ul class="errorlist"><li>{{ error }}</li></ul>{% endfor %}
     </div>
     <div>
       <label>Curso</label>
       {{ form.curso }}
-      {{ form.curso.errors }}
+      {% for error in form.curso.errors %}<ul class="errorlist"><li>{{ error }}</li></ul>{% endfor %}
     </div>
   </div>
 
   <div>
     <label>Instituição</label>
     {{ form.instituicao }}
-    {{ form.instituicao.errors }}
+    {% for error in form.instituicao.errors %}<ul class="errorlist"><li>{{ error }}</li></ul>{% endfor %}
   </div>
 
-  <button class="btn" type="submit">Criar conta</button>
+  <div class="actions">
+    <button class="btn" type="submit">Criar minha conta</button>
+  </div>
+  
+  {% if form.non_field_errors %}
+      <div class="alert alert-error" style="margin-top: 20px;">
+          <p>Por favor, corrija os seguintes erros:</p>
+          {% for error in form.non_field_errors %}
+              <ul class="errorlist"><li>{{ error }}</li></ul>
+          {% endfor %}
+      </div>
+  {% endif %}
 </form>
+
+<p class="help" style="text-align: center; margin-top: 30px;">
+  Já tem uma conta? <a href="{% url 'login' %}" style="color: var(--accent); font-weight: 600;">Faça login aqui</a>.
+</p>
 {% endblock %}

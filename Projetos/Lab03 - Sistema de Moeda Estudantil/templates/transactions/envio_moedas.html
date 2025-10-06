@@ -1,9 +1,11 @@
 {% extends "base.html" %}
-{% block title %}Enviar Moedas — Moeda Academica{% endblock %}
+{% block title %}Enviar Moedas - Moeda Academica{% endblock %}
 
 {% block content %}
-<h1>Enviar Moedas</h1>
-<p>Selecione o aluno, informe o valor e o motivo do envio.</p>
+<h1>💸 Enviar Moedas</h1>
+<p class="muted" style="margin-bottom: 30px;">
+  Preencha os campos abaixo para creditar moedas na conta de um aluno.
+</p>
 
 <form method="post" class="form">
   {% csrf_token %}
@@ -12,24 +14,35 @@
     <div>
       <label for="{{ form.aluno.id_for_label }}">Aluno</label>
       {{ form.aluno }}
+      {% for error in form.aluno.errors %}<ul class="errorlist"><li>{{ error }}</li></ul>{% endfor %}
       <div class="help">{{ form.aluno.help_text }}</div>
-      {{ form.aluno.errors }}
     </div>
     <div>
       <label for="{{ form.valor.id_for_label }}">Valor</label>
       {{ form.valor }}
+      {% for error in form.valor.errors %}<ul class="errorlist"><li>{{ error }}</li></ul>{% endfor %}
       <div class="help">{{ form.valor.help_text }}</div>
-      {{ form.valor.errors }}
     </div>
   </div>
 
   <div>
     <label for="{{ form.motivo.id_for_label }}">Motivo</label>
     {{ form.motivo }}
+    {% for error in form.motivo.errors %}<ul class="errorlist"><li>{{ error }}</li></ul>{% endfor %}
     <div class="help">{{ form.motivo.help_text }}</div>
-    {{ form.motivo.errors }}
   </div>
+  
+  {% if form.non_field_errors %}
+      <div class="alert alert-error" style="margin-top: 20px;">
+          <p>Por favor, corrija os seguintes erros:</p>
+          {% for error in form.non_field_errors %}
+              <ul class="errorlist"><li>{{ error }}</li></ul>
+          {% endfor %}
+      </div>
+  {% endif %}
 
-  <button class="btn" type="submit">Enviar</button>
+  <div class="actions">
+    <button class="btn" type="submit">Confirmar Envio</button>
+  </div>
 </form>
 {% endblock %}

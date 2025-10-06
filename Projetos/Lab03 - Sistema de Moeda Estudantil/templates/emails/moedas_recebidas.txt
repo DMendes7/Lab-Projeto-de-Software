@@ -1,3 +1,5 @@
+{{ site_name }} — Moedas Recebidas
+
 Olá, {{ aluno.get_full_name|default:aluno.username }}!
 
 Você recebeu {{ valor }} moedas no {{ site_name }}.
@@ -5,7 +7,7 @@ Você recebeu {{ valor }} moedas no {{ site_name }}.
 Quem enviou: {{ professor.get_full_name|default:professor.username }}
 {% if motivo %}Motivo: {{ motivo }}{% endif %}
 
-Acesse seu extrato:
+Acesse seu extrato para conferir seu saldo:
 {{ site_url }}/transacoes/extrato/
 
 — Este é um e-mail automático enviado por {{ from_email_public }}. Não responda.

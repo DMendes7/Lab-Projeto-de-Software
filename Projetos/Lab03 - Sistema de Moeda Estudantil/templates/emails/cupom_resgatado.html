@@ -7,106 +7,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ site_name }} — Cupom de Resgate</title>
     <style>
-      /* Estilos mínimos e seguros para e-mail */
-      .btn {
-        background:#2563eb;
-        color:#ffffff !important;
-        text-decoration:none;
-        display:inline-block;
-        padding:14px 18px;
-        border-radius:8px;
-        font-weight:700;
+      /* Reset e base (usando Dark Mode como padrão) */
+      * { box-sizing: border-box; }
+      body { margin:0; background:#0b1020; color:#dbe7ff; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+      a { color: inherit; }
+      
+      /* Layout e Card */
+      .wrap { max-width: 720px; margin: 0 auto; padding: 24px; }
+      .card {
+        background:#0f172a; border:1px solid rgba(148,163,184,.15);
+        border-radius: 18px; padding: 28px 28px 24px; box-shadow: 0 6px 30px rgba(2,6,23,.35);
       }
+      
+      /* Cabeçalho */
       .pill {
-        background:#eef2ff;
-        color:#3730a3;
-        font-weight:700;
-        padding:6px 12px;
-        border-radius:999px;
-        display:inline-block;
-        font-size:12px;
+        display:inline-flex; align-items:center; gap:10px;
+        background:linear-gradient(135deg, #1f2937 0%, #0b1220 100%);
+        color:#e2e8f0; padding:8px 14px; border-radius:999px; font-weight:700;
+        border: 1px solid rgba(148,163,184,.1);
+      }
+      .title { font-size: 24px; color: #e6eef7; margin: 18px 0 8px; }
+      .subtitle { font-size: 16px; color: #98a6b8; margin: 0 0 20px; }
+
+      /* Destaque do Código */
+      .code-container {
+        text-align: center; 
+        margin: 25px 0;
       }
       .code {
         font:700 28px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
         letter-spacing:2px;
-        color:#111827;
+        color:#f0c35a; /* Dourado para o código */
         padding:18px 20px;
-        border:2px dashed #d1d5db;
+        border:2px dashed rgba(240,195,90,.3); /* Borda pontilhada dourada */
+        background: rgba(240,195,90,.05);
         border-radius:10px;
-        background:#f9fafb;
-        text-align:center;
+        display: inline-block;
+        max-width: 100%;
+        overflow-wrap: break-word;
       }
-      .small { color:#6b7280; font-size:12px; }
-      /* Dark-mode básico (nem todos aplicam) */
-      @media (prefers-color-scheme: dark) {
-        body { background:#0b0f1a !important; }
-        .card { background:#0f172a !important; }
-        .heading, .text { color:#e5e7eb !important; }
-        .small { color:#9ca3af !important; }
-        .code { background:#111827 !important; border-color:#374151 !important; color:#f9fafb !important; }
-        .pill { background:#1f2937 !important; color:#c7d2fe !important; }
+      
+      /* Botão */
+      .cta {
+        background: #f0c35a; /* Dourado Moeda */
+        color: #0b1020 !important;
+        text-decoration: none;
+        display: inline-block;
+        padding: 14px 20px;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 16px;
+      }
+
+      /* Metadados */
+      .meta { font-size: 14px; color: #dbe7ff; margin: 4px 0; }
+      .meta strong { color: #e6eef7; font-weight: 600; }
+      .divider { border: 0; height: 1px; background: rgba(148,163,184,.1); margin: 20px 0; }
+
+      /* Cores de fundo claro (para modo claro) */
+      @media (prefers-color-scheme: light) {
+        body { background:#f4f7ff; color:#0f172a; }
+        .card { background:#ffffff; border-color: rgba(15,23,42,.06); }
+        .pill { background:#eef2ff; color:#334155; border: 1px solid rgba(15,23,42,.06); }
+        .title { color:#0f172a; }
+        .subtitle { color:#475569; }
+        .code { color:#111827; border:2px dashed #d1d5db; background:#f9fafb; }
+        .meta { color:#334155; }
+        .meta strong { color:#0f172a; }
+        .divider { background: #e5e7eb; }
+        .cta { background: #e5a420; color: #ffffff !important; }
       }
     </style>
   </head>
-  <body style="margin:0; padding:0; background:#f6f8fb;">
-    <!-- container -->
-    <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#f6f8fb;">
-      <tr>
-        <td align="center" style="padding:24px;">
-          <!-- card -->
-          <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="640" class="card" style="background:#ffffff; border-radius:14px; box-shadow:0 2px 10px rgba(0,0,0,.06);">
-            <tr>
-              <td style="padding:28px 28px 10px 28px;">
-                <span class="pill">🎟️ Cupom de Resgate</span>
-                <h1 class="heading" style="margin:14px 0 8px; font:800 26px/1.25 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;">Olá, {{ aluno.get_full_name|default:aluno.username }}!</h1>
-                <p class="text" style="margin:0; font:400 16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; color:#111827;">
-                  Você resgatou <strong>{{ vantagem.titulo }}</strong>
-                  (custo: <strong>{{ custo }}</strong> moedas) no <strong>{{ site_name }}</strong>.
-                </p>
-              </td>
-            </tr>
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <div class="pill"><span class="pill-emoji">🎁</span> Cupom Resgatado</div>
+        <h1 class="title">Parabéns, {{ aluno.get_full_name|default:aluno.username }}!</h1>
+        <p class="subtitle">Seu resgate de **{{ vantagem.titulo }}** foi processado com sucesso. Seu código de cupom está abaixo.</p>
 
-            <tr>
-              <td style="padding:10px 28px 6px;">
-                <p class="text" style="margin:0 0 8px; font:600 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; color:#374151;">
-                  Apresente este código no parceiro para realizar a troca:
-                </p>
-                <div class="code">{{ codigo }}</div>
-              </td>
-            </tr>
+        <div class="code-container">
+          <div class="code">{{ codigo }}</div>
+        </div>
 
-            <tr>
-              <td style="padding:14px 28px 0;">
-                <p class="text small" style="margin:0; font:400 13px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;">
-                  Parceiro: <strong>{{ vantagem.empresa.nome }}</strong>
-                </p>
-              </td>
-            </tr>
+        <div style="margin-top: 20px;">
+          <p class="meta">Vantagem: <strong>{{ vantagem.titulo }}</strong></p>
+          <p class="meta">Custo: <strong>{{ custo }} moedas</strong></p>
+          {% if vantagem.empresa %}
+            <p class="meta">Parceiro: <strong>{{ vantagem.empresa.nome }}</strong></p>
+          {% endif %}
+        </div>
+        
+        <hr class="divider"/>
 
-            <tr>
-              <td style="padding:22px 28px 6px;">
-                <hr style="border:0; height:1px; background:#e5e7eb;">
-                <p class="text" style="margin:16px 0 14px; font:400 15px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; color:#111827;">
-                  Acesse seu extrato para acompanhar o débito e o status do cupom.
-                </p>
-                <a class="btn" href="{{ site_url }}/transacoes/extrato/" target="_blank" rel="noreferrer">Ver extrato</a>
-              </td>
-            </tr>
+        <p class="subtitle" style="text-align: center; margin: 15px 0 25px;">
+          Use o código acima no site ou loja do parceiro para garantir sua vantagem.
+        </p>
+        <p style="text-align: center;">
+          <a class="cta" href="{{ site_url }}/transacoes/extrato/" target="_blank" rel="noreferrer">Ver Extrato</a>
+        </p>
+      </div>
 
-            <tr>
-              <td style="padding:22px 28px 28px;">
-                <hr style="border:0; height:1px; background:#e5e7eb;">
-                <p class="small" style="margin:12px 0 0; font:400 12px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;">
-                  Este é um e-mail automático enviado por {{ site_name }} &lt;{{ from_email_public }}&gt;.
-                  Por favor, não responda diretamente.
-                </p>
-              </td>
-            </tr>
-          </table>
-          <!-- /card -->
-        </td>
-      </tr>
-    </table>
-    <!-- /container -->
+      <p style="text-align: center; font-size: 12px; color: #5a6578; margin-top: 20px;">
+        Este é um e-mail automático enviado por {{ site_name }}.
+      </p>
+    </div>
   </body>
 </html>

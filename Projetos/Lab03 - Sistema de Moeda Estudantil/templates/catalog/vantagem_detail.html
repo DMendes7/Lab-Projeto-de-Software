@@ -1,41 +1,111 @@
 {% extends 'base.html' %}
-{% block title %}Vantagem{% endblock %}
+{% block title %}{{ vantagem.titulo|default:"Detalhe da Vantagem" }} — Moeda Academica{% endblock %}
 
 {% block content %}
-<div class="card">
-  <h1 style="margin-bottom:.25rem;">
-    {{ vantagem.titulo|default:"Vantagem" }}
-  </h1>
-  <p class="muted" style="margin-top:0;">
-    {{ vantagem.descricao|default:"Descrição da vantagem." }}
-  </p>
+<style>
+  /* Estilo para a imagem de destaque na página de detalhes */
+  .detail-image-box {
+    height: 100%;
+    min-height: 250px; /* Altura mínima para o placeholder */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  .detail-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .detail-image-box .icon-placeholder {
+    background: rgba(240,195,90,.08); /* Cor mais ligada ao accent */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+  }
+  
+  /* Layout do card de detalhes */
+  .detail-grid {
+    display: grid;
+    gap: 25px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 900px) {
+    .detail-grid {
+      grid-template-columns: 1fr 2fr; /* Coluna 1: Imagem, Coluna 2: Conteúdo */
+    }
+  }
+  
+  .detail-meta-badge {
+      background:rgba(255,255,255,.06); color:#cfe0f5; border-color:var(--border);
+  }
+  .detail-meta-badge strong {
+      color: var(--text);
+  }
+</style>
 
-  <!-- bloco de meta com bom espaçamento e quebra de linha quando necessário -->
-  <div style="
-      display:flex;
-      align-items:center;
-      gap:12px;
-      flex-wrap:wrap;
-      margin:14px 0 4px;">
-    <span class="badge">Custo: {{ vantagem.custo_moedas|default:"—" }} moedas</span>
-    {% if vantagem.empresa %}
-      <span class="badge" style="background:rgba(255,255,255,.06); color:#cfe0f5; border-color:var(--border);">
-        Empresa: {{ vantagem.empresa.nome }}
-      </span>
-    {% endif %}
-  </div>
+<h1 style="font-size: 2.2rem; margin:24px 0 26px;">
+  ⭐ {{ vantagem.titulo|default:"Vantagem" }}
+</h1>
 
-  <!-- ações separadas das badges com espaço adequado -->
-  <div class="mt-2" style="margin-top:16px;">
-    <div style="display:flex; gap:12px; flex-wrap:wrap;">
-      {% if request.user.is_authenticated and request.user.role|upper == 'ALUNO' %}
-        <form method="post" style="margin:0">
-          {% csrf_token %}
-          <button class="btn btn-accent" type="submit">Resgatar</button>
-        </form>
+<div class="card" style="padding: 25px;">
+  
+  <div class="detail-grid">
+    
+    <div class="detail-image-box">
+      {% if vantagem.image_url %}
+        <img
+          src="{{ vantagem.image_url }}"
+          alt="Imagem de {{ vantagem.titulo }}"
+          loading="lazy"
+        >
+      {% else %}
+        <div class="icon-placeholder" aria-hidden="true">
+          🏆
+        </div>
       {% endif %}
-      <a class="btn btn-ghost" href="{% url 'vantagens_list' %}">Voltar</a>
+    </div>
+
+    <div>
+      <h2 style="font-size: 1.8rem; margin-top: 0;">{{ vantagem.titulo }}</h2>
+      <p class="muted" style="font-size: 1.1rem; margin-top: 8px;">
+        {{ vantagem.descricao|default:"Descrição completa da vantagem não fornecida." }}
+      </p>
+
+      <div style="
+          display:flex;
+          align-items:center;
+          gap:12px;
+          flex-wrap:wrap;
+          margin:25px 0 20px 0;">
+        <span class="badge" style="
+            background: rgba(240,195,90,.15); 
+            color: var(--accent); 
+            border-color: rgba(240,195,90,.35);">
+          Custo: <strong>{{ vantagem.custo_moedas|default:"—" }}</strong> moedas
+        </span>
+        {% if vantagem.empresa %}
+          <span class="badge detail-meta-badge">
+            Empresa: <strong>{{ vantagem.empresa.nome }}</strong>
+          </span>
+        {% endif %}
+      </div>
+
+      <div class="actions" style="justify-content:flex-start;">
+        {% if request.user.is_authenticated and request.user.role|upper == 'ALUNO' %}
+          <form method="post" style="margin:0">
+            {% csrf_token %}
+            <button class="btn btn-accent" type="submit">Resgatar Vantagem</button>
+          </form>
+        {% endif %}
+        <a class="btn btn-ghost" href="{% url 'vantagens_list' %}">Voltar para o Catálogo</a>
+      </div>
     </div>
   </div>
+
 </div>
 {% endblock %}
