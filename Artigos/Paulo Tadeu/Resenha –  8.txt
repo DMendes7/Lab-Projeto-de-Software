@@ -1,0 +1,9 @@
+Resenha – Managing Technical Debt
+
+O artigo Managing Technical Debt apresenta uma visão estruturada sobre o conceito de dívida técnica, termo usado para descrever decisões de desenvolvimento que priorizam entregas rápidas em detrimento de qualidade, gerando custos futuros de manutenção. A metáfora da dívida financeira é usada para explicar que, assim como um empréstimo pode acelerar um investimento, assumir dívida técnica pode agilizar entregas — mas, se não for “paga” (isto é, resolvida), gera juros acumulados em forma de complexidade, retrabalho e dificuldade de evolução do sistema.
+
+O texto destaca que a dívida técnica não é inerentemente ruim; ela pode ser estratégica quando bem gerenciada. O problema surge quando decisões são tomadas sem controle ou monitoramento, levando ao acúmulo desordenado. Para evitar isso, os autores propõem práticas de gestão de dívida técnica que incluem identificação sistemática, registro em backlog, priorização consciente e integração dessas decisões ao processo de desenvolvimento. A visibilidade e comunicação entre times também são enfatizadas como essenciais para evitar que a dívida se torne invisível e crítica.
+
+Outro ponto relevante é que a dívida técnica ocorre em diferentes níveis: código, arquitetura, processos e até decisões organizacionais. Por isso, não basta apenas refatorar trechos isolados; é necessário adotar uma abordagem contínua de monitoramento e pagamento da dívida, alinhada com a estratégia de produto e engenharia.
+
+Para nós, estudantes de Engenharia de Software, esse artigo é importante porque mostra que lidar com dívida técnica é uma parte inevitável e estratégica do desenvolvimento. Ignorá-la leva à degradação do sistema ao longo do tempo; tratá-la de forma planejada permite equilibrar velocidade e qualidade, garantindo a sustentabilidade do software no longo prazo.
