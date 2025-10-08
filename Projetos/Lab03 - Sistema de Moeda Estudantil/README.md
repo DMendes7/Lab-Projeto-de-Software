@@ -4,6 +4,9 @@ Bem-vindo ao **Sistema de Moeda Estudantil**!
 Este projeto foi desenvolvido no contexto da disciplina **Laboratório de Projeto de Software (Lab03)** e simula um ecossistema acadêmico em que **professores, alunos e empresas parceiras** interagem por meio de uma moeda virtual utilizada para incentivar e premiar estudantes.
 
 ---
+## 🌐 Online - Render
+- https://lab-projeto-de-software.onrender.com/
+---
 
 ## 🚀 Funcionalidades Principais
 
