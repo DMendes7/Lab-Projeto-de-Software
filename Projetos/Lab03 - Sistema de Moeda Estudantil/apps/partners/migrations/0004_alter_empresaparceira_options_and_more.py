@@ -15,17 +15,17 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='empresaparceira',
-            options={'ordering': ['nome'], 'verbose_name': 'Empresa Parceira', 'verbose_name_plural': 'Empresas Parceiras'},
+            options={
+                'ordering': ['nome'],
+                'verbose_name': 'Empresa Parceira',
+                'verbose_name_plural': 'Empresas Parceiras',
+            },
         ),
         migrations.RemoveField(
             model_name='empresaparceira',
             name='email',
         ),
-        migrations.AddField(
-            model_name='empresaparceira',
-            name='conta',
-            field=models.OneToOneField(blank=True, help_text='Usuário com papel EMPRESA/PARCEIRO que acessa o dashboard desta empresa.', limit_choices_to=models.Q(('role__in', ['EMPRESA', 'PARCEIRO'])), null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='empresa_parceira', to=settings.AUTH_USER_MODEL),
-        ),
+        # >>> REMOVIDO: AddField('conta', ...) — já criado de forma segura na 0003 <<<
         migrations.AlterField(
             model_name='empresaparceira',
             name='ativa',
