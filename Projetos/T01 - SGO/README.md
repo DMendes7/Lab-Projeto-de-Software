@@ -8,21 +8,21 @@
 
 ## 1. 📚 Informações Gerais
 
-[cite_start]Este trabalho é a primeira entrega da disciplina **Projeto de Software** [cite: 3] [cite_start]e contém a modelagem UML completa para o **Sistema de Gestão das Olimpíadas (SGO)**[cite: 5]. [cite_start]O sistema deve gerenciar competições, inscrições de atletas, alocação de locais e controle de resultados[cite: 7].
+Este trabalho é a primeira entrega da disciplina **Projeto de Software** [cite: 3] e contém a modelagem UML completa para o **Sistema de Gestão das Olimpíadas (SGO)**[cite: 5]. O sistema deve gerenciar competições, inscrições de atletas, alocação de locais e controle de resultados[cite: 7].
 
 ## 2. 📝 Regras de Negócio Chave
 
-[cite_start]A modelagem reflete as regras de negócio [cite: 8] definidas para o sistema:
+A modelagem reflete as regras de negócio [cite: 8] definidas para o sistema:
 
-* [cite_start]**Cadastro:** Competições incluem modalidade, data, horário, local e lista de atletas inscritos[cite: 10].
-* [cite_start]**Inscrição:** O atleta representa apenas um país em cada modalidade[cite: 13].
-* [cite_start]**Alocação:** Um local só pode abrigar uma competição por vez, evitando conflitos de horário[cite: 15, 16].
-* [cite_start]**Resultados:** Resultados são registrados para determinar os classificados em segundo e terceiro lugares[cite: 18].
-* [cite_start]**Relatórios:** O sistema deve gerar relatórios de medalhas com base nas medalhas de ouro, prata e bronze[cite: 20].
+* **Cadastro:** Competições incluem modalidade, data, horário, local e lista de atletas inscritos[cite: 10].
+* **Inscrição:** O atleta representa apenas um país em cada modalidade[cite: 13].
+* **Alocação:** Um local só pode abrigar uma competição por vez, evitando conflitos de horário[cite: 15, 16].
+* **Resultados:** Resultados são registrados para determinar os classificados em segundo e terceiro lugares[cite: 18].
+* **Relatórios:** O sistema deve gerar relatórios de medalhas com base nas medalhas de ouro, prata e bronze[cite: 20].
 
 ## 3. 🏃 Histórias de Usuário (User Stories)
 
-[cite_start]As Histórias de Usuário (US) [cite: 39] cobrem as funcionalidades principais do sistema:
+As Histórias de Usuário (US) [cite: 39] cobrem as funcionalidades principais do sistema:
 
 | ID | Caso de Uso | História de Usuário (Como **[Ator]**, Eu quero **[Meta]**, Para que **[Valor]**) |
 | :--- | :--- | :--- |
@@ -34,46 +34,46 @@
 
 ## 4. 📐 Diagramas UML
 
-[cite_start]Todos os diagramas foram desenvolvidos em PlantUML e estão dispostos abaixo[cite: 39].
+Todos os diagramas foram desenvolvidos em PlantUML e estão dispostos abaixo[cite: 39].
 
 ### 4.1. Diagrama de Caso de Uso (UC) 🧭
 
 <p align="center">
-    <img width="800px" src="img/UC-SGO.png"/>
+    <img width="500" src="img/UC-SGO.png"/>
 </p>
 
 ### 4.2. Diagrama de Classes e Pacotes 🏛️
 
 <p align="center">
-    <img width="800px" src="img/Class-SGO.png"/>
+    <img width="500" src="img/Class-SGO.png"/>
 </p>
 
 ### 4.3. Diagrama de Componentes ⚙️
 
 <p align="center">
-    <img width="800px" src="img/Component-SGO.png"/>
+    <img width="500" src="img/Component-SGO.png"/>
 </p>
 
 ### 4.4. Diagrama de Pacotes 📦
 
 <p align="center">
-    <img width="800px" src="img/Package-SGO.png"/>
+    <img width="500" src="img/Package-SGO.png"/>
 </p>
 
 ### 4.5. Diagrama de Implantação ☁️
 
 <p align="center">
-    <img width="800px" src="img/Deployment-SGO.png"/>
+    <img width="500" src="img/Deployment-SGO.png"/>
 </p>
 
 ## 5. 🗂️ Conteúdo do Repositório (Entrega)
 
-[cite_start]O repositório contém a estrutura completa exigida[cite: 43]:
+O repositório contém a estrutura completa exigida[cite: 43]:
 
-* [cite_start]**`README.md`**: Documentação e Histórias de Usuário[cite: 47].
-* [cite_start]**`img/`**: Contém os 5 diagramas UML em formato PNG[cite: 48, 49, 50, 51, 52].
+* **`README.md`**: Documentação e Histórias de Usuário[cite: 47].
+* **`img/`**: Contém os 5 diagramas UML em formato PNG[cite: 48, 49, 50, 51, 52].
 * **`diagramas/PlantUML`**: Arquivos-fonte (`.puml`) da modelagem.
-* [cite_start]**`diagramas/drawio`**: Arquivos de projeto editáveis (`.drawio`)[cite: 53, 54, 55, 56, 57].
+* **`diagramas/drawio`**: Arquivos de projeto editáveis (`.drawio`)[cite: 53, 54, 55, 56, 57].
 
 ---
-[cite_start]**Próximo Passo:** **Suba este arquivo `README.md` e todos os arquivos para o GitHub.** O seu trabalho está pronto para a entrega no CANVAS[cite: 32].
+**Próximo Passo:** **Suba este arquivo `README.md` e todos os arquivos para o GitHub.** O seu trabalho está pronto para a entrega no CANVAS[cite: 32].

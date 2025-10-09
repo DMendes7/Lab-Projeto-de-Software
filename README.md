@@ -57,7 +57,10 @@ Cada resenha está organizada em sua respectiva pasta dentro de `Artigos/`.
   Resenha sobre práticas de DDD e como o design estratégico auxilia na organização e evolução de sistemas complexos.  
 
 - **Artigo 8 - Managing Technical Debt**  
-  Resenha sobre o conceito de dívida técnica, suas causas, riscos e formas de gerenciamento.  
+  Resenha sobre o conceito de dívida técnica, suas causas, riscos e formas de gerenciamento. 
+
+- **Artigo 9 — Documenting Architecture Decisions**  
+  Resenha sobre a importância da documentação de decisões arquiteturais para a manutenção e evolução de sistemas.   
 
 ---
 
