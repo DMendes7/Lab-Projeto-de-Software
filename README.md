@@ -59,7 +59,7 @@ Cada resenha está organizada em sua respectiva pasta dentro de `Artigos/`.
 - **Artigo 8 - Managing Technical Debt**  
   Resenha sobre o conceito de dívida técnica, suas causas, riscos e formas de gerenciamento. 
 
-- **Artigo 9 — Documenting Architecture Decisions**  
+- **Artigo 9 - Documenting Architecture Decisions**  
   Resenha sobre a importância da documentação de decisões arquiteturais para a manutenção e evolução de sistemas.   
 
 ---
