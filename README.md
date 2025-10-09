@@ -1,4 +1,4 @@
-# 🧪 Laboratório de Projeto de Software — Portfólio de Projetos
+# 🧪 Laboratório de Projeto de Software - Portfólio de Projetos
 
 ![Banner](img/banner-repositorio.png)
 
