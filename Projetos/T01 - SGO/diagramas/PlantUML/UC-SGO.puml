@@ -1,0 +1,112 @@
+@startuml UC-SGO
+!pragma teoz true
+
+' === CONFIGURAÇÕES ESTÉTICAS (mantidas pois são excelentes) ===
+' Emojis nativos (mac) + fallbacks para visualização moderna
+skinparam defaultFontName "Apple Color Emoji, Noto Color Emoji, Segoe UI Emoji, Helvetica, Arial"
+skinparam backgroundColor #FFFFFF
+skinparam shadowing true
+skinparam roundcorner 20
+skinparam linetype ortho
+skinparam defaultFontColor #0F172A
+
+' Cores e Formas para Elegância
+skinparam rectangle {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  Shadowing true
+}
+skinparam usecase {
+  BackgroundColor #EEF2FF
+  BorderColor #334155
+  FontColor #0F172A
+  ArrowColor #334155
+  Shadowing true
+}
+skinparam actorStyle awesome
+skinparam actor {
+  BackgroundColor #FFFFFF
+  BorderColor #475569
+  FontColor #0F172A
+  Shadowing true
+}
+skinparam note {
+  BackgroundColor #FFF7ED
+  BorderColor #EA580C
+  FontColor #7C2D12
+  RoundCorner 14
+  Shadowing true
+}
+skinparam legend {
+  BackgroundColor #F1F5F9
+  BorderColor #94A3B8
+  FontColor #0F172A
+  RoundCorner 14
+}
+
+title SGO — Sistema de Gestão das Olimpíadas\nDiagrama de Caso de Uso Elegante
+
+left to right direction
+
+' ==== 1. Atores (Atores principais e papéis) ====
+actor "Organizador\n(Gestor)\n🧭" as Organizador
+actor "Oficial\n(Resultados)\n⚖️" as Oficial
+actor "Atleta\n🏃‍♂️" as Atleta
+actor "Comitê / Público\n👥" as Publico
+
+' ==== 2. Sistema / Casos de Uso (Grupo central) ====
+rectangle "SGO - Sistema de Gestão\n📦" {
+  ' Casos de Uso Primários (Principais Funcionalidades)
+  usecase "Cadastrar Competição\n🗓️" as UC_CadastrarCompeticao
+  usecase "Inscrever Atleta\n➕"      as UC_InscreverAtleta
+  usecase "Alocar Local\n📍"          as UC_AlocarLocal
+  usecase "Registrar Resultados\n🏆"  as UC_RegistrarResultados
+  usecase "Relatório de Medalhas\n🏅" as UC_RelatorioMedalhas
+
+  ' Casos de Uso Secundários (Regras Incluídas)
+  ' Nomes levemente simplificados para simetria visual
+  usecase "Validar Conflito\n(Horário/Local)\n⏱️" as UC_ValidarConflito
+  usecase "Vincular País\npor Modalidade\n🚩" as UC_VincularPais
+  usecase "Classificar Pódio\n🥇/🥈/🥉" as UC_Classificacao
+}
+
+' ==== 3. Ligações Atores → Casos ====
+' Organização da fonte para melhor leitura
+Organizador --> UC_CadastrarCompeticao
+Organizador --> UC_AlocarLocal
+Organizador --> UC_RelatorioMedalhas
+
+Atleta      --> UC_InscreverAtleta
+
+Oficial     --> UC_RegistrarResultados
+
+Publico     --> UC_RelatorioMedalhas
+
+' ==== 4. Includes (Regras de Negócio) e Notas ====
+' Notas revisadas para serem mais concisas e alinhadas
+UC_AlocarLocal         .> UC_ValidarConflito : <<include>>
+note right of UC_ValidarConflito
+Regra 3: Um local só pode ter
+uma competição por horário.
+end note
+
+UC_InscreverAtleta     .> UC_VincularPais    : <<include>>
+note right of UC_VincularPais
+Regra 2: Atleta só representa um
+país por modalidade.
+end note
+
+UC_RegistrarResultados .> UC_Classificacao   : <<include>>
+note right of UC_Classificacao
+Regra 4: Define o pódio
+(1º Ouro, 2º Prata, 3º Bronze).
+end note
+
+' ==== 5. Legenda (Guias) ====
+legend right
+  Guia Visual
+  — Emojis para intuição e design
+  — <<include>> = Regra de Negócio/Sub-tarefa obrigatória
+  — Layout otimizado para PlantUML Teoz
+endlegend
+@enduml

@@ -1,0 +1,126 @@
+@startuml Class-SGO
+!pragma teoz true
+
+' === CONFIGURAÇÕES ESTÉTICAS ===
+skinparam defaultFontName "Apple Color Emoji, Noto Color Emoji, Segoe UI Emoji, Helvetica, Arial"
+skinparam backgroundColor #FFFFFF
+skinparam shadowing true
+skinparam roundcorner 14
+skinparam linetype ortho
+skinparam defaultFontColor #0F172A
+
+' Cores e Formas para Classes/Pacotes
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  FontColor #0F172A
+  ArrowColor #475569
+  StereotypeFontColor #7C2D12
+  StereotypeBackgroundColor #FFF7ED
+  Shadowing true
+}
+skinparam package {
+  BackgroundColor #EEF2FF
+  BorderColor #334155
+  FontColor #0F172A
+  Shadowing true
+  BorderThickness 2
+}
+skinparam legend {
+  BackgroundColor #F1F5F9
+  BorderColor #94A3B8
+  FontColor #0F172A
+  RoundCorner 14
+}
+
+title SGO — Diagrama de Classes e Pacotes\nEstrutura Detalhada do Sistema
+
+left to right direction
+
+' ==== 1. Pacotes (Organização) e Classes Detalhadas ====
+package "Núcleo\n(Core)\n🏛️" as Core {
+    class Pais <<Entidade>> {
+        - nome : String
+        - codigo : String {único}
+        + obterMedalhas() : Mapa<Tipo, Integer>
+    }
+    
+    class Atleta <<Entidade>> {
+        - id : Integer {PK}
+        - nome : String
+        - dataNascimento : Date
+        - pais : Pais
+        --
+        + inscrever(competicao: Competicao)
+    }
+
+    class Local <<Entidade>> {
+        - nome : String
+        - capacidade : Integer
+    }
+}
+
+package "Competições\n(Events)\n🏟️" as Events {
+    class Modalidade <<Enum>> {
+        ESPORTES_COLETIVOS
+        ESPORTES_INDIVIDUAIS
+        ...
+    }
+    
+    class Competicao <<Entidade>> {
+        - id : Integer {PK}
+        - nome : String
+        - data : Date
+        - horario : Time
+        - modalidade : Modalidade
+        - inscritos : Lista<Atleta>
+        - local : Local {único por horário}
+        --
+        + alocarLocal(local: Local, horario: Time) : Boolean
+    }
+}
+
+package "Resultados\n(Ranking)\n🏆" as Ranking {
+    class Resultado <<Entidade>> {
+        - id : Integer {PK}
+        - competicao : Competicao
+        - ouro : Atleta
+        - prata : Atleta
+        - bronze : Atleta
+        - outrosClassificados : Lista<Atleta>
+        --
+        + registrar()
+    }
+    
+    class RelatorioMedalhas <<Serviço>> {
+        + gerarPorPais() : Relatorio
+    }
+}
+
+' ==== 2. Relacionamentos entre Classes/Pacotes ====
+
+' Relacionamentos dentro do CORE
+Atleta "1" -- "1" Pais : pertence_a
+Local -[hidden]-> Pais
+
+' Relacionamentos EVENTOS
+Competicao "1" -- "1" Local : alocado_em >
+Competicao "1" -- "1" Modalidade : é_de
+Competicao "1" -- "*" Atleta : tem_inscrito >
+
+' Relacionamentos RESULTADOS
+Resultado "1" -- "1" Competicao : para_a
+Resultado "1" -- "1" Atleta : ouro
+Resultado "1" -- "1" Atleta : prata
+Resultado "1" -- "1" Atleta : bronze
+
+' Relacionamentos entre Pacotes (Geral)
+Ranking ..> Events : <<usa>>
+Ranking ..> Core : <<consulta>>
+
+' ==== 3. Legenda ====
+legend right
+  Guia Visual
+  — Foco na Estrutura e Lógica interna das classes.
+endlegend
+@enduml

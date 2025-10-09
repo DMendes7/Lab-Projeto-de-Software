@@ -1,0 +1,88 @@
+@startuml Component-SGO
+!pragma teoz true
+
+' === CONFIGURAÇÕES ESTÉTICAS ===
+skinparam defaultFontName "Apple Color Emoji, Noto Color Emoji, Segoe UI Emoji, Helvetica, Arial"
+skinparam backgroundColor #FFFFFF
+skinparam shadowing true
+skinparam roundcorner 14
+skinparam linetype ortho
+skinparam defaultFontColor #0F172A
+
+' Cores e Formas para Componentes (Azul Claro) e Interfaces (Laranja)
+skinparam component {
+  BackgroundColor #EEF2FF
+  BorderColor #334155
+  FontColor #0F172A
+  ArrowColor #475569
+  StereotypeFontColor #7C2D12
+  StereotypeBackgroundColor #FFF7ED
+  Shadowing true
+}
+skinparam interface {
+  BackgroundColor #FFF7ED
+  BorderColor #EA580C
+  FontColor #7C2D12
+  Shadowing true
+}
+skinparam legend {
+  BackgroundColor #F1F5F9
+  BorderColor #94A3B8
+  FontColor #0F172A
+  RoundCorner 14
+}
+
+title SGO — Diagrama de Componentes\nDivisão Lógica do Sistema
+
+left to right direction
+
+' ==== 1. Componentes e Interfaces ====
+
+component "Interface de Usuário\n(Web/Mobile)\n🖥️" as UI
+
+component "Módulo de Inscrições\n(Atletas)\n🏃‍♂️" as Inscricoes {
+  interface "IInscricaoService" as IReg
+}
+
+component "Módulo de Competições\n(Eventos)\n🗓️" as Competicoes {
+  interface "ICompeticaoService" as IComp
+}
+
+component "Módulo de Alocação\n(Locais/Horários)\n📍" as Alocacao {
+  interface "IAlocacaoService" as IAloc
+}
+
+component "Módulo de Resultados\n(Registro/Pódio)\n🏆" as Resultados {
+  interface "IResultadoService" as IRes
+}
+
+component "Módulo de Relatórios\n(Medalhas/Geral)\n🏅" as Relatorios {
+  interface "IRelatorioService" as IRel
+}
+
+' ==== 2. Ligações (Dependências e Interfaces) ====
+
+' UI usa os serviços centrais
+UI --> IReg : <<chama>>
+UI --> IComp : <<chama>>
+UI --> IAloc : <<chama>>
+UI --> IRes : <<chama>>
+UI --> IRel : <<chama>>
+
+' Módulos requerem serviços de outros
+Inscricoes .right.> IComp : <<requer>>
+
+Alocacao .up.> IComp : <<requer>>
+
+Resultados .down.> IComp : <<requer>>
+Resultados .down.> IAloc : <<requer>>
+
+Relatorios .left.> IRes : <<requer>>
+
+' ==== 3. Legenda ====
+legend right
+  Guia Visual
+  — Componentes = Módulos lógicos de software.
+  — Interfaces = Pontos de comunicação definidos.
+endlegend
+@enduml

@@ -1,0 +1,72 @@
+@startuml Package-SGO
+!pragma teoz true
+
+' === CONFIGURAÇÕES ESTÉTICAS ===
+skinparam defaultFontName "Apple Color Emoji, Noto Color Emoji, Segoe UI Emoji, Helvetica, Arial"
+skinparam backgroundColor #FFFFFF
+skinparam shadowing true
+skinparam roundcorner 14
+skinparam linetype ortho
+skinparam defaultFontColor #0F172A
+
+' Cores e Formas para Pacotes (Mais Foco)
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  FontColor #0F172A
+  ArrowColor #475569
+  StereotypeFontColor #7C2D12
+  StereotypeBackgroundColor #FFF7ED
+  Shadowing true
+}
+skinparam package {
+  BackgroundColor #EEF2FF
+  BorderColor #334155
+  FontColor #0F172A
+  Shadowing true
+  BorderThickness 2
+}
+skinparam legend {
+  BackgroundColor #F1F5F9
+  BorderColor #94A3B8
+  FontColor #0F172A
+  RoundCorner 14
+}
+
+title SGO — Diagrama de Pacotes\nOrganização Lógica do Sistema
+
+left to right direction
+
+' **INSTRUÇÃO CRUCIAL PARA VISÃO DE PACOTES**
+hide fields
+hide methods
+
+' ==== 1. Pacotes e Classes (Visão de Alto Nível) ====
+package "Núcleo\n(Core)\n🏛️" as Core {
+    class Pais <<Entidade>> 
+    class Atleta <<Entidade>> 
+    class Local <<Entidade>> 
+}
+
+package "Competições\n(Events)\n🏟️" as Events {
+    class Modalidade <<Enum>>
+    class Competicao <<Entidade>> 
+}
+
+package "Resultados\n(Ranking)\n🏆" as Ranking {
+    class Resultado <<Entidade>> 
+    class RelatorioMedalhas <<Serviço>>
+}
+
+' ==== 2. Dependências entre Pacotes (Setas Tracejadas) ====
+Ranking ..> Events : <<usa>>
+Ranking ..> Core : <<consulta>>
+Events ..> Core : <<consulta>>
+
+' ==== 3. Legenda ====
+legend right
+  Guia Visual
+  — Foco na Organização por Módulos Lógicos (Pacotes).
+  — Detalhes internos das classes estão omitidos.
+endlegend
+@enduml

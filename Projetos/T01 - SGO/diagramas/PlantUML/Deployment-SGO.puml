@@ -1,0 +1,88 @@
+@startuml Deployment-SGO
+!pragma teoz true
+
+' === CONFIGURAÇÕES ESTÉTICAS ===
+skinparam defaultFontName "Apple Color Emoji, Noto Color Emoji, Segoe UI Emoji, Helvetica, Arial"
+skinparam backgroundColor #FFFFFF
+skinparam shadowing true
+skinparam roundcorner 14
+skinparam linetype polyline
+skinparam defaultFontColor #0F172A
+
+' Cores e Formas para Implantação
+skinparam node {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  FontColor #0F172A
+  Shadowing true
+}
+skinparam database {
+  BackgroundColor #EEF2FF
+  BorderColor #334155
+  FontColor #0F172A
+  Shadowing true
+}
+skinparam artifact {
+  BackgroundColor #FFF7ED
+  BorderColor #EA580C
+  FontColor #7C2D12
+  Shadowing true
+}
+skinparam legend {
+  BackgroundColor #F1F5F9
+  BorderColor #94A3B8
+  FontColor #0F172A
+  RoundCorner 14
+}
+
+title SGO — Diagrama de Implantação\nArquitetura Física
+
+top to bottom direction
+
+' ==== 1. Nós (Níveis de Hardware) ====
+
+node "Dispositivos do Usuário\n(Clientes)\n📱" as Cliente {
+  artifact "App Cliente Web/Mobile" as AppCliente
+}
+
+node "Servidor Web/API\n(Nó de Aplicação)\n☁️" as ServidorApp {
+  stereotype = "Linux, Java/Node.js"
+
+  ' Artefatos (Componentes Lógicos) distribuídos
+  artifact "Módulo de Inscrições" as ArtifactInscricao
+  artifact "Módulo de Alocação" as ArtifactAlocacao
+  artifact "Módulo de Resultados" as ArtifactResultado
+  artifact "Módulo de Relatórios" as ArtifactRelatorios
+}
+
+database "Banco de Dados\n(Persistência)\n💾" as DB {
+  stereotype = "PostgreSQL/MySQL"
+  artifact "Esquema SGO" as DBSchema
+}
+
+' ==== 2. Ligações (Comunicação) ====
+
+' Comunicação Cliente <-> Servidor (HTTP/S)
+Cliente .. ServidorApp : <<HTTP/S>>
+
+' Comunicação Servidor <-> Banco de Dados (JDBC/ORM)
+ServidorApp ..> DB : <<JDBC/ORM>>
+
+' Distribuição de Artefatos no Servidor
+ArtifactInscricao .[hidden]. ArtifactAlocacao
+ArtifactAlocacao .[hidden]. ArtifactResultado
+ArtifactResultado .[hidden]. ArtifactRelatorios
+
+' Persistência dos dados no DB
+ArtifactInscricao --> DBSchema : <<persiste>>
+ArtifactAlocacao --> DBSchema : <<persiste>>
+ArtifactResultado --> DBSchema : <<persiste>>
+ArtifactRelatorios --> DBSchema : <<consulta>>
+
+' ==== 3. Legenda ====
+legend right
+  Guia Visual
+  — Nodes = Dispositivos físicos ou virtuais.
+  — Artifacts = Componentes de software distribuídos.
+endlegend
+@enduml
