@@ -75,4 +75,3 @@ O repositório contém a estrutura completa exigida:
 * **`diagramas/drawio`**: Arquivos de projeto editáveis (`.drawio`).
 
 ---
-**Próximo Passo:** **Suba este arquivo `README.md` e todos os arquivos para o GitHub.** O seu trabalho está pronto para a entrega no CANVAS.
