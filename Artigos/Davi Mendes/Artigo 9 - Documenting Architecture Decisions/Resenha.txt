@@ -1,0 +1,32 @@
+Resenha do Artigo: Documenting Architecture Decisions (Michael Nygard, 2011)
+-----------------------------------------------------------------------------
+
+Introdução
+----------
+O artigo fala sobre a importancia de registrar as decisoes arquiteturais num projeto,
+principalmente em times q usam metodos ageis. A ideia é q n adianta docs enormes q ninguem
+le, o certo é ter registros pequenos e uteis.
+
+Principais pontos
+-----------------
+- Decisoes arquiteturais (ADR) devem ser curtas, tipo 1 ou 2 paginas, explicando contexto,
+decisao, status e consequencias.
+- Mantidas direto no repositorio do projeto, assim todo mundo ve e pode acompanhar.
+- Se uma decisao for trocada, a antiga continua la marcada como "superseded".
+- O foco é capturar o "pq" da decisao, pra evitar q futuros devs aceitem ou mudem algo sem
+saber as razoes.
+
+Reflexão
+--------
+Achei legal pq resolve aquele problema classico de entrar num projeto e n entender pq certas
+coisas foram feitas. O ADR vira meio q um historico de raciocinio da equipe.
+
+Minha opinião
+-------------
+Curti pq é pratico, simples e combina com agilidade. Melhor ter varios docs curtos q ajudam
+no dia a dia doq um pdf gigante q ngm abre.
+
+Conclusão
+---------
+Registrar decisoes arquiteturais de forma simples e continua ajuda a dar transparencia e evita
+confusao no futuro. É uma pratica facil mas q faz muita diferença.
