@@ -8,21 +8,21 @@
 
 ## 1. 📚 Informações Gerais
 
-Este trabalho é a primeira entrega da disciplina **Projeto de Software** [cite: 3] e contém a modelagem UML completa para o **Sistema de Gestão das Olimpíadas (SGO)**[cite: 5]. O sistema deve gerenciar competições, inscrições de atletas, alocação de locais e controle de resultados[cite: 7].
+Este trabalho é a primeira entrega da disciplina **Projeto de Software** e contém a modelagem UML completa para o **Sistema de Gestão das Olimpíadas (SGO)**. O sistema deve gerenciar competições, inscrições de atletas, alocação de locais e controle de resultados.
 
 ## 2. 📝 Regras de Negócio Chave
 
-A modelagem reflete as regras de negócio [cite: 8] definidas para o sistema:
+A modelagem reflete as regras de negócio definidas para o sistema:
 
-* **Cadastro:** Competições incluem modalidade, data, horário, local e lista de atletas inscritos[cite: 10].
-* **Inscrição:** O atleta representa apenas um país em cada modalidade[cite: 13].
-* **Alocação:** Um local só pode abrigar uma competição por vez, evitando conflitos de horário[cite: 15, 16].
-* **Resultados:** Resultados são registrados para determinar os classificados em segundo e terceiro lugares[cite: 18].
-* **Relatórios:** O sistema deve gerar relatórios de medalhas com base nas medalhas de ouro, prata e bronze[cite: 20].
+* **Cadastro:** Competições incluem modalidade, data, horário, local e lista de atletas inscritos.
+* **Inscrição:** O atleta representa apenas um país em cada modalidade.
+* **Alocação:** Um local só pode abrigar uma competição por vez, evitando conflitos de horário.
+* **Resultados:** Resultados são registrados para determinar os classificados em segundo e terceiro lugares.
+* **Relatórios:** O sistema deve gerar relatórios de medalhas com base nas medalhas de ouro, prata e bronze.
 
 ## 3. 🏃 Histórias de Usuário (User Stories)
 
-As Histórias de Usuário (US) [cite: 39] cobrem as funcionalidades principais do sistema:
+As Histórias de Usuário (US) cobrem as funcionalidades principais do sistema:
 
 | ID | Caso de Uso | História de Usuário (Como **[Ator]**, Eu quero **[Meta]**, Para que **[Valor]**) |
 | :--- | :--- | :--- |
@@ -34,8 +34,7 @@ As Histórias de Usuário (US) [cite: 39] cobrem as funcionalidades principais d
 
 ## 4. 📐 Diagramas UML
 
-Todos os diagramas foram desenvolvidos em PlantUML e estão dispostos abaixo[cite: 39].
-
+Todos os diagramas foram desenvolvidos em PlantUML e estão dispostos abaixo.
 ### 4.1. Diagrama de Caso de Uso (UC) 🧭
 
 <p align="center">
@@ -68,12 +67,12 @@ Todos os diagramas foram desenvolvidos em PlantUML e estão dispostos abaixo[cit
 
 ## 5. 🗂️ Conteúdo do Repositório (Entrega)
 
-O repositório contém a estrutura completa exigida[cite: 43]:
+O repositório contém a estrutura completa exigida:
 
-* **`README.md`**: Documentação e Histórias de Usuário[cite: 47].
-* **`img/`**: Contém os 5 diagramas UML em formato PNG[cite: 48, 49, 50, 51, 52].
+* **`README.md`**: Documentação e Histórias de Usuário.
+* **`img/`**: Contém os 5 diagramas UML em formato PNG.
 * **`diagramas/PlantUML`**: Arquivos-fonte (`.puml`) da modelagem.
-* **`diagramas/drawio`**: Arquivos de projeto editáveis (`.drawio`)[cite: 53, 54, 55, 56, 57].
+* **`diagramas/drawio`**: Arquivos de projeto editáveis (`.drawio`).
 
 ---
-**Próximo Passo:** **Suba este arquivo `README.md` e todos os arquivos para o GitHub.** O seu trabalho está pronto para a entrega no CANVAS[cite: 32].
+**Próximo Passo:** **Suba este arquivo `README.md` e todos os arquivos para o GitHub.** O seu trabalho está pronto para a entrega no CANVAS.
