@@ -1,0 +1,35 @@
+Resenha do Artigo: Hexagonal Architecture (Alistair Cockburn, 2005)
+-------------------------------------------------------------------
+
+Introdução
+----------
+O texto apresenta a "Hexagonal Architecture", tb conhecida como "Ports and Adapters".
+A ideia é separar a logica de negocio da aplicação das coisas externas (UI, banco, APIs),
+deixando a app independente e mais facil de testar e manter.
+
+Principais pontos
+-----------------
+- A aplicaçao conversa com o mundo externo por "ports". Cada port pode ter varios
+"adapters" (ex: GUI, testes, banco real ou mock).
+- Isso evita q a logica de negocio fique presa na interface ou no banco.
+- Permite rodar testes automatizados sem precisar de UI ou BD, e facilita trocar
+tecnologias no futuro.
+- O hexagono é so uma forma visual pra mostrar q a app pode ter varios lados
+de comunicação, n so camadas empilhadas.
+
+Reflexão
+--------
+O artigo mostra q mtos problemas de software vem de misturar logica de negocio
+com interface ou banco. Com ports e adapters fica mais claro separar o q é regra
+do q é detalhe tecnico.
+
+Minha opinião
+-------------
+Achei bem pratico pq ajuda a manter a app flexivel. É meio q um "isolamento" que
+evita dor de cabeça qnd precisar mudar a infra. Profeição pro futuro do sistema.
+
+Conclusão
+---------
+Hexagonal Architecture é um jeito simples mas poderoso de desenhar software.
+Ela deixa claro onde ta a regra de negocio e onde ficam os detalhes externos,
+ajudando testes, manutencao e evolução.

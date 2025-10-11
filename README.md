@@ -62,6 +62,9 @@ Cada resenha está organizada em sua respectiva pasta dentro de `Artigos/`.
 - **Artigo 9 - Documenting Architecture Decisions**  
   Resenha sobre a importância da documentação de decisões arquiteturais para a manutenção e evolução de sistemas.   
 
+- **Artigo 10 - Hexagonal Architecture**  
+  Resenha sobre o padrão arquitetural hexagonal, sua motivação e vantagens na separação entre regras de negócio e infraestrutura.  
+
 ---
 
 ## 🛠️ Tecnologias Utilizadas
