@@ -6,6 +6,14 @@
   <img src="https://img.shields.io/badge/Professor-Jo%C3%A3o%20Paulo%20Carneiro%20Aramuni-informational"/>
 </p>
 
+## 👥 Informações do Grupo
+
+**Dupla:**  
+- Davi Mendes
+- Paulo Tadeu  
+
+---
+
 ## 1. 📚 Informações Gerais
 
 Este trabalho é a primeira entrega da disciplina **Projeto de Software** e contém a modelagem UML completa para o **Sistema de Gestão das Olimpíadas (SGO)**. O sistema deve gerenciar competições, inscrições de atletas, alocação de locais e controle de resultados.
@@ -35,6 +43,7 @@ As Histórias de Usuário (US) cobrem as funcionalidades principais do sistema:
 ## 4. 📐 Diagramas UML
 
 Todos os diagramas foram desenvolvidos em PlantUML e estão dispostos abaixo.
+
 ### 4.1. Diagrama de Caso de Uso (UC) 🧭
 
 <p align="center">
