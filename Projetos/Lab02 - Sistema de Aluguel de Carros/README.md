@@ -1,4 +1,4 @@
-# 🚗 AutoRent — Sistema de Aluguel de Carros
+# 🚗 AutoRent - Sistema de Aluguel de Carros
 
 ![Hero Banner](car-rental-system/src/main/resources/static/img/hero.jpg)
 
