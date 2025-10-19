@@ -1,0 +1,9 @@
+Resenha – Hexagonal Architecture
+
+O artigo Hexagonal Architecture, proposto por Alistair Cockburn, apresenta uma forma de estruturar sistemas de software de modo que fiquem independentes de frameworks, bancos de dados e interfaces externas. Também conhecida como Arquitetura de Portas e Adaptadores (Ports and Adapters), essa abordagem visa resolver um problema comum no desenvolvimento: o forte acoplamento entre regras de negócio e detalhes técnicos, que dificulta a manutenção, os testes e a evolução do sistema.
+
+A ideia central é isolar o núcleo da aplicação (as regras de negócio) de tudo o que é externo a ele. Para isso, o sistema é organizado em torno de um hexágono conceitual, onde cada lado representa uma interface de comunicação — como interfaces de usuário, bancos de dados, APIs ou serviços externos. Entre o núcleo e o mundo externo, ficam os adaptadores, responsáveis por converter dados e chamadas entre formatos diferentes.
+
+Essa separação cria uma clara fronteira entre domínio e infraestrutura, permitindo que o sistema seja testado sem depender de componentes externos. Por exemplo, é possível testar a lógica de negócios sem precisar de um banco de dados real, apenas substituindo o adaptador. Além disso, essa abordagem facilita a substituição de tecnologias e a integração com novos sistemas, sem modificar o núcleo da aplicação.
+
+Para nós, estudantes de Engenharia de Software, a Hexagonal Architecture representa uma evolução na forma de pensar arquiteturas limpas e sustentáveis. Ela ensina que um bom design não depende de ferramentas, mas sim de organizar dependências de fora para dentro, mantendo o domínio protegido. Em resumo, trata-se de uma arquitetura que promove testabilidade, flexibilidade e longevidade — qualidades fundamentais para sistemas modernos e bem projetados.
