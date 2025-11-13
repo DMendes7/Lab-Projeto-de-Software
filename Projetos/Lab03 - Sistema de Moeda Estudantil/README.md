@@ -1,7 +1,7 @@
 # 🎓💰 Sistema de Moeda Estudantil (Lab03)
 
 <p align="center">
-  <img src="Projetos/Lab03 - Sistema de Moeda Estudantil/static/images/x-icon.png" width="240" alt="Solvix Logo"/>
+  <img src="Projetos/Lab03 - Sistema de Moeda Estudantil/static/images/x-icon.png" width="240" alt="Logo"/>
 </p>
 
 Bem-vindo ao **Sistema de Moeda Estudantil**!  
