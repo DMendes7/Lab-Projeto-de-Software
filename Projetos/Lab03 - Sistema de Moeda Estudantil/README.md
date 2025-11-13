@@ -1,5 +1,9 @@
 # 🎓💰 Sistema de Moeda Estudantil (Lab03)
 
+<p align="center">
+  <img src="Projetos/Lab03 - Sistema de Moeda Estudantil/static/images/x-icon.png" width="240" alt="Solvix Logo"/>
+</p>
+
 Bem-vindo ao **Sistema de Moeda Estudantil**!  
 Este projeto foi desenvolvido no contexto da disciplina **Laboratório de Projeto de Software (Lab03)** e simula um ecossistema acadêmico em que **professores, alunos e empresas parceiras** interagem por meio de uma moeda virtual utilizada para incentivar e premiar estudantes.
 
