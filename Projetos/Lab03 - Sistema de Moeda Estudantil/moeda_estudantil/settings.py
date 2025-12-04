@@ -1,13 +1,28 @@
 # moeda_estudantil/settings.py
 from pathlib import Path
 import os
+import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# ============================
+# 🔐 Segurança / Ambiente
+# ============================
 SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret-key-change-me")
 DEBUG = os.getenv("DEBUG", "true").lower() == "true"
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
 
+ALLOWED_HOSTS = os.getenv(
+    "ALLOWED_HOSTS",
+    "localhost,127.0.0.1,.onrender.com"
+).split(",")
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.onrender.com",
+]
+
+# ============================
+# 🚀 Aplicativos
+# ============================
 INSTALLED_APPS = [
     # Django
     "django.contrib.admin",
@@ -17,10 +32,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    # WhiteNoise helper (opcional, útil no runserver)
+    # WhiteNoise helper (apenas para DEV)
     "whitenoise.runserver_nostatic",
 
-    # Nossos apps (domínio)
+    # Apps do domínio
     "apps.accounts",
     "apps.institutions",
     "apps.partners",
@@ -28,80 +43,113 @@ INSTALLED_APPS = [
     "apps.wallet",
     "apps.transactions",
 
-    # util/infra
+    # Infra/util
     "apps.notifications",
     "apps.core",
 ]
 
+# ============================
+# ⚙️ Middleware
+# ============================
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",  # estáticos quando DEBUG=False
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # Serve estáticos em produção
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "apps.core.middleware.SimpleSecurityHeaders",  # nosso middleware
+
+    # Seu middleware customizado
+    "apps.core.middleware.SimpleSecurityHeaders",
 ]
 
 ROOT_URLCONF = "moeda_estudantil.urls"
 
-TEMPLATES = [{
-    "BACKEND": "django.template.backends.django.DjangoTemplates",
-    "DIRS": [BASE_DIR / "templates"],
-    "APP_DIRS": True,
-    "OPTIONS": {
-        "context_processors": [
-            "django.template.context_processors.debug",
-            "django.template.context_processors.request",
-            "django.contrib.auth.context_processors.auth",
-            "django.contrib.messages.context_processors.messages",
-        ],
+# ============================
+# 🧱 Templates
+# ============================
+TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [BASE_DIR / "templates"],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+            ],
+        },
     },
-}]
+]
 
 WSGI_APPLICATION = "moeda_estudantil.wsgi.application"
 ASGI_APPLICATION = "moeda_estudantil.asgi.application"
 
+# ============================
+# 🗄 Banco de Dados
+# ============================
+# Render → utiliza DATABASE_URL (Postgres)
+# Local → mantém SQLite automaticamente
 DATABASES = {
-    "default": {"ENGINE": "django.db.backends.sqlite3", "NAME": BASE_DIR / "db.sqlite3"}
+    "default": dj_database_url.config(
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        conn_max_age=600,
+    )
 }
 
+# ============================
+# 👥 Autenticação
+# ============================
 AUTH_USER_MODEL = "accounts.User"
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "role_home"
 LOGOUT_REDIRECT_URL = "login"
 
+# ============================
+# 🌎 Localização
+# ============================
 LANGUAGE_CODE = "pt-br"
 TIME_ZONE = "America/Sao_Paulo"
 USE_I18N = True
 USE_TZ = True
 
+# ============================
+# 📁 Arquivos Estáticos
+# ============================
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
-
-# Armazenamento
+# WhiteNoise cuida dos arquivos compactados
 STORAGES = {
-    "default": {  # necessário para ImageField/FileField (uploads)
+    "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
-    "staticfiles": {  # WhiteNoise
+    "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
 
-# ✉️ E-mail: usar SMTP do Gmail SEMPRE (inclusive em DEBUG)
+# ============================
+# 🖼 Arquivos de Mídia
+# ============================
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
+# ============================
+# ✉️ E-mail (SMTP Gmail)
+# ============================
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
-EMAIL_HOST_USER = "moeda.academica@gmail.com"
-EMAIL_HOST_PASSWORD = "lhge bjpf xfyy pehe"  # 16 caracteres gerados pelo Google
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "moeda.academica@gmail.com")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "senha-app-gmail")
+
 DEFAULT_FROM_EMAIL = "Moeda Acadêmica <moeda.academica@gmail.com>"

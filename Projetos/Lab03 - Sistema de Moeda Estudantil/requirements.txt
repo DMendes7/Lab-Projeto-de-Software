@@ -1,6 +1,7 @@
 Django>=5.0,<6.0
 gunicorn
-whitenoise
+whitenoise[brotli]
 psycopg2-binary
+dj-database-url
 python-dotenv
 Pillow
