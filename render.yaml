@@ -11,34 +11,34 @@ services:
     runtime: python
     plan: free
     region: oregon
-    branch: main   
+    branch: main
+
+    # 👇 CAMINHO DO SEU PROJETO DENTRO DO REPO
+    rootDir: "Projetos/Lab03 - Sistema de Moeda Estudantil"
+
     buildCommand: "./build.sh"
     startCommand: "gunicorn moeda_estudantil.wsgi:application"
+
     envVars:
-      # 🔗 Banco de Dados
       - key: DATABASE_URL
         fromDatabase:
           name: moeda-academica-db
           property: connectionString
 
-      # 🔐 Segurança
       - key: SECRET_KEY
         generateValue: true
+
       - key: DEBUG
         value: "False"
 
-      # 🐍 Versão do Python
       - key: PYTHON_VERSION
         value: "3.12.0"
 
-      # 🌐 Hosts permitidos 
       - key: ALLOWED_HOSTS
         value: "localhost,127.0.0.1,.onrender.com"
 
-      # ✉️ SMTP do Gmail
       - key: EMAIL_HOST_USER
         value: "moeda.academica@gmail.com"
 
-      # ⚠️ Senha de app do Gmail 
       - key: EMAIL_HOST_PASSWORD
         sync: false
