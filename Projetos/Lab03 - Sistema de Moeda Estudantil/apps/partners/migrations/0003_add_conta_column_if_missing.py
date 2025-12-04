@@ -1,36 +1,35 @@
 # apps/partners/migrations/0003_add_conta_column_if_missing.py
-from django.db import migrations, connection
+from django.db import migrations
 
-
-def ensure_conta_column(apps, schema_editor):
+def noop_forward(apps, schema_editor):
     """
-    Garante que a coluna 'conta_id' exista na tabela partners_empresaparceira.
-    Em SQLite, criamos a coluna via SQL simples (sem constraint de FK).
-    É idempotente: só cria se não existir.
+    Esta migration existia originalmente para criar a coluna `conta_id`
+    manualmente em SQLite, mas em bancos novos (ex.: Postgres no Render)
+    ela causava conflito com a migration 0004, que já cria essa coluna.
+
+    Agora ela é um NO-OP (não faz nada) para garantir que:
+
+    - Em bancos antigos/local (SQLite): a migração já foi aplicada e isso
+      não altera nada.
+    - Em bancos novos (Render/Postgres): somente a migration 0004 cria
+      `conta_id`, evitando o erro:
+      
+      `column "conta_id" already exists`
     """
-    table = "partners_empresaparceira"
+    pass
 
-    # Verifica colunas atuais
-    with connection.cursor() as cursor:
-        cols = [c.name for c in connection.introspection.get_table_description(cursor, table)]
 
-    if "conta_id" in cols:
-        return  # já existe, nada a fazer
-
-    # Cria a coluna como INTEGER NULL
-    schema_editor.execute(f'ALTER TABLE "{table}" ADD COLUMN "conta_id" integer NULL;')
-
-    # (Opcional) criar índice simples para filtragens/joins
-    schema_editor.execute(f'CREATE INDEX IF NOT EXISTS "{table}_conta_id_idx" ON "{table}" ("conta_id");')
+def noop_reverse(apps, schema_editor):
+    # não desfaz nada
+    pass
 
 
 class Migration(migrations.Migration):
-    # Dependa apenas do estado inicial do app, para evitar conflitos
+
     dependencies = [
         ("partners", "0001_initial"),
-        # não precisamos depender de accounts aqui, pois não vamos declarar FK nesta migração
     ]
 
     operations = [
-        migrations.RunPython(ensure_conta_column, migrations.RunPython.noop),
+        migrations.RunPython(noop_forward, noop_reverse),
     ]
