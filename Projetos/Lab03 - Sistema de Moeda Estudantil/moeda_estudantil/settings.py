@@ -1,23 +1,12 @@
 # moeda_estudantil/settings.py
 from pathlib import Path
 import os
-import dj_database_url 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret-key-change-me")
 DEBUG = os.getenv("DEBUG", "true").lower() == "true"
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
-
-# --- Ajustes para Render ---
-render_host = os.getenv("RENDER_EXTERNAL_HOSTNAME")
-ALLOWED_HOSTS = [h.strip() for h in ALLOWED_HOSTS if h.strip()]
-if render_host:
-    ALLOWED_HOSTS.append(render_host)
-
-CSRF_TRUSTED_ORIGINS = []
-if render_host:
-    CSRF_TRUSTED_ORIGINS = [f"https://{render_host}"]
 
 INSTALLED_APPS = [
     # Django
@@ -75,20 +64,9 @@ TEMPLATES = [{
 WSGI_APPLICATION = "moeda_estudantil.wsgi.application"
 ASGI_APPLICATION = "moeda_estudantil.asgi.application"
 
-# --- Banco de dados ---
-# Se DATABASE_URL existir (Render), usa Postgres; senão, permanece no SQLite local
-if os.getenv("DATABASE_URL"):
-    DATABASES = {
-        "default": dj_database_url.config(
-            default=os.getenv("DATABASE_URL"),
-            conn_max_age=600,
-            ssl_require=True,
-        )
-    }
-else:
-    DATABASES = {
-        "default": {"ENGINE": "django.db.backends.sqlite3", "NAME": BASE_DIR / "db.sqlite3"}
-    }
+DATABASES = {
+    "default": {"ENGINE": "django.db.backends.sqlite3", "NAME": BASE_DIR / "db.sqlite3"}
+}
 
 AUTH_USER_MODEL = "accounts.User"
 LOGIN_URL = "login"
@@ -117,7 +95,7 @@ STORAGES = {
     },
 }
 
-# ✉️ E-mail
+# ✉️ E-mail: usar SMTP do Gmail SEMPRE (inclusive em DEBUG)
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
