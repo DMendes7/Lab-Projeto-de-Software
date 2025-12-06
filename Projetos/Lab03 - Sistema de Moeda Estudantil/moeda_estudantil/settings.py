@@ -141,15 +141,23 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 # ============================
-# ✉️ E-mail (SMTP Gmail)
+# ✉️ E-mail (Configuração flexível)
 # ============================
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+# No Render usamos CONSOLE para não quebrar o sistema (Render bloqueia SMTP).
+# Localmente continua usando SMTP do Gmail normalmente.
+
+EMAIL_BACKEND = os.getenv(
+    "EMAIL_BACKEND",  # se existir no Render, usa esse
+    "django.core.mail.backends.smtp.EmailBackend"  # padrão: SMTP local
+)
+
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "moeda.academica@gmail.com")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "senha-app-gmail")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
 
-DEFAULT_FROM_EMAIL = "Moeda Acadêmica <moeda.academica@gmail.com>"
+DEFAULT_FROM_EMAIL = f"Moeda Acadêmica <{EMAIL_HOST_USER}>"
