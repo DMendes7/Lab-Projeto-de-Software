@@ -144,12 +144,11 @@ MEDIA_ROOT = BASE_DIR / "media"
 # ✉️ E-mail (Configuração flexível)
 # ============================
 
-# No Render usamos CONSOLE para não quebrar o sistema (Render bloqueia SMTP).
-# Localmente continua usando SMTP do Gmail normalmente.
+import os
 
 EMAIL_BACKEND = os.getenv(
-    "EMAIL_BACKEND",  # se existir no Render, usa esse
-    "django.core.mail.backends.smtp.EmailBackend"  # padrão: SMTP local
+    "EMAIL_BACKEND",
+    "django.core.mail.backends.smtp.EmailBackend"  # usado localmente
 )
 
 EMAIL_HOST = "smtp.gmail.com"
