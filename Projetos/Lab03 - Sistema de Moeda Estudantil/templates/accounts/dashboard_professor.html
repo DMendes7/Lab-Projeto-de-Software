@@ -3,51 +3,19 @@
 {% block title %}Dashboard do Professor - Moeda Academica{% endblock %}
 
 {% block content %}
-<style>
-  /* Estilos customizados para o layout */
-  .grid3 a.card {
-    text-decoration: none;
-    color: var(--text);
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  }
-  .grid3 a.card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(0,0,0,.45);
-  }
-  .grid3 a.card h2 {
-      margin-top: 0;
-      margin-bottom: 8px;
-  }
-  /* Garante que o botão/link de ação fique alinhado na parte inferior */
-  .card-action-link {
-    margin-top: auto; 
-    padding-top: 15px;
-  }
-
-  /* Estilo para o Saldo (adaptado do Aluno, mas aplicado ao professor) */
-  .saldo-display {
-    font-size: 2.8rem;
-    font-weight: 800;
-    color: var(--accent, #f0c35a); /* Cor de destaque (dourado) */
-    line-height: 1.2;
-    margin: 10px 0 20px 0;
-  }
-</style>
-
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 <h1>✨ Dashboard do Professor</h1>
 
 <div class="grid3">
-  <a class="card" href="{% url 'enviar_moedas' %}">
-    <h2 style="color: var(--accent);">💸 Saldo para Distribuição</h2>
+  <a class="card card-accent" href="{% url 'enviar_moedas' %}">
+    <h2>💸 Saldo para Distribuição</h2>
     <p><span class="tag">Carteira do Professor</span></p>
     
     <div class="saldo-display">
       {{ saldo_atual }}
     </div>
-    <p style="color: var(--muted); margin-top: 0;">Clique para distribuir moedas aos alunos cadastrados.</p>
+    <p class="muted">Clique para distribuir moedas aos alunos cadastrados.</p>
 
     <div class="card-action-link">
         <span class="btn">Enviar Moedas</span>
@@ -56,7 +24,7 @@
 
   <a class="card" href="{% url 'extrato' %}">
     <h2>📑 Extrato</h2>
-    <p style="color: var(--muted);">Visualize todas as suas movimentações de crédito e débito realizadas na plataforma.</p>
+    <p class="muted">Visualize todas as suas movimentações de crédito e débito realizadas na plataforma.</p>
     <div class="card-action-link">
         <span class="btn btn-ghost">Ver Detalhes</span>
     </div>
@@ -64,7 +32,7 @@
 
   <a class="card" href="{% url 'vantagens_list' %}">
     <h2>🛍️ Catálogo de Vantagens</h2>
-    <p style="color: var(--muted);">Confira as vantagens disponíveis para os alunos resgatarem com suas moedas.</p>
+    <p class="muted">Confira as vantagens disponíveis para os alunos resgatarem com suas moedas.</p>
     <div class="card-action-link">
         <span class="btn btn-ghost">Acessar Catálogo</span>
     </div>

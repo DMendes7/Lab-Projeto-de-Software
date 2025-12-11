@@ -37,9 +37,10 @@ class EmpresaParceiraAdmin(admin.ModelAdmin):
 
     list_display = ("nome", "ativa", "email", "conta")
     list_filter = ("ativa",)
-    search_fields = ("nome", "conta__email", "conta__username")
+    search_fields = ("nome", "conta__email", "conta__username", "cnpj")
     autocomplete_fields = ("conta",)
     fields = ("nome", "cnpj", "ativa", "conta")
+    raw_id_fields = ("conta",)
 
     def email(self, obj):
         if obj.conta and getattr(obj.conta, "email", None):
