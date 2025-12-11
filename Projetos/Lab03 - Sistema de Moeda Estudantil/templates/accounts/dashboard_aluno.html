@@ -2,27 +2,8 @@
 {% block title %}Dashboard do Aluno - Moeda Academica{% endblock %}
 
 {% block content %}
-<style>
-  /* Estilos específicos para o Saldo (Card principal) */
-  .saldo-display {
-    font-size: 2.8rem;
-    font-weight: 800;
-    color: var(--accent, #f0c35a); /* Cor de destaque (dourado) */
-    line-height: 1.2;
-    margin: 10px 0 20px 0;
-  }
-  /* Garante que todos os cards do grid tenham a mesma altura */
-  .grid3 .card {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-  .card-action-link {
-    margin-top: auto; /* Empurra o botão/link para a base do card */
-    padding-top: 15px;
-  }
-</style>
-
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 <h1>🚀 Dashboard do Aluno</h1>
 
 <div class="grid3">
@@ -40,7 +21,7 @@
 
   <div class="card">
     <h2>📑 Extrato</h2>
-    <p style="color: var(--muted);">Acompanhe todos os créditos e débitos da sua carteira de moedas acadêmicas.</p>
+    <p class="muted">Acompanhe todos os créditos e débitos da sua carteira de moedas acadêmicas.</p>
     <div class="card-action-link">
         <a class="btn btn-ghost" href="{% url 'extrato' %}">Ver extrato</a>
     </div>
@@ -48,7 +29,7 @@
 
   <div class="card">
     <h2>🛍️ Catálogo</h2>
-    <p style="color: var(--muted);">Veja as vantagens e produtos disponíveis oferecidos pelas empresas parceiras.</p>
+    <p class="muted">Veja as vantagens e produtos disponíveis oferecidos pelas empresas parceiras.</p>
     <div class="card-action-link">
         <a class="btn btn-ghost" href="{% url 'vantagens_list' %}">Abrir catálogo</a>
     </div>
